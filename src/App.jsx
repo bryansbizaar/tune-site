@@ -11,7 +11,7 @@ import "./index.css";
 
 function App() {
   return (
-    <Router>
+    <Router basename="/tune-site">
       <div className="App">
         <Routes>
           <Route path="/" element={<Home />} />
