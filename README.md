@@ -1,9 +1,3 @@
-# React + Vite
+# Whangarei Tunes
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-# tune-site
+This site has several purposes. First, it is a project to for me to practice React, CSS and MuseScore. Second, it is a community resourse that serves my students who are interested in learning traditional and contemporary folk tunes from the USA, the UK and Ireland, Eastern Europe, Nordic Countries and more.
