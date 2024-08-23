@@ -45,7 +45,7 @@ const ChordList = () => {
         <ul>
           {sortedTunes.map((tune) => (
             <li className="tune-name" key={tune.id}>
-              <Link to={`/chords/${tune.id}`}>{tune.title}</Link>
+              <Link to={getRoutePath(`/chords/${tune.id}`)}>{tune.title}</Link>
             </li>
           ))}
         </ul>
