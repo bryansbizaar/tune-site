@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "http://bryansbizaar.github.io/tune-site",
+  "homepage": "http://bryansbizaar.github.io/tune-site/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
