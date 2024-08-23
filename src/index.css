@@ -1,0 +1,286 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: black;
+}
+
+body {
+  background: rgb(231, 227, 215);
+}
+
+.title,
+.img,
+iframe,
+.vidcontainer iframe,
+.img-tune,
+.header-fixed {
+  width: 100%;
+}
+
+.header-fixed {
+  position: fixed;
+}
+
+.title,
+.description {
+  font-size: 1.5rem;
+}
+
+.title,
+.nav a,
+.sub-heading,
+.name {
+  font-family: "Economica", sans-serif;
+}
+
+.title {
+  display: inline-block;
+  padding: 1rem 0;
+  background: rgb(255, 233, 220);
+}
+
+.title,
+.centered-content,
+.chord-nav,
+.tune-name {
+  text-align: center;
+}
+
+.title,
+.sheetMusicContainer,
+.musicPlayer {
+  margin: 0 auto;
+}
+
+.title-text {
+  text-shadow: 0.2rem 0.2rem 0.2rem rgba(0, 0, 0, 0.25);
+}
+
+.nav-item {
+  text-shadow: 0.08rem 0.08rem 0.08rem rgba(0, 0, 0, 0.15);
+}
+
+.name,
+.group {
+  text-shadow: 0.08rem 0.08rem 0.08rem rgba(0, 0, 0, 0.1);
+}
+
+.title,
+.title-text a,
+.nav-item,
+.nav-item a,
+.chord-nav a,
+.link-container a,
+.resource-content a,
+.tune-name {
+  list-style: none;
+  text-decoration: none;
+}
+
+.group,
+.tune-group {
+  text-decoration: none;
+}
+
+.nav,
+.nav-item,
+.link-container,
+.articles {
+  display: flex;
+  justify-content: center;
+}
+
+.nav {
+  background: rgb(247, 226, 181);
+  box-shadow: 0 0.15rem 0.5rem rgba(0, 0, 0, 0.15);
+}
+
+.nav,
+.nav-item,
+.articles {
+  align-items: center;
+}
+
+.nav-item a {
+  color: inherit;
+}
+
+.nav-item img {
+  vertical-align: middle;
+}
+
+.nav a,
+.group,
+.tune-group {
+  font-size: 1.25rem;
+}
+
+.link-container {
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.img,
+.text,
+.resources,
+.chord-nav,
+.article-content,
+.description,
+.sheetMusicContainer,
+.musicPlayer,
+.nav-item a {
+  padding: 1rem;
+}
+
+.articles {
+  justify-items: center;
+}
+
+.sub-heading {
+  padding: 0.5rem;
+}
+
+.tunes-week {
+  margin: 2rem 1rem 2rem;
+}
+
+.tunes-list {
+  margin-top: 2rem;
+}
+
+.nav a:hover,
+.group:hover,
+.title a:hover,
+.subject a:hover,
+.chord-nav a:hover,
+.text a:hover,
+.tune-name a:hover,
+.resource-content a:hover {
+  color: rgb(104, 102, 102);
+  cursor: pointer;
+}
+
+.img {
+  margin-top: 9rem;
+  border-radius: 1.5rem;
+}
+
+.img,
+.img-tune {
+  object-fit: cover;
+}
+
+.cc-home {
+  margin: 0 2rem;
+}
+
+.cc-tunes,
+.cc-resources {
+  margin: 1rem 2rem 2rem;
+}
+
+.container-content {
+  max-width: 50rem;
+  background: rgb(253, 251, 245);
+  border-radius: 0.5rem;
+  box-shadow: 0.5rem 0.5rem 0.5rem rgba(0, 0, 0, 0.15);
+}
+
+.container {
+  padding-bottom: 3rem;
+}
+
+.sheetMusicContainer {
+  max-width: 50rem;
+}
+
+iframe {
+  border: none;
+  height: 100%;
+}
+
+.musicPlayer {
+  width: 80%;
+  max-width: 40rem;
+}
+
+.img-tune {
+  border-radius: 0.5rem;
+  box-shadow: 0.5rem 0.5rem 0.5rem rgba(0, 0, 0, 0.15);
+}
+
+.name {
+  font-size: 1.75rem;
+}
+
+.name,
+.resource-content {
+  margin-bottom: 1rem;
+}
+
+.group,
+.tune-group {
+  display: inline-block;
+  font-weight: 550;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.subject a,
+.text,
+.tune-name,
+.chord-nav,
+.resources,
+.article-content a {
+  font-size: 1.2rem;
+  line-height: 1.6rem;
+}
+
+.tune-name {
+  padding: 0.3rem 0.5rem;
+}
+
+@media screen and (min-width: 48rem) {
+  .container-content {
+    box-shadow: 0.8rem 0.8rem 0.8rem rgba(0, 0, 0, 0.15);
+  }
+
+  iframe {
+    height: 352px;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .nav a {
+    font-size: 1.75rem;
+  }
+
+  .img {
+    margin-top: calc(18vh);
+  }
+
+  .container {
+    margin: 0 1rem;
+  }
+
+  .link-container {
+    gap: 5rem;
+  }
+}
+
+.space {
+  margin-left: 0.5rem;
+}
+
+@media screen and (min-width: 53.75rem) {
+  .container-content {
+    margin: 0 auto;
+  }
+
+  .img {
+    height: 55vh;
+    margin-top: calc(23vh);
+  }
+}
