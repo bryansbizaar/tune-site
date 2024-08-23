@@ -21,7 +21,7 @@ function Resources() {
           </div>
           <div className="resources">
             <p className="resource-content">
-              <span className="group">Celtic:</span>:
+              <span className="group">Celtic:</span>
               <span className="space"></span>
               <a
                 href="https://irish.session.nz/"
