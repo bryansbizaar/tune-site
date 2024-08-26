@@ -5,7 +5,6 @@ import Header from "./Header";
 import TuneDisplay from "./TuneDisplay";
 import instruments from "/images/instruments.jpg";
 import { sortTunes } from "../utils/sorting";
-import { getRoutePath } from "../utils/getRoutePath";
 
 const TuneList = () => {
   const [tunes, setTunes] = useState([]);
@@ -89,9 +88,7 @@ const TuneList = () => {
                     {tune.title}
                   </a>
                 ) : (
-                  <Link to={getRoutePath(`/tune/${tune.id}`)}>
-                    {tune.title}
-                  </Link>
+                  <Link to={`/tune/${tune.id}`}>{tune.title}</Link>
                 )}
                 : {tune.description}
               </li>
