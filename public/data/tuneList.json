@@ -4,16 +4,16 @@
     "title": "Adventspolska",
     "description": "Polksa, G",
     "hasChords": true,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "30-year-jig",
     "title": "30 Year Jig",
     "description": "Jig, G",
     "hasChords": true,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "angeline",
@@ -22,16 +22,16 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://www.thesession.org/tunes/14300",
     "hasChords": true,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "antin-mikko",
     "title": "Antin Mikko",
     "description": "Polska, A",
     "hasChords": true,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "arran-boat-song",
@@ -40,16 +40,16 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://www.thesession.org/tunes/986",
     "hasChords": false,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "arthur-darleys",
     "title": "Arthur Darley's",
     "description": "Jig, D",
     "hasChords": true,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "ashokan-farewell",
@@ -58,16 +58,16 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://www.thesession.org/tunes/4997",
     "hasChords": true,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "baym-rebn-in-palesteena",
     "title": "Baym Rebn In Palesteena",
     "description": "D",
     "hasChords": true,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "ballydesmond",
@@ -76,8 +76,8 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://www.thesession.org/tunes/239",
     "hasChords": true,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "ballydesmond-2",
@@ -86,8 +86,8 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://www.thesession.org/tunes/238",
     "hasChords": true,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "bell-table",
@@ -96,8 +96,8 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://irish.session.nz/tunes-archive/belltable-waltz/",
     "hasChords": false,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "bill-sullivans",
@@ -106,24 +106,24 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/481",
     "hasChords": true,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "biserka",
     "title": "Biserka",
     "description": "Waltz, Gm",
     "hasChords": true,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "bjornlaten",
     "title": "Björnlåten",
     "description": "Polska, G",
     "hasChords": true,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "britches-full-of-stitches",
@@ -132,8 +132,8 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://irish.session.nz/tunes-archive/britches-full-of-stitches/",
     "hasChords": true,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "butterfly",
@@ -142,8 +142,8 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/10",
     "hasChords": true,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "castle",
@@ -152,8 +152,8 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/273",
     "hasChords": true,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "catharsis",
@@ -162,16 +162,16 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/703",
     "hasChords": true,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "coffee",
     "title": "Coffee",
     "description": "Jig, Am",
     "hasChords": false,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "crested-hens",
@@ -180,16 +180,16 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/562",
     "hasChords": true,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "cuckoos-nest",
     "title": "Cuckoos Nest",
     "description": "Hornpipe, D",
     "hasChords": true,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "cup-of-tea",
@@ -198,24 +198,24 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/20",
     "hasChords": true,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "dans-loudieg",
     "title": "Dans Loudieg",
     "description": "Ronde, Am",
     "hasChords": true,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "derriere-chez-nous",
     "title": "Derrière Chez Nous",
     "description": "Bouree, Am",
     "hasChords": true,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "drowsy-maggie",
@@ -224,8 +224,8 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://irish.session.nz/tunes-archive/drowsy-maggie-cm/",
     "hasChords": false,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "earls-chair",
@@ -234,16 +234,16 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/221",
     "hasChords": true,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "elzics-farewell",
     "title": "Elzic's Farewell",
     "description": "Reel, Am",
     "hasChords": true,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "farewell-to-whalley-range",
@@ -252,8 +252,8 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/2410",
     "hasChords": true,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "father-o-flynn",
@@ -262,8 +262,8 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/1080",
     "hasChords": true,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "la-fee-des-dents",
@@ -272,8 +272,8 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/20653",
     "hasChords": true,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "fermanagh",
@@ -282,8 +282,8 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/654",
     "hasChords": false,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "finnish",
@@ -292,8 +292,8 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://irish.session.nz/tunes-archive/finnish-polka/",
     "hasChords": true,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "flatbush",
@@ -302,8 +302,8 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/3809",
     "hasChords": true,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "foggy-dew",
@@ -312,8 +312,8 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/2516",
     "hasChords": true,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "foxhunter",
@@ -322,16 +322,16 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/482",
     "hasChords": true,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "franks",
     "title": "Frank's",
     "description": "Reel, D",
     "hasChords": true,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "full-rigged-ship",
@@ -340,8 +340,8 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/878",
     "hasChords": true,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "green-cake",
@@ -350,24 +350,24 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://irish.session.nz/tunes-archive/green-cake/",
     "hasChords": true,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "grey-owl",
     "title": "Grey Owl",
     "description": "Reel, D",
     "hasChords": true,
-    "tuneOfTheWeek": true,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "hag-at-the-churn",
     "title": "The Hag At The Churn",
     "description": "Jig, D mix",
     "hasChords": true,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "hardiman-the-fiddler",
@@ -376,32 +376,32 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/48",
     "hasChords": true,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "hora-de-kaval",
     "title": "Hora de Kaval",
     "description": "Hora, D",
     "hasChords": true,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "humours-of-ballyloughlin",
     "title": "Humours of Ballyloughlin",
     "description": "Jig, D mix",
     "hasChords": true,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "inion-ni-scanlan",
     "title": "Inion ni Scanlan",
     "description": "D",
     "hasChords": true,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "itzikel",
@@ -410,16 +410,16 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/445",
     "hasChords": true,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "jag-ska-lara-dig-slangpolska",
     "title": "Jag Ska Lärä Dig, Slängpolska",
     "description": "Polska, Dm",
     "hasChords": true,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "josefins-waltz",
@@ -428,31 +428,47 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://irish.session.nz/tunes-archive/josefins-waltz/",
     "hasChords": true,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "jovano-jovanke",
     "title": "Jovano, Jovanke",
     "description": "D Freygish",
     "hasChords": true,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "julia-delanys",
     "title": "Julia Delany's",
     "description": "Reel, Dm",
     "hasChords": true,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "little-david-seats-the-bride",
     "title": "Little David Seats The Bride",
     "description": "2/4, D",
     "hasChords": true,
-    "tuneOfTheWeek": false,
-    "upNextTune": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
+  },
+  {
+    "id": "macarthur-road",
+    "title": "MacArthur Road",
+    "description": "Reel, D",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
+    "id": "old-hag-you-have-killed-me",
+    "title": "Old Hag You Have Killed Me",
+    "description": "Jig, Dmix",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
   }
 ]

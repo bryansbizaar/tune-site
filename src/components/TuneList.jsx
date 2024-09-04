@@ -32,8 +32,8 @@ const TuneList = () => {
   if (!tunes) return <div>Loading...</div>;
   // if (tunes.length === 0) return <div>No tunes available</div>;
 
-  const tuneOfTheWeek = tunes.find((tune) => tune.tuneOfTheWeek === true);
-  const upNextTune = tunes.find((tune) => tune.upNextTune === true);
+  const tunesOfTheWeek = tunes.filter((tune) => tune.tunesOfTheWeek === true);
+  const upNextTunes = tunes.filter((tune) => tune.upNextTunes === true);
 
   const sortedTunes = sortTunes(tunes);
 
@@ -71,7 +71,10 @@ const TuneList = () => {
             </p>
           </div>
         </div>
-        <TuneDisplay tuneOfTheWeek={tuneOfTheWeek} upNextTune={upNextTune} />
+        <TuneDisplay
+          tunesOfTheWeek={tunesOfTheWeek}
+          upNextTunes={upNextTunes}
+        />
         <div className="container">
           <ul>
             <h2 className="centered-content sub-heading">
