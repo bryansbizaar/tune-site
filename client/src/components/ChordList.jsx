@@ -11,7 +11,10 @@ const ChordList = () => {
   useEffect(() => {
     const fetchChords = async () => {
       try {
-        const response = await fetch("/data/tuneList.json");
+        //const response = await fetch("/data/tuneList.json");
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/tuneList`
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch tune data");
         }
