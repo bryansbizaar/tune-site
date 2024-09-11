@@ -12,7 +12,9 @@ const TuneDetail = () => {
   useEffect(() => {
     const fetchTune = async () => {
       try {
-        const response = await fetch(`/data/tunes/${id}.json`);
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/tune/${id}`
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch tune data");
         }
@@ -39,7 +41,8 @@ const TuneDetail = () => {
         <div className="sheetMusicContainer">
           <img
             className="img-tune"
-            src={tune.sheetMusicFile}
+            //src={tune.sheetMusicFile}
+            src={`${import.meta.env.VITE_API_URL}${tune.sheetMusicFile}`}
             alt={tune.title}
           />
         </div>
@@ -48,7 +51,8 @@ const TuneDetail = () => {
           <div className="sheetMusicContainer">
             <img
               className="img-tune"
-              src={tune.v2}
+              //src={tune.v2}
+              src={`${import.meta.env.VITE_API_URL}${tune.sheetMusicFile}`}
               alt={`${tune.title} - Version 2`}
             />
           </div>
