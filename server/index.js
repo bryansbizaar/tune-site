@@ -52,6 +52,8 @@ app.get("/api/chords/:id", async (req, res) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`Server is running on port: ${port}`);
-});
+if (require.main === module) {
+  app.listen(port, () => {});
+}
+
+module.exports = app;
