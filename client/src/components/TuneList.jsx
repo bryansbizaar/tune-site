@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import SpotifyMusicPlayer from "./SpotifyMusicPlayer";
 import Header from "./Header";
 import TuneDisplay from "./TuneDisplay";
-import instruments from "/images/instruments.jpg";
 import { sortTunes } from "../utils/sorting";
+
+const instruments = `${import.meta.env.VITE_API_URL}/images/instruments.jpg`;
 
 const TuneList = () => {
   const [tunes, setTunes] = useState([]);
