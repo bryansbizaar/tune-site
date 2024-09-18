@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Header from "./Header";
-import instruments from "/images/instruments.jpg";
 import { sortTunes } from "../utils/sorting";
+
+const instruments = `${import.meta.env.VITE_API_URL}/images/instruments.jpg`;
 
 const ChordList = () => {
   const [tunes, setTunes] = useState([]);

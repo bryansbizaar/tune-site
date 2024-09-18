@@ -15,7 +15,7 @@ const Navigation = () => {
             rel="noopener noreferrer"
           >
             <img
-              src="/images/facebook.png"
+              src={`${import.meta.env.VITE_API_URL}/images/facebook.png`}
               alt="facebook logo"
               width="17"
               height="17"
