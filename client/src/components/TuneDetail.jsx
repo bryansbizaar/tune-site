@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import SpotifyMusicPlayer from "./SpotifyMusicPlayer";
 import YouTubePlayer from "./YouTubePlayer";
 import Header from "./Header";
+import { VITE_API_URL } from "../env";
 
 const TuneDetail = () => {
   const [tune, setTune] = useState(null);
@@ -12,9 +13,7 @@ const TuneDetail = () => {
   useEffect(() => {
     const fetchTune = async () => {
       try {
-        const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/tune/${id}`
-        );
+        const response = await fetch(`${VITE_API_URL}/api/tune/${id}`);
         if (!response.ok) {
           throw new Error("Failed to fetch tune data");
         }
@@ -41,8 +40,7 @@ const TuneDetail = () => {
         <div className="sheetMusicContainer">
           <img
             className="img-tune"
-            //src={tune.sheetMusicFile}
-            src={`${import.meta.env.VITE_API_URL}${tune.sheetMusicFile}`}
+            src={`${VITE_API_URL}${tune.sheetMusicFile}`}
             alt={tune.title}
           />
         </div>
@@ -51,8 +49,7 @@ const TuneDetail = () => {
           <div className="sheetMusicContainer">
             <img
               className="img-tune"
-              //src={tune.v2}
-              src={`${import.meta.env.VITE_API_URL}${tune.sheetMusicFile}`}
+              src={`${VITE_API_URL}${tune.sheetMusicFile}`}
               alt={`${tune.title} - Version 2`}
             />
           </div>

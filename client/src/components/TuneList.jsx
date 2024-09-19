@@ -4,19 +4,19 @@ import SpotifyMusicPlayer from "./SpotifyMusicPlayer";
 import Header from "./Header";
 import TuneDisplay from "./TuneDisplay";
 import { sortTunes } from "../utils/sorting";
+import { VITE_API_URL } from "../env";
 
-const instruments = `${import.meta.env.VITE_API_URL}/images/instruments.jpg`;
+const instruments = `${VITE_API_URL}/images/instruments.jpg`;
 
 const TuneList = () => {
   const [tunes, setTunes] = useState([]);
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchTunes = async () => {
       try {
-        const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/tuneList`
-        );
+        const response = await fetch(`${VITE_API_URL}/api/tuneList`);
         if (!response.ok) {
           throw new Error("Failed to fetch tune data");
         }
@@ -25,15 +25,25 @@ const TuneList = () => {
       } catch (err) {
         console.error("Error fetching tunes:", err);
         setError(err.message);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchTunes();
   }, []);
 
-  if (error) return <div>Error: {error}</div>;
-  if (!tunes) return <div>Loading...</div>;
-  // if (tunes.length === 0) return <div>No tunes available</div>;
+  if (isLoading) {
+    return <div data-testid="loading-indicator">Loading...</div>;
+  }
+
+  if (error) {
+    return <div data-testid="error-message">Error: {error}</div>;
+  }
+
+  if (!tunes || tunes.length === 0) {
+    return <div data-testid="no-tunes-message">No tunes available</div>;
+  }
 
   const tunesOfTheWeek = tunes.filter((tune) => tune.tunesOfTheWeek === true);
   const upNextTunes = tunes.filter((tune) => tune.upNextTunes === true);
@@ -96,7 +106,7 @@ const TuneList = () => {
                 ) : (
                   <Link to={`/tune/${tune.id}`}>{tune.title}</Link>
                 )}
-                : {tune.description}
+                <span>: {tune.description}</span>
               </li>
             ))}
           </ul>

@@ -11,7 +11,6 @@ import "./index.css";
 
 function App() {
   return (
-    // <Router basename="/tune-site">
     <Router>
       <div className="App">
         <Routes>
@@ -21,6 +20,7 @@ function App() {
           <Route path="/chords" element={<ChordList />} />
           <Route path="/chords/:id" element={<ChordDetail />} />
           <Route path="/resources" element={<Resources />} />
+          <Route path="*" element={<div>Not Found</div>} />
         </Routes>
       </div>
     </Router>

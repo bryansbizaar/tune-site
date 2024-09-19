@@ -2,39 +2,48 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Header from "./Header";
 import { sortTunes } from "../utils/sorting";
+import { VITE_API_URL } from "../env";
 
-const instruments = `${import.meta.env.VITE_API_URL}/images/instruments.jpg`;
+const instruments = `${VITE_API_URL}/images/instruments.jpg`;
 
 const ChordList = () => {
   const [tunes, setTunes] = useState([]);
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchChords = async () => {
       try {
-        //const response = await fetch("/data/tuneList.json");
-        const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/tuneList`
-        );
+        const response = await fetch(`${VITE_API_URL}/api/tuneList`);
         if (!response.ok) {
           throw new Error("Failed to fetch tune data");
         }
         const data = await response.json();
-        // Filter tunes to only those with chord image files
+
         const tunesWithChords = data.filter((tune) => tune.hasChords);
         setTunes(tunesWithChords);
       } catch (err) {
         console.error("Error fetching tunes:", err);
         setError(err.message);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchChords();
   }, []);
 
-  if (error) return <div>Error: {error}</div>;
-  if (!tunes) return <div>Loading...</div>;
-  // if (tunes.length === 0) return <div>No chords available</div>;
+  if (isLoading) {
+    return <div data-testid="loading-indicator">Loading...</div>;
+  }
+
+  if (error) {
+    return <div data-testid="error-message">Error: {error}</div>;
+  }
+
+  if (!tunes || tunes.length === 0) {
+    return <div data-testid="no-tunes-message">No tunes available</div>;
+  }
 
   const sortedTunes = sortTunes(tunes);
 
