@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import SpotifyMusicPlayer from "./SpotifyMusicPlayer";
+import YouTubePlayer from "./YouTubePlayer";
 import Header from "./Header";
+import { VITE_API_URL } from "../env";
 
 const ChordDetail = () => {
   const [tune, setTune] = useState(null);
@@ -12,9 +14,7 @@ const ChordDetail = () => {
     const fetchChord = async () => {
       try {
         //const response = await fetch(`/data/tunes/${id}.json`);
-        const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/tune/${id}`
-        );
+        const response = await fetch(`${VITE_API_URL}/api/tune/${id}`);
         if (!response.ok) {
           throw new Error("Failed to fetch tune data");
         }
@@ -45,7 +45,7 @@ const ChordDetail = () => {
             <img
               className="img-tune"
               //src={tune.chords}
-              src={`${import.meta.env.VITE_API_URL}${tune.chords}`}
+              src={`${VITE_API_URL}${tune.chords}`}
               alt={`Chord diagram for ${tune.title}`}
             />
           </div>

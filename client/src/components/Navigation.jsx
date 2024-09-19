@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { VITE_API_URL } from "../env.js";
 
 const Navigation = () => {
   return (
@@ -15,7 +16,7 @@ const Navigation = () => {
             rel="noopener noreferrer"
           >
             <img
-              src={`${import.meta.env.VITE_API_URL}/images/facebook.png`}
+              src={`${VITE_API_URL}/images/facebook.png`}
               alt="facebook logo"
               width="17"
               height="17"

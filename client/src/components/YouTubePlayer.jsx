@@ -1,4 +1,10 @@
+import React from "react";
+
 const YouTubePlayer = ({ youtubeTrackId }) => {
+  if (!youtubeTrackId) {
+    return null;
+  }
+
   const embedUrl = `https://www.youtube.com/embed/${youtubeTrackId}`;
 
   return (
