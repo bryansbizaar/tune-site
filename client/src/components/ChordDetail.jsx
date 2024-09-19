@@ -13,7 +13,6 @@ const ChordDetail = () => {
   useEffect(() => {
     const fetchChord = async () => {
       try {
-        //const response = await fetch(`/data/tunes/${id}.json`);
         const response = await fetch(`${VITE_API_URL}/api/tune/${id}`);
         if (!response.ok) {
           throw new Error("Failed to fetch tune data");
@@ -44,7 +43,6 @@ const ChordDetail = () => {
           <div className="sheetMusicContainer">
             <img
               className="img-tune"
-              //src={tune.chords}
               src={`${VITE_API_URL}${tune.chords}`}
               alt={`Chord diagram for ${tune.title}`}
             />

@@ -2,7 +2,6 @@ import React from "react";
 import Header from "./Header";
 import { VITE_API_URL } from "../env";
 
-// const instruments = `${import.meta.env.VITE_API_URL}/images/instruments.jpg`;
 const instruments = `${VITE_API_URL}/images/instruments.jpg`;
 
 const Home = () => {
