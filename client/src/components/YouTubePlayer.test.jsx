@@ -1,7 +1,7 @@
 // YouTubePlayer.test.jsx
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import YouTubePlayer from "./YouTubePlayer"; // Adjust the path if necessary
+import YouTubePlayer from "./YouTubePlayer";
 
 describe("YouTubePlayer Component", () => {
   it("renders the YouTube iframe with the correct src when a valid youtubeTrackId is passed", () => {

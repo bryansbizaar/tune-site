@@ -51,18 +51,6 @@ describe("SpotifyMusicPlayer Component", () => {
     );
   });
 
-  // test("updates iframe key when spotifyTrackId changes", () => {
-  //   const { rerender } = render(
-  //     <SpotifyMusicPlayer spotifyTrackId="1234567" />
-  //   );
-  //   let iframe = screen.getByTitle("Spotify music player");
-  //   expect(iframe).toHaveAttribute("key", "1234567");
-
-  //   rerender(<SpotifyMusicPlayer spotifyTrackId="7890123" />);
-  //   iframe = screen.getByTitle("Spotify music player");
-  //   expect(iframe).toHaveAttribute("key", "7890123");
-  // });
-
   test("updates iframe src when spotifyTrackId changes", () => {
     const { rerender } = render(
       <SpotifyMusicPlayer spotifyTrackId="1234567" />
