@@ -1,9 +1,16 @@
 const request = require("supertest");
+const mongoose = require("mongoose");
 const app = require("./index");
-const path = require("path");
 const fs = require("fs").promises;
 
 describe("API Tests", () => {
+  afterAll(async () => {
+    await mongoose.connection.close();
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
   describe("GET /api/tuneList", () => {
     it("responds with json", async () => {
       const response = await request(app)

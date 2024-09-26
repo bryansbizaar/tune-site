@@ -4,7 +4,7 @@ import SpotifyMusicPlayer from "./SpotifyMusicPlayer";
 import Header from "./Header";
 import TuneDisplay from "./TuneDisplay";
 import { sortTunes } from "../utils/sorting";
-import { VITE_API_URL } from "../env";
+import { VITE_API_URL } from "../env.js";
 
 const instruments = `${VITE_API_URL}/images/instruments.jpg`;
 

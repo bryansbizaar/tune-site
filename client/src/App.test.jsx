@@ -23,6 +23,9 @@ jest.mock("./components/ChordDetail", () => () => (
 jest.mock("./components/Resources", () => () => (
   <div data-testid="resources">Resources Component</div>
 ));
+jest.mock("./components/LoginForm", () => () => (
+  <div data-testid="login-form">Login Form Component</div>
+));
 
 describe("App Component", () => {
   const renderWithRouter = (route) => {
@@ -61,6 +64,11 @@ describe("App Component", () => {
   test("renders Resources component for /resources route", () => {
     renderWithRouter("/resources");
     expect(screen.getByTestId("resources")).toBeInTheDocument();
+  });
+
+  test("renders LoginForm component for /login route", () => {
+    renderWithRouter("/login");
+    expect(screen.getByTestId("login-form")).toBeInTheDocument();
   });
 
   test("renders Not Found for unknown route", () => {
