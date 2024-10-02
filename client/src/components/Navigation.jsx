@@ -2,7 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { VITE_API_URL } from "../env.js";
 
-const Navigation = () => {
+const Navigation = ({ isLoggedIn, logout }) => {
+  const handleLogout = (e) => {
+    e.preventDefault();
+    logout();
+  };
+
   return (
     <nav>
       <ul className="nav">
@@ -10,6 +15,11 @@ const Navigation = () => {
           <Link to="/tunelist">Tunes</Link>
           <Link to="/chords">Chords</Link>
           <Link to="/resources">Resources</Link>
+          {isLoggedIn ? (
+            <button onClick={handleLogout}>Log Out</button>
+          ) : (
+            <Link to="/login">Log In</Link>
+          )}
           <a
             href="https://www.facebook.com/groups/whangareifolkrootstraditionalmusic"
             target="_blank"

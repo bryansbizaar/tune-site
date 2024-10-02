@@ -1,51 +1,44 @@
 import React, { useState } from "react";
-import { VITE_API_URL } from "../env";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../useAuth";
+import { VITE_API_URL } from "../env";
 
-const LoginForm = () => {
+const SignupForm = () => {
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
-  const { login } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+
+    if (!username || !email || !password) {
+      setError("All fields are required");
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
-      if (!email && !password) {
-        throw new Error("Please enter both email and password");
-      } else if (!email) {
-        throw new Error("Please enter email");
-      } else if (!password) {
-        throw new Error("Please enter password");
-      }
-
-      const response = await fetch(`${VITE_API_URL}/api/auth/login`, {
+      const response = await fetch(`${VITE_API_URL}/api/auth/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ username, email, password }),
       });
 
       const data = await response.json();
-
       if (!response.ok) {
-        throw new Error(data.message || "Login failed");
+        throw new Error(data.error || "Signup failed");
       }
 
-      // Handle successful login (e.g., redirect, save token, etc.)
-
-      login(data.token);
+      localStorage.setItem("token", data.token);
       navigate("/");
     } catch (err) {
-      console.error("Login error:", err);
-      setError(err.message || "An error occurred. Please try again.");
+      setError(err.message);
     } finally {
       setIsSubmitting(false);
     }
@@ -53,8 +46,18 @@ const LoginForm = () => {
 
   return (
     <div>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit} data-testid="login-form">
+      <h2>Sign Up</h2>
+      <form onSubmit={handleSubmit} data-testid="signup-form">
+        <div>
+          <label htmlFor="username">Username:</label>
+          <input
+            type="text"
+            id="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+        </div>
         <div>
           <label htmlFor="email">Email:</label>
           <input
@@ -62,7 +65,6 @@ const LoginForm = () => {
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter your email"
             required
           />
         </div>
@@ -73,25 +75,18 @@ const LoginForm = () => {
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Enter your password"
             required
           />
         </div>
-        {error && (
-          <p data-testid="error-message" style={{ color: "red" }}>
-            {error}
-          </p>
-        )}
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          data-testid="submit-button"
-        >
-          {isSubmitting ? "Logging in..." : "Log In"}
+        <p role="alert" data-testid="error-message">
+          {error}
+        </p>
+        <button type="submit" disabled={isSubmitting}>
+          {isSubmitting ? "Signing up..." : "Sign Up"}
         </button>
       </form>
     </div>
   );
 };
 
-export default LoginForm;
+export default SignupForm;

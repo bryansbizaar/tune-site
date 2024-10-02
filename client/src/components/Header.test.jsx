@@ -11,6 +11,14 @@ jest.mock("./Navigation", () => {
   };
 });
 
+// Mock the useAuth hook
+jest.mock("../useAuth", () => ({
+  useAuth: () => ({
+    isLoggedIn: false,
+    logout: jest.fn(),
+  }),
+}));
+
 const renderWithRouter = (ui, { route = "/" } = {}) => {
   window.history.pushState({}, "Test page", route);
   return render(ui, { wrapper: BrowserRouter });

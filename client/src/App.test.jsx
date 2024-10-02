@@ -4,7 +4,14 @@ import { MemoryRouter } from "react-router-dom";
 import "@testing-library/jest-dom";
 import App from "./App";
 
-// Mock all the components
+// Mock the AuthProvider
+jest.mock("./useAuth", () => ({
+  AuthProvider: ({ children }) => (
+    <div data-testid="auth-provider">{children}</div>
+  ),
+}));
+
+// Mock the components
 jest.mock("./components/Home", () => () => (
   <div data-testid="home">Home Component</div>
 ));
@@ -26,6 +33,12 @@ jest.mock("./components/Resources", () => () => (
 jest.mock("./components/LoginForm", () => () => (
   <div data-testid="login-form">Login Form Component</div>
 ));
+jest.mock("./components/SignupForm", () => () => (
+  <div data-testid="signup-form">Signup Form Component</div>
+));
+
+// Mock the CSS import
+jest.mock("./index.css", () => ({}));
 
 describe("App Component", () => {
   const renderWithRouter = (route) => {
@@ -35,6 +48,11 @@ describe("App Component", () => {
       </MemoryRouter>
     );
   };
+
+  test("renders AuthProvider", () => {
+    renderWithRouter("/");
+    expect(screen.getByTestId("auth-provider")).toBeInTheDocument();
+  });
 
   test("renders Home component for / route", () => {
     renderWithRouter("/");
@@ -69,6 +87,11 @@ describe("App Component", () => {
   test("renders LoginForm component for /login route", () => {
     renderWithRouter("/login");
     expect(screen.getByTestId("login-form")).toBeInTheDocument();
+  });
+
+  test("renders SignupForm component for /signup route", () => {
+    renderWithRouter("/signup");
+    expect(screen.getByTestId("signup-form")).toBeInTheDocument();
   });
 
   test("renders Not Found for unknown route", () => {
