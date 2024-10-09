@@ -10,7 +10,7 @@ const Header = ({ isFixed = true }) => {
     <div className={`header ${isFixed ? "header-fixed" : ""}`}>
       <div className="title">
         <h1 className="title-text">
-          <Link to="/">Whangarei Tunes </Link>
+          <Link to="/">Whangarei Tunes</Link>
         </h1>
       </div>
       <Navigation isLoggedIn={isLoggedIn} logout={logout} />

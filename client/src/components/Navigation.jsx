@@ -1,11 +1,29 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { VITE_API_URL } from "../env.js";
+import * as Dialog from "@radix-ui/react-dialog";
+import { Button } from "./ui/Button";
+import AuthForm from "./AuthForm";
+import { useAuth } from "../useAuth";
 
-const Navigation = ({ isLoggedIn, logout }) => {
+const Navigation = () => {
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const { isLoggedIn, logout } = useAuth();
+  const navigate = useNavigate();
+
   const handleLogout = (e) => {
     e.preventDefault();
     logout();
+    navigate("/");
+  };
+
+  const handleLoginClick = (e) => {
+    e.preventDefault();
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -16,9 +34,9 @@ const Navigation = ({ isLoggedIn, logout }) => {
           <Link to="/chords">Chords</Link>
           <Link to="/resources">Resources</Link>
           {isLoggedIn ? (
-            <button onClick={handleLogout}>Log Out</button>
+            <Button onClick={handleLogout}>Log Out</Button>
           ) : (
-            <Link to="/login">Log In</Link>
+            <Button onClick={handleLoginClick}>Log In</Button>
           )}
           <a
             href="https://www.facebook.com/groups/whangareifolkrootstraditionalmusic"
@@ -35,6 +53,27 @@ const Navigation = ({ isLoggedIn, logout }) => {
           </a>
         </li>
       </ul>
+      {!isLoggedIn && (
+        <Dialog.Root open={isModalOpen} onOpenChange={setIsModalOpen}>
+          <Dialog.Portal>
+            <Dialog.Overlay className="dialog-overlay" />
+            <Dialog.Content className="dialog-content">
+              <Dialog.Title className="dialog-title">
+                Authentication
+              </Dialog.Title>
+              <Dialog.Description className="dialog-description">
+                Log in or sign up to access exclusive content.
+              </Dialog.Description>
+              <AuthForm onClose={handleCloseModal} />
+              <Dialog.Close asChild>
+                <button className="dialog-close" aria-label="Close">
+                  ×
+                </button>
+              </Dialog.Close>
+            </Dialog.Content>
+          </Dialog.Portal>
+        </Dialog.Root>
+      )}
     </nav>
   );
 };

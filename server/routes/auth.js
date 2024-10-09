@@ -5,9 +5,9 @@ const router = express.Router();
 
 router.post("/signup", async (req, res) => {
   try {
-    const { username, email, password } = req.body;
+    const { name, email, password } = req.body;
 
-    if (!username || !email || !password) {
+    if (!name || !email || !password) {
       return res.status(400).json({ error: "All fields are required" });
     }
 
@@ -18,7 +18,7 @@ router.post("/signup", async (req, res) => {
     }
 
     // Create new user
-    const newUser = new UserModel({ username, email, password });
+    const newUser = new UserModel({ name, email, password });
     await newUser.save();
 
     // Generate token
@@ -32,7 +32,7 @@ router.post("/signup", async (req, res) => {
       message: "User created successfully",
       user: {
         id: newUser._id,
-        username: newUser.username,
+        name: newUser.name,
         email: newUser.email,
         role: newUser.role,
       },
