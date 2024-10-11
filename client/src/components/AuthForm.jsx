@@ -73,20 +73,19 @@ const AuthForm = ({ onClose }) => {
 
   return (
     <div className="card">
-      {/* <div className="card-header">
-        <h2 className="card-title">Access Exclusive Content</h2>
-      </div> */}
       <div className="card-content">
-        <div className="tabs-list">
+        <div className="tabs-list" role="group" aria-label="Login or Sign Up">
           <button
             className={`tabs-trigger ${activeTab === "login" ? "active" : ""}`}
             onClick={() => setActiveTab("login")}
+            data-testid="login-tab"
           >
             Login
           </button>
           <button
             className={`tabs-trigger ${activeTab === "signup" ? "active" : ""}`}
             onClick={() => setActiveTab("signup")}
+            data-testid="signup-tab"
           >
             Sign Up
           </button>
@@ -110,7 +109,11 @@ const AuthForm = ({ onClose }) => {
                 className="input"
                 required
               />
-              <button type="submit" className="button">
+              <button
+                type="submit"
+                className="button"
+                data-testid="login-submit"
+              >
                 Log In
               </button>
             </form>
@@ -143,7 +146,11 @@ const AuthForm = ({ onClose }) => {
                 className="input"
                 required
               />
-              <button type="submit" className="button">
+              <button
+                type="submit"
+                className="button"
+                data-testid="signup-submit"
+              >
                 Sign Up
               </button>
             </form>
