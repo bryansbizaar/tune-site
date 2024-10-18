@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "./ui/Button";
 import {
   Dialog,
@@ -8,10 +8,20 @@ import {
 } from "./ui/Dialog";
 import AuthForm from "./AuthForm";
 import { useAuth } from "../useAuth";
+import { useLocation } from "react-router-dom";
 
 const AuthButton = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { isLoggedIn, logout } = useAuth();
+  const location = useLocation();
+
+  useEffect(() => {
+    const query = new URLSearchParams(location.search);
+    const token = query.get("reset_token");
+    if (token) {
+      setIsModalOpen(true);
+    }
+  }, [location]);
 
   const handleLoginClick = () => {
     setIsModalOpen(true);

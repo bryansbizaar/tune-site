@@ -7,8 +7,6 @@ import TuneDetail from "./components/TuneDetail";
 import ChordList from "./components/ChordList";
 import Resources from "./components/Resources";
 import ChordDetail from "./components/ChordDetail";
-import LoginForm from "./components/LoginForm";
-import SignupForm from "./components/SignupForm";
 
 import "./index.css";
 
@@ -24,8 +22,6 @@ function App() {
           <Route path="/chords/:id" element={<ChordDetail />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="*" element={<div>Not Found</div>} />
-          <Route path="/login" element={<LoginForm />} />
-          <Route path="/signup" element={<SignupForm />} />
         </Routes>
       </div>
     </AuthProvider>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1729143188719" clover="3.2.0">
+  <project timestamp="1729143188719" name="All files">
+    <metrics statements="22" coveredstatements="20" conditionals="10" coveredconditionals="8" methods="3" coveredmethods="3" elements="35" coveredelements="31" complexity="0" loc="22" ncloc="22" packages="1" files="1" classes="1"/>
+    <file name="ForgotPasswordForm.jsx" path="/Users/bryanowens/Code/Websites/Tunes/react-tunes/client/src/components/ForgotPasswordForm.jsx">
+      <metrics statements="22" coveredstatements="20" conditionals="10" coveredconditionals="8" methods="3" coveredmethods="3"/>
+      <line num="4" count="1" type="stmt"/>
+      <line num="5" count="10" type="stmt"/>
+      <line num="6" count="10" type="stmt"/>
+      <line num="7" count="10" type="stmt"/>
+      <line num="9" count="10" type="stmt"/>
+      <line num="10" count="2" type="stmt"/>
+      <line num="11" count="2" type="stmt"/>
+      <line num="12" count="2" type="stmt"/>
+      <line num="14" count="2" type="cond" truecount="1" falsecount="1"/>
+      <line num="15" count="0" type="stmt"/>
+      <line num="16" count="0" type="stmt"/>
+      <line num="19" count="2" type="stmt"/>
+      <line num="20" count="2" type="stmt"/>
+      <line num="26" count="2" type="cond" truecount="2" falsecount="0"/>
+      <line num="27" count="1" type="stmt"/>
+      <line num="30" count="1" type="stmt"/>
+      <line num="31" count="1" type="cond" truecount="1" falsecount="1"/>
+      <line num="32" count="1" type="stmt"/>
+      <line num="34" count="1" type="stmt"/>
+      <line num="35" count="1" type="stmt"/>
+      <line num="39" count="10" type="stmt"/>
+      <line num="47" count="2" type="stmt"/>
+    </file>
+  </project>
+</coverage>

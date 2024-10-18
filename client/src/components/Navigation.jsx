@@ -20,9 +20,7 @@ const Navigation = () => {
             <img
               src={`${VITE_API_URL}/images/facebook.png`}
               alt="facebook logo"
-              width="17"
-              height="17"
-              style={{ marginLeft: "10px" }}
+              className="facebook-icon"
             />
           </a>
         </li>

@@ -1,7 +1,9 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const UserModel = require("../models/userModel");
+const crypto = require("crypto");
 const router = express.Router();
+const { sendResetEmail } = require("../utils/email");
 
 router.post("/signup", async (req, res) => {
   try {
@@ -77,6 +79,73 @@ router.post("/login", async (req, res) => {
     });
   } catch (error) {
     console.error("Login error:", error);
+    res.status(500).json({ error: "An unexpected error occurred" });
+  }
+});
+
+router.post("/forgot-password", async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(400).json({ error: "Email is required" });
+    }
+
+    // Check if user exists
+    const user = await UserModel.findOne({ email });
+    if (!user) {
+      return res.status(200).json({
+        message:
+          "If an account with that email exists, a password reset link has been sent.",
+      });
+    }
+
+    // Generate reset token
+    const token = crypto.randomBytes(20).toString("hex");
+
+    // Save token to user
+    user.resetPasswordToken = token;
+    user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+    await user.save();
+
+    // Send email
+    const resetUrl = `${process.env.FRONTEND_URL}?reset_token=${token}`;
+    await sendResetEmail(user.email, resetUrl);
+
+    res.status(200).json({
+      message:
+        "If an account with that email exists, a password reset link has been sent.",
+    });
+  } catch (error) {
+    console.error("Forgot password error:", error);
+    res.status(500).json({ error: "An unexpected error occurred" });
+  }
+});
+
+// Add a new route for resetting the password
+router.post("/reset-password", async (req, res) => {
+  try {
+    const { token, newPassword } = req.body;
+
+    // Find user by token
+    const user = await UserModel.findOne({
+      resetPasswordToken: token,
+      resetPasswordExpires: { $gt: Date.now() },
+    });
+
+    if (!user) {
+      return res.status(400).json({ error: "Invalid or expired token" });
+    }
+
+    // Set new password
+    user.password = newPassword;
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpires = undefined;
+    await user.save();
+
+    res.status(200).json({ message: "Password has been reset" });
+  } catch (error) {
+    console.error("Reset password error:", error);
     res.status(500).json({ error: "An unexpected error occurred" });
   }
 });

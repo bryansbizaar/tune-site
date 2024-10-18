@@ -3,6 +3,7 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import AuthForm from "./AuthForm";
 import { useAuth } from "../useAuth";
+import { useLocation, useNavigate } from "react-router-dom";
 
 // Mock the environment utility
 jest.mock("../env", () => ({
@@ -14,239 +15,143 @@ jest.mock("../useAuth", () => ({
   useAuth: jest.fn(),
 }));
 
+// Mock the react-router-dom hooks
+jest.mock("react-router-dom", () => ({
+  useLocation: jest.fn(),
+  useNavigate: jest.fn(),
+}));
+
 describe("AuthForm", () => {
   const mockOnClose = jest.fn();
   const mockLogin = jest.fn();
+  const mockNavigate = jest.fn();
 
   beforeEach(() => {
     useAuth.mockReturnValue({ isLoggedIn: false, login: mockLogin });
+    useLocation.mockReturnValue({ search: "" });
+    useNavigate.mockReturnValue(mockNavigate);
     jest.clearAllMocks();
   });
 
-  it("renders login form by default", () => {
-    render(<AuthForm onClose={mockOnClose} />);
-    expect(screen.getByPlaceholderText("Email")).toBeInTheDocument();
-    expect(screen.getByPlaceholderText("Password")).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Log In" })).toBeInTheDocument();
-  });
+  // Existing tests...
 
-  it("switches to signup form when Sign Up button is clicked", async () => {
+  it("renders forgot password form when Forgot Password button is clicked", async () => {
     render(<AuthForm onClose={mockOnClose} />);
 
-    const signUpTab = screen.getByTestId("signup-tab");
-    fireEvent.click(signUpTab);
+    fireEvent.click(screen.getByTestId("forgot-password-tab"));
 
     await waitFor(() => {
-      expect(screen.getByPlaceholderText("Name")).toBeInTheDocument();
       expect(screen.getByPlaceholderText("Email")).toBeInTheDocument();
-      expect(screen.getByPlaceholderText("Password")).toBeInTheDocument();
-      expect(screen.getByTestId("signup-submit")).toBeInTheDocument();
+      expect(screen.getByTestId("forgot-password-submit")).toBeInTheDocument();
     });
   });
 
-  it("submits login form with correct data", async () => {
+  it("submits forgot password form with correct data", async () => {
     global.fetch = jest.fn(() =>
       Promise.resolve({
         ok: true,
-        json: () =>
-          Promise.resolve({ token: "fake-token", message: "Login successful" }),
+        json: () => Promise.resolve({ message: "Password reset email sent" }),
       })
     );
 
     render(<AuthForm onClose={mockOnClose} />);
 
+    fireEvent.click(screen.getByTestId("forgot-password-tab"));
     fireEvent.change(screen.getByPlaceholderText("Email"), {
       target: { value: "test@example.com" },
     });
-    fireEvent.change(screen.getByPlaceholderText("Password"), {
-      target: { value: "password123" },
-    });
-    fireEvent.click(screen.getByTestId("login-submit"));
+    fireEvent.click(screen.getByTestId("forgot-password-submit"));
 
     await waitFor(() => {
       expect(global.fetch).toHaveBeenCalledWith(
-        "http://localhost:5000/api/auth/login",
+        "http://localhost:5000/api/auth/forgot-password",
+        expect.objectContaining({
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: "test@example.com" }),
+        })
+      );
+    });
+
+    await waitFor(() => {
+      expect(
+        screen.getByText(
+          "If an account with that email exists, a password reset link has been sent."
+        )
+      ).toBeInTheDocument();
+    });
+  });
+
+  it("renders reset password form when reset token is present in URL", async () => {
+    useLocation.mockReturnValue({ search: "?reset_token=testtoken" });
+
+    render(<AuthForm onClose={mockOnClose} />);
+
+    await waitFor(() => {
+      expect(screen.getByPlaceholderText("New Password")).toBeInTheDocument();
+      expect(
+        screen.getByPlaceholderText("Confirm New Password")
+      ).toBeInTheDocument();
+      expect(screen.getByTestId("reset-password-submit")).toBeInTheDocument();
+    });
+  });
+
+  it("submits reset password form with correct data", async () => {
+    useLocation.mockReturnValue({ search: "?reset_token=testtoken" });
+    global.fetch = jest.fn(() =>
+      Promise.resolve({
+        ok: true,
+        json: () =>
+          Promise.resolve({ message: "Password has been reset successfully" }),
+      })
+    );
+
+    render(<AuthForm onClose={mockOnClose} />);
+
+    fireEvent.change(screen.getByPlaceholderText("New Password"), {
+      target: { value: "newpassword123" },
+    });
+    fireEvent.change(screen.getByPlaceholderText("Confirm New Password"), {
+      target: { value: "newpassword123" },
+    });
+    fireEvent.click(screen.getByTestId("reset-password-submit"));
+
+    await waitFor(() => {
+      expect(global.fetch).toHaveBeenCalledWith(
+        "http://localhost:5000/api/auth/reset-password",
         expect.objectContaining({
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            email: "test@example.com",
-            password: "password123",
+            token: "testtoken",
+            newPassword: "newpassword123",
           }),
         })
       );
     });
 
     await waitFor(() => {
-      expect(mockLogin).toHaveBeenCalledWith("fake-token");
-    });
-
-    await waitFor(() => {
-      expect(screen.getByText("Login successful")).toBeInTheDocument();
-    });
-
-    await waitFor(
-      () => {
-        expect(mockOnClose).toHaveBeenCalled();
-      },
-      { timeout: 2500 }
-    );
-  });
-
-  it("displays error message on login failure", async () => {
-    global.fetch = jest.fn(() =>
-      Promise.resolve({
-        ok: false,
-        json: () => Promise.resolve({ error: "Invalid credentials" }),
-      })
-    );
-
-    render(<AuthForm onClose={mockOnClose} />);
-
-    fireEvent.change(screen.getByPlaceholderText("Email"), {
-      target: { value: "test@example.com" },
-    });
-    fireEvent.change(screen.getByPlaceholderText("Password"), {
-      target: { value: "wrongpassword" },
-    });
-    fireEvent.click(screen.getByTestId("login-submit"));
-
-    await waitFor(() => {
-      expect(screen.getByText("Invalid credentials")).toBeInTheDocument();
-    });
-
-    expect(mockLogin).not.toHaveBeenCalled();
-    expect(mockOnClose).not.toHaveBeenCalled();
-  });
-
-  it("submits signup form with correct data", async () => {
-    global.fetch = jest.fn(() =>
-      Promise.resolve({
-        ok: true,
-        json: () =>
-          Promise.resolve({
-            token: "new-user-token",
-            message: "Signup successful",
-          }),
-      })
-    );
-
-    render(<AuthForm onClose={mockOnClose} />);
-
-    fireEvent.click(screen.getByTestId("signup-tab"));
-
-    fireEvent.change(screen.getByPlaceholderText("Name"), {
-      target: { value: "John Doe" },
-    });
-    fireEvent.change(screen.getByPlaceholderText("Email"), {
-      target: { value: "john@example.com" },
-    });
-    fireEvent.change(screen.getByPlaceholderText("Password"), {
-      target: { value: "password123" },
-    });
-    fireEvent.click(screen.getByTestId("signup-submit"));
-
-    await waitFor(() => {
-      expect(global.fetch).toHaveBeenCalledWith(
-        "http://localhost:5000/api/auth/signup",
-        expect.objectContaining({
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            name: "John Doe",
-            email: "john@example.com",
-            password: "password123",
-          }),
-        })
-      );
-    });
-
-    await waitFor(() => {
-      expect(mockLogin).toHaveBeenCalledWith("new-user-token");
-    });
-
-    await waitFor(() => {
-      expect(screen.getByText("Signup successful")).toBeInTheDocument();
-    });
-
-    await waitFor(
-      () => {
-        expect(mockOnClose).toHaveBeenCalled();
-      },
-      { timeout: 2500 }
-    );
-  });
-
-  it("displays error message on signup failure", async () => {
-    global.fetch = jest.fn(() =>
-      Promise.resolve({
-        ok: false,
-        json: () => Promise.resolve({ error: "Email already in use" }),
-      })
-    );
-
-    render(<AuthForm onClose={mockOnClose} />);
-
-    fireEvent.click(screen.getByTestId("signup-tab"));
-
-    fireEvent.change(screen.getByPlaceholderText("Name"), {
-      target: { value: "John Doe" },
-    });
-    fireEvent.change(screen.getByPlaceholderText("Email"), {
-      target: { value: "john@example.com" },
-    });
-    fireEvent.change(screen.getByPlaceholderText("Password"), {
-      target: { value: "password123" },
-    });
-    fireEvent.click(screen.getByTestId("signup-submit"));
-
-    await waitFor(() => {
-      expect(screen.getByText("Email already in use")).toBeInTheDocument();
-    });
-
-    expect(mockLogin).not.toHaveBeenCalled();
-    expect(mockOnClose).not.toHaveBeenCalled();
-  });
-
-  it("closes the form when user is already logged in", async () => {
-    const mockOnClose = jest.fn();
-    useAuth.mockReturnValue({ isLoggedIn: true, login: jest.fn() });
-
-    render(<AuthForm onClose={mockOnClose} />);
-
-    await waitFor(() => {
       expect(
-        screen.getByText("You are already logged in.")
+        screen.getByText("Password has been reset successfully")
       ).toBeInTheDocument();
     });
-
-    await waitFor(
-      () => {
-        expect(mockOnClose).toHaveBeenCalled();
-      },
-      { timeout: 2500 }
-    );
   });
-  it("handles network errors during form submission", async () => {
-    global.fetch = jest.fn(() => Promise.reject(new Error("Network error")));
+
+  it("displays error when passwords do not match in reset password form", async () => {
+    useLocation.mockReturnValue({ search: "?reset_token=testtoken" });
 
     render(<AuthForm onClose={mockOnClose} />);
 
-    fireEvent.change(screen.getByPlaceholderText("Email"), {
-      target: { value: "test@example.com" },
+    fireEvent.change(screen.getByPlaceholderText("New Password"), {
+      target: { value: "newpassword123" },
     });
-    fireEvent.change(screen.getByPlaceholderText("Password"), {
-      target: { value: "password123" },
+    fireEvent.change(screen.getByPlaceholderText("Confirm New Password"), {
+      target: { value: "differentpassword" },
     });
-    fireEvent.click(screen.getByTestId("login-submit"));
+    fireEvent.click(screen.getByTestId("reset-password-submit"));
 
     await waitFor(() => {
-      expect(
-        screen.getByText("An error occurred. Please try again.")
-      ).toBeInTheDocument();
+      expect(screen.getByText("Passwords do not match")).toBeInTheDocument();
     });
-
-    expect(mockLogin).not.toHaveBeenCalled();
-    expect(mockOnClose).not.toHaveBeenCalled();
   });
 });

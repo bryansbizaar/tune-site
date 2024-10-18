@@ -68,9 +68,7 @@ app.use((err, req, res, next) => {
 const startServer = async () => {
   try {
     await connectDB();
-    app.listen(port, () => {
-      console.log(`Server is running on http://localhost:${port}`);
-    });
+    app.listen(port, () => {});
   } catch (error) {
     console.error("Failed to connect to the database:", error);
     process.exit(1);

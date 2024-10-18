@@ -240,6 +240,11 @@ iframe {
   padding: 0.3rem 0.5rem;
 }
 
+.facebook-icon {
+  width: 1rem;
+  height: 1rem;
+}
+
 .input {
   width: 100%;
   padding: 8px;
@@ -249,8 +254,8 @@ iframe {
 }
 
 .button {
-  padding: 8px 16px;
-  background-color: #0070f3;
+  padding: 4px 8px;
+  background-color: #bbb16e;
   color: white;
   border: none;
   border-radius: 4px;
@@ -258,7 +263,7 @@ iframe {
 }
 
 .button:hover {
-  background-color: #0060df;
+  background-color: #c1c49e;
 }
 
 .sr-only {
