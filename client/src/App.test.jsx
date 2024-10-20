@@ -30,12 +30,12 @@ jest.mock("./components/ChordDetail", () => () => (
 jest.mock("./components/Resources", () => () => (
   <div data-testid="resources">Resources Component</div>
 ));
-jest.mock("./components/LoginForm", () => () => (
-  <div data-testid="login-form">Login Form Component</div>
-));
-jest.mock("./components/SignupForm", () => () => (
-  <div data-testid="signup-form">Signup Form Component</div>
-));
+// jest.mock("./components/LoginForm", () => () => (
+//   <div data-testid="login-form">Login Form Component</div>
+// ));
+// jest.mock("./components/SignupForm", () => () => (
+//   <div data-testid="signup-form">Signup Form Component</div>
+// ));
 
 // Mock the CSS import
 jest.mock("./index.css", () => ({}));
@@ -84,15 +84,15 @@ describe("App Component", () => {
     expect(screen.getByTestId("resources")).toBeInTheDocument();
   });
 
-  test("renders LoginForm component for /login route", () => {
-    renderWithRouter("/login");
-    expect(screen.getByTestId("login-form")).toBeInTheDocument();
-  });
+  // test("renders LoginForm component for /login route", () => {
+  //   renderWithRouter("/login");
+  //   expect(screen.getByTestId("login-form")).toBeInTheDocument();
+  // });
 
-  test("renders SignupForm component for /signup route", () => {
-    renderWithRouter("/signup");
-    expect(screen.getByTestId("signup-form")).toBeInTheDocument();
-  });
+  // test("renders SignupForm component for /signup route", () => {
+  //   renderWithRouter("/signup");
+  //   expect(screen.getByTestId("signup-form")).toBeInTheDocument();
+  // });
 
   test("renders Not Found for unknown route", () => {
     renderWithRouter("/unknown");

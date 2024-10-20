@@ -1,262 +1,36 @@
-// const request = require("supertest");
-// const mongoose = require("mongoose");
-// const app = require("../../index"); // Your app's main file
-// const UserModel = require("../../models/userModel");
-// const { sendResetEmail } = require("../../utils/email");
-// const authRoutes = require("../../routes/auth");
-// const express = require("express");
-
-// jest.mock("../../utils/email");
-
-// jest.setTimeout(30000); // Set timeout for all tests in this file to 30 seconds
-
-// // Express app setup for integration testing
-// app.use(express.json());
-// app.use("/api/auth", authRoutes);
-
-// let server;
-
-// // Ensure MongoDB is connected before running tests
-// beforeAll(async () => {
-//   await mongoose.connect(process.env.MONGODB_URI);
-// });
-
-// // Start the server and clean up database before each test
-// beforeEach(async () => {
-//   server = app.listen(4000); // Specify a port to avoid conflicts
-//   await UserModel.deleteMany({}); // Clear users before each test
-// });
-
-// // Close the server after each test to ensure no open handles
-// afterEach(async () => {
-//   if (server && server.close) {
-//     await server.close();
-//   }
-// });
-
-// // Close the MongoDB connection after all tests
-// afterAll(async () => {
-//   await mongoose.connection.close();
-// });
-
-// describe("Forgot Password Flow (Server)", () => {
-//   it("should complete the entire forgot password flow", async () => {
-//     // Create a user
-//     const user = new UserModel({
-//       name: "Test User",
-//       email: "test@example.com",
-//       password: "oldpassword",
-//     });
-//     await user.save();
-
-//     // Request password reset
-//     const forgotResponse = await request(app)
-//       .post("/api/auth/forgot-password")
-//       .send({ email: "test@example.com" });
-//     expect(forgotResponse.statusCode).toBe(200);
-//     expect(sendResetEmail).toHaveBeenCalled();
-
-//     // Get the reset token (in a real scenario, this would be sent via email)
-//     const updatedUser = await UserModel.findOne({ email: "test@example.com" });
-//     const resetToken = updatedUser.resetPasswordToken;
-//     expect(resetToken).toBeDefined(); // Ensure token is created
-
-//     // Reset the password
-//     const resetResponse = await request(app)
-//       .post("/api/auth/reset-password")
-//       .send({ token: resetToken, newPassword: "newpassword123" });
-//     expect(resetResponse.statusCode).toBe(200);
-
-//     // Check that resetPasswordToken is cleared
-//     const finalUser = await UserModel.findOne({ email: "test@example.com" });
-//     expect(finalUser.resetPasswordToken).toBeUndefined();
-
-//     // Try logging in with the new password
-//     const loginResponse = await request(app)
-//       .post("/api/auth/login")
-//       .send({ email: "test@example.com", password: "newpassword123" });
-//     expect(loginResponse.statusCode).toBe(200);
-//     expect(loginResponse.body).toHaveProperty("token");
-
-//     // Verify that the old password no longer works
-//     const oldPasswordLoginResponse = await request(app)
-//       .post("/api/auth/login")
-//       .send({ email: "test@example.com", password: "oldpassword" });
-//     expect(oldPasswordLoginResponse.statusCode).toBe(401);
-//   });
-// });
-
-// const request = require("supertest");
-// const app = require("../../index");
-// const mongoose = require("mongoose");
-// const UserModel = require("../../models/userModel");
-
-// jest.setTimeout(10000); // Set timeout to 10 seconds
-
-// // Ensure MongoDB is connected before running tests
-// beforeAll(async () => {
-//   await mongoose.connect(process.env.MONGODB_URI);
-// });
-
-// // Start server and clean up database before each test
-// beforeEach(async () => {
-//   server = app.listen();
-//   await UserModel.deleteMany(); // Clear users before each test
-// });
-
-// // Close server after each test
-// afterEach(async () => {
-//   if (server && server.close) {
-//     await server.close();
-//   }
-// });
-
-// // Close the MongoDB connection after all tests
-// afterAll(async () => {
-//   await mongoose.connection.close();
-// });
-
-// describe("POST /api/auth/forgot-password", () => {
-//   it("should send a password reset link if the email exists", async () => {
-//     const response = await request(app)
-//       .post("/api/auth/forgot-password")
-//       .send({ email: "test@example.com" }); // Use an existing test email or mock this behavior in your server
-
-//     expect(response.statusCode).toBe(200);
-//     expect(response.body.message).toBe(
-//       "If an account with that email exists, a password reset link has been sent."
-//     );
-//   });
-
-//   it("should return a success message even if the email does not exist", async () => {
-//     const response = await request(app)
-//       .post("/api/auth/forgot-password")
-//       .send({ email: "nonexistent@example.com" });
-
-//     expect(response.statusCode).toBe(200);
-//     expect(response.body.message).toBe(
-//       "If an account with that email exists, a password reset link has been sent."
-//     );
-//   });
-// });
-
-// const request = require("supertest");
-// const app = require("../../index");
-// const mongoose = require("mongoose");
-// const UserModel = require("../../models/userModel");
-
-// jest.setTimeout(10000); // Set timeout to 10 seconds
-
-// // Ensure MongoDB is connected before running tests
-// beforeAll(async () => {
-//   await mongoose.connect(process.env.MONGODB_URI);
-// });
-
-// // Start server and clean up database before each test
-// beforeEach(async () => {
-//   server = app.listen();
-//   await UserModel.deleteMany(); // Clear users before each test
-// });
-
-// // Close server after each test
-// afterEach(async () => {
-//   if (server && server.close) {
-//     await server.close();
-//   }
-// });
-
-// // Close the MongoDB connection after all tests
-// afterAll(async () => {
-//   await mongoose.connection.close();
-// });
-
-// describe("POST /api/auth/forgot-password", () => {
-//   it("should send a password reset link if the email exists", async () => {
-//     // Create a test user
-//     await UserModel.create({
-//       name: "Test User",
-//       email: "test@example.com",
-//       password: "password123",
-//     });
-
-//     const response = await request(app)
-//       .post("/api/auth/forgot-password")
-//       .send({ email: "test@example.com" });
-
-//     expect(response.statusCode).toBe(200);
-//     expect(response.body.message).toBe(
-//       "If an account with that email exists, a password reset link has been sent."
-//     );
-//   });
-
-//   it("should return a success message even if the email does not exist", async () => {
-//     const response = await request(app)
-//       .post("/api/auth/forgot-password")
-//       .send({ email: "nonexistent@example.com" });
-
-//     expect(response.statusCode).toBe(200);
-//     expect(response.body.message).toBe(
-//       "If an account with that email exists, a password reset link has been sent."
-//     );
-//   });
-
-//   it("should return an error if the email field is empty", async () => {
-//     const response = await request(app)
-//       .post("/api/auth/forgot-password")
-//       .send({ email: "" });
-
-//     expect(response.statusCode).toBe(400);
-//     expect(response.body.error).toBe("Email is required");
-//   });
-
-//   it("should generate a reset token for an existing user", async () => {
-//     const user = await UserModel.create({
-//       name: "Test User",
-//       email: "test@example.com",
-//       password: "password123",
-//     });
-
-//     await request(app)
-//       .post("/api/auth/forgot-password")
-//       .send({ email: "test@example.com" });
-
-//     const updatedUser = await UserModel.findById(user._id);
-//     expect(updatedUser.resetPasswordToken).toBeDefined();
-//     expect(updatedUser.resetPasswordExpires).toBeDefined();
-//   });
-// });
 const request = require("supertest");
 const app = require("../../index");
 const mongoose = require("mongoose");
+const { MongoMemoryServer } = require("mongodb-memory-server");
 const UserModel = require("../../models/userModel");
 const { sendResetEmail } = require("../../utils/email");
 
 jest.mock("../../utils/email");
 
-jest.setTimeout(10000); // Set timeout to 10 seconds
+jest.setTimeout(10000);
 
-// Ensure MongoDB is connected before running tests
+let server;
+let mongoServer;
+
 beforeAll(async () => {
-  await mongoose.connect(process.env.MONGODB_URI);
+  mongoServer = await MongoMemoryServer.create();
+  const mongoUri = mongoServer.getUri();
+  await mongoose.connect(mongoUri, {});
 });
 
-// Start server and clean up database before each test
 beforeEach(async () => {
-  server = app.listen();
-  await UserModel.deleteMany(); // Clear users before each test
-  jest.clearAllMocks(); // Clear all mocks before each test
+  server = app.listen(0);
+  await UserModel.deleteMany();
+  jest.clearAllMocks();
 });
 
-// Close server after each test
 afterEach(async () => {
-  if (server && server.close) {
-    await server.close();
-  }
+  await new Promise((resolve) => server.close(resolve));
 });
 
-// Close the MongoDB connection after all tests
 afterAll(async () => {
-  await mongoose.connection.close();
+  await mongoose.disconnect();
+  await mongoServer.stop();
 });
 
 describe("Password Reset Flow", () => {

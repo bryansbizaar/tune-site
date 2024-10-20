@@ -3,14 +3,30 @@ const mongoose = require("mongoose");
 const app = require("./index");
 const fs = require("fs").promises;
 
+jest.setTimeout(10000);
+
+let server;
+let testDbName;
+
 describe("API Tests", () => {
+  beforeAll(async () => {
+    testDbName = "test_index_" + Math.round(Math.random() * 1000);
+    await mongoose.connect(process.env.MONGODB_URI + testDbName);
+  });
+
+  beforeEach(async () => {
+    server = app.listen(0);
+  });
+
+  afterEach(async () => {
+    await new Promise((resolve) => server.close(resolve));
+  });
+
   afterAll(async () => {
+    await mongoose.connection.db.dropDatabase();
     await mongoose.connection.close();
   });
 
-  afterEach(() => {
-    jest.restoreAllMocks();
-  });
   describe("GET /api/tuneList", () => {
     it("responds with json", async () => {
       const response = await request(app)

@@ -8,29 +8,31 @@ const { sendResetEmail } = require("../utils/email");
 
 jest.mock("../utils/email");
 
-jest.setTimeout(10000); // Set timeout to 10 seconds
+jest.setTimeout(10000);
 
 app.use(express.json());
 app.use("/api/auth", authRoutes);
 
 let server;
+let testDbName;
 
-// Ensure MongoDB is connected before running tests
 beforeAll(async () => {
-  await mongoose.connect(process.env.MONGODB_URI);
+  testDbName = "test_auth_" + Math.round(Math.random() * 1000);
+  await mongoose.connect(process.env.MONGODB_URI + testDbName);
 });
 
-// Start server and clean up database before each test
 beforeEach(async () => {
-  server = app.listen();
-  await UserModel.deleteMany(); // Clear users before each test
+  server = app.listen(0);
+  await UserModel.deleteMany();
 });
 
-// Close server after each test
 afterEach(async () => {
-  if (server && server.close) {
-    await server.close();
-  }
+  await new Promise((resolve) => server.close(resolve));
+});
+
+afterAll(async () => {
+  await mongoose.connection.db.dropDatabase();
+  await mongoose.connection.close();
 });
 
 // Close the MongoDB connection after all tests
