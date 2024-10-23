@@ -1,7 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../useAuth";
 
 const TuneDisplay = ({ tunesOfTheWeek, upNextTunes }) => {
+  const [clickedTuneId, setClickedTuneId] = useState(null);
+  const { isLoggedIn } = useAuth();
+
+  const handleTuneClick = (tune, e) => {
+    e.preventDefault();
+    if (tune.hasExternalLink) {
+      window.open(tune.externalLinkUrl, "_blank");
+      return;
+    }
+
+    if (!isLoggedIn) {
+      setClickedTuneId(tune.id);
+      setTimeout(() => setClickedTuneId(null), 3000);
+      return;
+    }
+    // If logged in, allow navigation to tune detail
+    window.location.href = `/tune/${tune.id}`;
+  };
+
   return (
     <div className="tunes-week tunes-container">
       <h2 className="centered-content sub-heading">
@@ -10,7 +30,27 @@ const TuneDisplay = ({ tunesOfTheWeek, upNextTunes }) => {
       {tunesOfTheWeek.length > 0 ? (
         tunesOfTheWeek.map((tune) => (
           <p key={tune.id} className="tune-name">
-            <Link to={`/tune/${tune.id}`}>{tune.title}</Link>
+            {tune.hasExternalLink ? (
+              <a
+                href={tune.externalLinkUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {tune.title}
+              </a>
+            ) : (
+              <>
+                <Link
+                  to={`/tune/${tune.id}`}
+                  onClick={(e) => handleTuneClick(tune, e)}
+                >
+                  {tune.title}
+                </Link>
+                {!isLoggedIn && clickedTuneId === tune.id && (
+                  <span className="login-message"> (login required)</span>
+                )}
+              </>
+            )}
           </p>
         ))
       ) : (
@@ -21,7 +61,27 @@ const TuneDisplay = ({ tunesOfTheWeek, upNextTunes }) => {
       {upNextTunes.length > 0 ? (
         upNextTunes.map((tune) => (
           <p key={tune.id} className="tune-name">
-            <Link to={`/tune/${tune.id}`}>{tune.title}</Link>
+            {tune.hasExternalLink ? (
+              <a
+                href={tune.externalLinkUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {tune.title}
+              </a>
+            ) : (
+              <>
+                <Link
+                  to={`/tune/${tune.id}`}
+                  onClick={(e) => handleTuneClick(tune, e)}
+                >
+                  {tune.title}
+                </Link>
+                {!isLoggedIn && clickedTuneId === tune.id && (
+                  <span className="login-message"> (login required)</span>
+                )}
+              </>
+            )}
           </p>
         ))
       ) : (

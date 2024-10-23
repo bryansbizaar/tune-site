@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SpotifyMusicPlayer from "./SpotifyMusicPlayer";
 import Header from "./Header";
 import TuneDisplay from "./TuneDisplay";
 import { sortTunes } from "../utils/sorting";
 import { VITE_API_URL } from "../env.js";
+import { useAuth } from "../useAuth";
 
 const instruments = `${VITE_API_URL}/images/instruments.jpg`;
 
@@ -12,6 +13,9 @@ const TuneList = () => {
   const [tunes, setTunes] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [clickedTuneId, setClickedTuneId] = useState(null);
+  const { isLoggedIn } = useAuth();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     const fetchTunes = async () => {
@@ -33,6 +37,17 @@ const TuneList = () => {
     fetchTunes();
   }, []);
 
+  const handleInternalTuneClick = (tuneId, e) => {
+    e.preventDefault();
+    if (!isLoggedIn) {
+      setClickedTuneId(tuneId);
+      setTimeout(() => setClickedTuneId(null), 3000);
+      return;
+    }
+    // If logged in, allow navigation to tune detail
+    window.location.href = `/tune/${tuneId}`;
+  };
+
   if (isLoading) {
     return <div data-testid="loading-indicator">Loading...</div>;
   }
@@ -47,7 +62,6 @@ const TuneList = () => {
 
   const tunesOfTheWeek = tunes.filter((tune) => tune.tunesOfTheWeek === true);
   const upNextTunes = tunes.filter((tune) => tune.upNextTunes === true);
-
   const sortedTunes = sortTunes(tunes);
 
   return (
@@ -104,7 +118,17 @@ const TuneList = () => {
                     {tune.title}
                   </a>
                 ) : (
-                  <Link to={`/tune/${tune.id}`}>{tune.title}</Link>
+                  <>
+                    <Link
+                      to={`/tune/${tune.id}`}
+                      onClick={(e) => handleInternalTuneClick(tune.id, e)}
+                    >
+                      {tune.title}
+                    </Link>
+                    {!isLoggedIn && clickedTuneId === tune.id && (
+                      <span className="login-message"> (login required)</span>
+                    )}
+                  </>
                 )}
                 <span>: {tune.description}</span>
               </li>

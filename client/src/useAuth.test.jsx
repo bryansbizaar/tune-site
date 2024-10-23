@@ -26,7 +26,8 @@ const TestComponent = () => {
       <div data-testid="login-status">
         {isLoggedIn ? "Logged In" : "Logged Out"}
       </div>
-      <button onClick={() => login("test-token")}>Login</button>
+      <button onClick={() => login("test-token")}>Login Default</button>
+      <button onClick={() => login("test-token", "30d")}>Login Extended</button>
       <button onClick={logout}>Logout</button>
     </div>
   );
@@ -45,43 +46,103 @@ const renderWithAuth = () => {
 describe("useAuth", () => {
   beforeEach(() => {
     jest.clearAllMocks();
+    // Clear timezone-related issues by using a fixed date
+    jest.useFakeTimers();
+    jest.setSystemTime(new Date("2024-01-01"));
   });
 
-  it("should initialize with isLoggedIn false when no token in localStorage", () => {
+  afterEach(() => {
+    jest.useRealTimers();
+  });
+
+  it("should initialize with isLoggedIn false when no token exists", () => {
     localStorageMock.getItem.mockReturnValue(null);
     renderWithAuth();
     expect(screen.getByTestId("login-status")).toHaveTextContent("Logged Out");
   });
 
-  it("should initialize with isLoggedIn true when token exists in localStorage", () => {
-    localStorageMock.getItem.mockReturnValue("fake-token");
+  it("should initialize with isLoggedIn true when valid token exists", () => {
+    const futureTime = new Date().getTime() + 24 * 60 * 60 * 1000; // 1 day in future
+    localStorageMock.getItem
+      .mockReturnValueOnce("fake-token") // for token
+      .mockReturnValueOnce(futureTime.toString()); // for expiry
+
     renderWithAuth();
     expect(screen.getByTestId("login-status")).toHaveTextContent("Logged In");
   });
 
-  it("should set isLoggedIn to true and store token in localStorage on login", async () => {
-    localStorageMock.getItem.mockReturnValue(null);
+  it("should initialize with isLoggedIn false when token is expired", () => {
+    const pastTime = new Date().getTime() - 1000; // 1 second in past
+    localStorageMock.getItem
+      .mockReturnValueOnce("fake-token")
+      .mockReturnValueOnce(pastTime.toString());
+
     renderWithAuth();
-    fireEvent.click(screen.getByText("Login"));
-    await waitFor(() => {
-      expect(screen.getByTestId("login-status")).toHaveTextContent("Logged In");
-    });
-    expect(localStorageMock.setItem).toHaveBeenCalledWith(
-      "token",
-      "test-token"
-    );
+    expect(screen.getByTestId("login-status")).toHaveTextContent("Logged Out");
+    expect(localStorageMock.removeItem).toHaveBeenCalledWith("token");
+    expect(localStorageMock.removeItem).toHaveBeenCalledWith("tokenExpiry");
   });
 
-  it("should set isLoggedIn to false, remove token from localStorage, and navigate to login on logout", async () => {
+  it("should set correct expiry time for default login (1 day)", async () => {
+    renderWithAuth();
+    fireEvent.click(screen.getByText("Login Default"));
+
+    const expectedExpiry = new Date().getTime() + 24 * 60 * 60 * 1000;
+
+    await waitFor(() => {
+      expect(localStorageMock.setItem).toHaveBeenCalledWith(
+        "token",
+        "test-token"
+      );
+      expect(localStorageMock.setItem).toHaveBeenCalledWith(
+        "tokenExpiry",
+        expectedExpiry.toString()
+      );
+      expect(screen.getByTestId("login-status")).toHaveTextContent("Logged In");
+    });
+  });
+
+  it("should set correct expiry time for extended login (30 days)", async () => {
+    renderWithAuth();
+    fireEvent.click(screen.getByText("Login Extended"));
+
+    const expectedExpiry = new Date().getTime() + 30 * 24 * 60 * 60 * 1000;
+
+    await waitFor(() => {
+      expect(localStorageMock.setItem).toHaveBeenCalledWith(
+        "token",
+        "test-token"
+      );
+      expect(localStorageMock.setItem).toHaveBeenCalledWith(
+        "tokenExpiry",
+        expectedExpiry.toString()
+      );
+      expect(screen.getByTestId("login-status")).toHaveTextContent("Logged In");
+    });
+  });
+
+  it("should clear token and expiry on logout", async () => {
     localStorageMock.getItem.mockReturnValue("fake-token");
     renderWithAuth();
     fireEvent.click(screen.getByText("Logout"));
+
     await waitFor(() => {
+      expect(localStorageMock.removeItem).toHaveBeenCalledWith("token");
+      expect(localStorageMock.removeItem).toHaveBeenCalledWith("tokenExpiry");
+      expect(mockNavigate).toHaveBeenCalledWith("/");
       expect(screen.getByTestId("login-status")).toHaveTextContent(
         "Logged Out"
       );
     });
+  });
+
+  it("should handle missing expiry time for existing token", () => {
+    localStorageMock.getItem
+      .mockReturnValueOnce("fake-token") // token exists
+      .mockReturnValueOnce(null); // but no expiry time
+
+    renderWithAuth();
+    expect(screen.getByTestId("login-status")).toHaveTextContent("Logged Out");
     expect(localStorageMock.removeItem).toHaveBeenCalledWith("token");
-    expect(mockNavigate).toHaveBeenCalledWith("/");
   });
 });

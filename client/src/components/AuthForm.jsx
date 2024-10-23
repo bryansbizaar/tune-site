@@ -12,6 +12,7 @@ const AuthForm = ({ onClose }) => {
   const [message, setMessage] = useState("");
   const [activeTab, setActiveTab] = useState("login");
   const [resetToken, setResetToken] = useState("");
+  const [stayLoggedIn, setStayLoggedIn] = useState(false);
   const { isLoggedIn, login } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
@@ -60,7 +61,7 @@ const AuthForm = ({ onClose }) => {
       switch (type) {
         case "login":
           endpoint = "/api/auth/login";
-          body = JSON.stringify({ email, password });
+          body = JSON.stringify({ email, password, stayLoggedIn });
           break;
         case "signup":
           endpoint = "/api/auth/signup";
@@ -90,7 +91,7 @@ const AuthForm = ({ onClose }) => {
       if (response.ok) {
         setMessage(data.message || "Operation successful");
         if (data.token) {
-          login(data.token);
+          login(data.token, data.expiresIn);
         }
         if (type === "resetPassword") {
           setActiveTab("login");
@@ -134,6 +135,16 @@ const AuthForm = ({ onClose }) => {
               className="input"
               required
             />
+            <div>
+              <input
+                type="checkbox"
+                id="stayLoggedIn"
+                checked={stayLoggedIn}
+                onChange={(e) => setStayLoggedIn(e.target.checked)}
+                className="checkbox"
+              />
+              <label htmlFor="stayLoggedIn">Stay logged in for 30 days</label>
+            </div>
             <button type="submit" className="button" data-testid="login-submit">
               Log In
             </button>

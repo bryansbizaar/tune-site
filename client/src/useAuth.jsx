@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext, createContext } from "react";
+
 import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext(null);
@@ -9,16 +10,43 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    setIsLoggedIn(!!token);
+    const tokenExpiry = localStorage.getItem("tokenExpiry");
+
+    if (token && tokenExpiry) {
+      // Check if token has expired
+      if (new Date().getTime() < parseInt(tokenExpiry)) {
+        setIsLoggedIn(true);
+      } else {
+        // Token has expired, clean up
+        localStorage.removeItem("token");
+        localStorage.removeItem("tokenExpiry");
+        setIsLoggedIn(false);
+      }
+    } else if (token || tokenExpiry) {
+      // Invalid state: has one but not both, clean up
+      localStorage.removeItem("token");
+      localStorage.removeItem("tokenExpiry");
+      setIsLoggedIn(false);
+    } else {
+      setIsLoggedIn(false);
+    }
   }, []);
 
-  const login = (token) => {
+  const login = (token, expiresIn = "1d") => {
     localStorage.setItem("token", token);
+
+    // Calculate expiry time
+    const expiryMs =
+      expiresIn === "30d" ? 30 * 24 * 60 * 60 * 1000 : 24 * 60 * 60 * 1000;
+    const expiryTime = new Date().getTime() + expiryMs;
+
+    localStorage.setItem("tokenExpiry", expiryTime.toString());
     setIsLoggedIn(true);
   };
 
   const logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("tokenExpiry");
     setIsLoggedIn(false);
     navigate("/");
   };

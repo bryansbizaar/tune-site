@@ -5,7 +5,8 @@
     "description": "Polksa, G",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTunes": false
+    "upNextTunes": false,
+    "requiresAuth": true
   },
   {
     "id": "30-year-jig",

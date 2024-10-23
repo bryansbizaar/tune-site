@@ -1,6 +1,7 @@
 const request = require("supertest");
 const mongoose = require("mongoose");
 const express = require("express");
+const jwt = require("jsonwebtoken");
 const app = express();
 const authRoutes = require("../routes/auth");
 const UserModel = require("../models/userModel");
@@ -40,7 +41,7 @@ afterAll(async () => {
   await mongoose.connection.close();
 });
 
-describe("Auth Routes", () => {
+describe("Auth Routes - Stay Logged In Tests", () => {
   describe("POST /signup", () => {
     it("should create a new user and return 201", async () => {
       const newUser = {
@@ -112,7 +113,7 @@ describe("Auth Routes", () => {
 
   describe("POST /login", () => {
     it("should login successfully with correct credentials", async () => {
-      // First, create a user
+      // Create a user
       const user = {
         name: "testuser",
         email: "testuser@example.com",
@@ -120,7 +121,7 @@ describe("Auth Routes", () => {
       };
       await request(app).post("/api/auth/signup").send(user);
 
-      // Now, attempt to login
+      // Attempt to login
       const loginResponse = await request(app)
         .post("/api/auth/login")
         .send({ email: user.email, password: user.password });
@@ -134,7 +135,7 @@ describe("Auth Routes", () => {
     });
 
     it("should return 401 with incorrect password", async () => {
-      // First, create a user
+      // Create a user
       const user = {
         name: "testuser",
         email: "testuser@example.com",
@@ -142,7 +143,7 @@ describe("Auth Routes", () => {
       };
       await request(app).post("/api/auth/signup").send(user);
 
-      // Now, attempt to login with incorrect password
+      // Attempt to login with incorrect password
       const loginResponse = await request(app)
         .post("/api/auth/login")
         .send({ email: user.email, password: "wrongpassword" });
@@ -176,6 +177,68 @@ describe("Auth Routes", () => {
 
       expect(loginResponse.status).toBe(400);
       expect(loginResponse.body.error).toBe("Email and password are required");
+    });
+    it("should set token expiration to 30 days when stayLoggedIn is true", async () => {
+      // Create a user
+      const user = {
+        name: "testuser",
+        email: "testuser@example.com",
+        password: "password123",
+      };
+      await request(app).post("/api/auth/signup").send(user);
+
+      // Attempt to login with stayLoggedIn
+      const loginResponse = await request(app).post("/api/auth/login").send({
+        email: user.email,
+        password: user.password,
+        stayLoggedIn: true,
+      });
+
+      expect(loginResponse.status).toBe(200);
+      expect(loginResponse.body.message).toBe("Login successful");
+      expect(loginResponse.body).toHaveProperty("token");
+      expect(loginResponse.body.expiresIn).toBe("30d");
+    });
+    it("should set token expiration to 1 day when stayLoggedIn is false", async () => {
+      // Create a user
+      const user = {
+        name: "testuser",
+        email: "testuser@example.com",
+        password: "password123",
+      };
+      await request(app).post("/api/auth/signup").send(user);
+
+      // Attempt to login with stayLoggedIn false
+      const loginResponse = await request(app).post("/api/auth/login").send({
+        email: user.email,
+        password: user.password,
+        stayLoggedIn: false,
+      });
+
+      expect(loginResponse.status).toBe(200);
+      expect(loginResponse.body.message).toBe("Login successful");
+      expect(loginResponse.body).toHaveProperty("token");
+      expect(loginResponse.body.expiresIn).toBe("1d");
+    });
+    it("should default to 1 day expiration when stayLoggedIn is not provided", async () => {
+      // Create a user
+      const user = {
+        name: "testuser",
+        email: "testuser@example.com",
+        password: "password123",
+      };
+      await request(app).post("/api/auth/signup").send(user);
+
+      // Attempt to login without stayLoggedIn parameter
+      const loginResponse = await request(app).post("/api/auth/login").send({
+        email: user.email,
+        password: user.password,
+      });
+
+      expect(loginResponse.status).toBe(200);
+      expect(loginResponse.body.message).toBe("Login successful");
+      expect(loginResponse.body).toHaveProperty("token");
+      expect(loginResponse.body.expiresIn).toBe("1d");
     });
   });
 
