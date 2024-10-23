@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/components/ChordDetail.jsx</title>
+    <title>Code coverage report for TuneDetail.jsx</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../../prettify.css" />
-    <link rel="stylesheet" href="../../base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="../../favicon.png" />
+    <link rel="stylesheet" href="prettify.css" />
+    <link rel="stylesheet" href="base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(../../sort-arrow-sprite.png);
+            background-image: url(sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/components</a> ChordDetail.jsx</h1>
+        <h1><a href="index.html">All files</a> TuneDetail.jsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -135,8 +135,7 @@
 <a name='L70'></a><a href='#L70'>70</a>
 <a name='L71'></a><a href='#L71'>71</a>
 <a name='L72'></a><a href='#L72'>72</a>
-<a name='L73'></a><a href='#L73'>73</a>
-<a name='L74'></a><a href='#L74'>74</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L73'></a><a href='#L73'>73</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -144,33 +143,32 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -216,13 +214,13 @@ import YouTubePlayer from "./YouTubePlayer";
 import Header from "./Header";
 import { VITE_API_URL } from "../env";
 &nbsp;
-const ChordDetail = () =&gt; {
+const TuneDetail = () =&gt; {
   const [tune, setTune] = useState(null);
   const [error, setError] = useState(null);
   const { id } = useParams();
 &nbsp;
   useEffect(() =&gt; {
-    const fetchChord = async () =&gt; {
+    const fetchTune = async () =&gt; {
       try {
         const response = await fetch(`${VITE_API_URL}/api/tune/${id}`);
         <span class="missing-if-branch" title="if path not taken" >I</span>if (!response.ok) {
@@ -236,7 +234,7 @@ const ChordDetail = () =&gt; {
       }
     };
 &nbsp;
-    fetchChord();
+    fetchTune();
   }, [id]);
 &nbsp;
   if (error) return &lt;div&gt;Error: {error}&lt;/div&gt;;
@@ -245,43 +243,42 @@ const ChordDetail = () =&gt; {
   return (
     &lt;&gt;
       &lt;Header isFixed={false} /&gt;
-      &lt;div&gt;
-        &lt;p className={tune.chordsDescription ? "centered-content text" : <span class="branch-1 cbranch-no" title="branch not covered" >""}</span>&gt;
-          {tune.chordsDescription}
-        &lt;/p&gt;
+      &lt;div className="centered-content chord-nav"&gt;
+        {tune.chords &amp;&amp; &lt;Link to={`/chords/${id}`}&gt;Click to show chords&lt;/Link&gt;}
+        {tune.description &amp;&amp; &lt;p className="text"&gt;{tune.description}&lt;/p&gt;}
+        &lt;div className="sheetMusicContainer"&gt;
+          &lt;img
+            className="img-tune"
+            src={`${VITE_API_URL}${tune.sheetMusicFile}`}
+            alt={tune.title}
+          /&gt;
+        &lt;/div&gt;
 &nbsp;
-        {tune.chords ? (
+        {tune.v2 &amp;&amp; (
           &lt;div className="sheetMusicContainer"&gt;
             &lt;img
               className="img-tune"
-              src={`${VITE_API_URL}${tune.chords}`}
-              alt={`Chord diagram for ${tune.title}`}
+              src={`${VITE_API_URL}${tune.sheetMusicFile}`}
+              alt={`${tune.title} - Version 2`}
             /&gt;
           &lt;/div&gt;
-        ) : (
-          &lt;p&gt;No chord diagram available for this tune.&lt;/p&gt;
         )}
 &nbsp;
-        &lt;div className="link-container"&gt;
-          &lt;Link to="/chords"&gt;Back to Chord List&lt;/Link&gt;
-          {tune.sheetMusicFile &amp;&amp; (
-            &lt;Link to={`/tune/${id}`}&gt;Back to Tune Details&lt;/Link&gt;
-          )}
-        &lt;/div&gt;
-        &lt;div className="musicPlayer"&gt;
-          {tune.spotifyTrackId &amp;&amp; (
+        {tune.spotifyTrackId ? (
+          &lt;div className="musicPlayer"&gt;
             &lt;SpotifyMusicPlayer spotifyTrackId={tune.spotifyTrackId} /&gt;
-          )}
-          {tune.youtubeTrackId &amp;&amp; (
+          &lt;/div&gt;
+        ) : tune.youtubeTrackId ? (
+          &lt;div className="musicPlayer"&gt;
             &lt;YouTubePlayer youtubeTrackId={tune.youtubeTrackId} /&gt;
-          )}
-        &lt;/div&gt;
+          &lt;/div&gt;
+        ) : <span class="branch-1 cbranch-no" title="branch not covered" >null}</span>
       &lt;/div&gt;
     &lt;/&gt;
   );
 };
 &nbsp;
-export default ChordDetail;
+export default TuneDetail;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -289,16 +286,16 @@ export default ChordDetail;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-10-23T22:39:30.985Z
+                at 2024-10-23T22:32:45.611Z
             </div>
-        <script src="../../prettify.js"></script>
+        <script src="prettify.js"></script>
         <script>
             window.onload = function () {
                 prettyPrint();
             };
         </script>
-        <script src="../../sorter.js"></script>
-        <script src="../../block-navigation.js"></script>
+        <script src="sorter.js"></script>
+        <script src="block-navigation.js"></script>
     </body>
 </html>
     

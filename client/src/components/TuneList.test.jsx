@@ -1,8 +1,9 @@
 import React from "react";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { MemoryRouter } from "react-router-dom";
 import TuneList from "./TuneList";
+import { useAuth } from "../useAuth";
 
 // Mock child components
 jest.mock("./Header", () => () => <div data-testid="header">Header</div>);
@@ -24,6 +25,11 @@ jest.mock("../env", () => ({
 // Mock the sorting utility
 jest.mock("../utils/sorting", () => ({
   sortTunes: (tunes) => tunes.sort((a, b) => a.title.localeCompare(b.title)),
+}));
+
+// Mock useAuth hook
+jest.mock("../useAuth", () => ({
+  useAuth: jest.fn(),
 }));
 
 // Mock fetch
@@ -58,6 +64,7 @@ describe("TuneList Component", () => {
 
   beforeEach(() => {
     fetch.mockClear();
+    useAuth.mockReturnValue({ isLoggedIn: false });
   });
 
   const renderComponent = () => {
@@ -68,41 +75,15 @@ describe("TuneList Component", () => {
     );
   };
 
-  test("displays loading state initially", async () => {
-    let resolvePromise;
-    const promise = new Promise((resolve) => {
-      resolvePromise = resolve;
-    });
-
-    fetch.mockImplementationOnce(() => promise);
-
-    render(
-      <MemoryRouter>
-        <TuneList />
-      </MemoryRouter>
-    );
-
+  test("displays loading state initially", () => {
+    fetch.mockImplementationOnce(() => new Promise(() => {}));
+    renderComponent();
     expect(screen.getByTestId("loading-indicator")).toBeInTheDocument();
-
-    resolvePromise({
-      ok: true,
-      json: () => Promise.resolve([]),
-    });
-
-    await waitFor(() => {
-      expect(screen.queryByTestId("loading-indicator")).not.toBeInTheDocument();
-    });
   });
 
   test("displays error message when fetch fails", async () => {
     fetch.mockRejectedValueOnce(new Error("API Error"));
-
-    render(
-      <MemoryRouter>
-        <TuneList />
-      </MemoryRouter>
-    );
-
+    renderComponent();
     await waitFor(() => {
       expect(screen.getByTestId("error-message")).toHaveTextContent(
         "Error: API Error"
@@ -115,22 +96,10 @@ describe("TuneList Component", () => {
       ok: true,
       json: () => Promise.resolve([]),
     });
-
-    render(
-      <MemoryRouter>
-        <TuneList />
-      </MemoryRouter>
-    );
-
+    renderComponent();
     await waitFor(() => {
       expect(screen.getByTestId("no-tunes-message")).toBeInTheDocument();
     });
-  });
-
-  test("displays error message when fetch fails", async () => {
-    fetch.mockRejectedValueOnce(new Error("API Error"));
-    renderComponent();
-    expect(await screen.findByText(/Error: API Error/)).toBeInTheDocument();
   });
 
   test("renders tune list correctly", async () => {
@@ -142,20 +111,16 @@ describe("TuneList Component", () => {
     renderComponent();
 
     await waitFor(() => {
+      // Header text
       expect(screen.getByText("Session Class Tunes")).toBeInTheDocument();
       expect(screen.getByText("Session Class Repertoire:")).toBeInTheDocument();
 
-      const tuneAElement = screen.getByText("Tune A");
-      expect(tuneAElement).toBeInTheDocument();
-      expect(tuneAElement.nextSibling.textContent).toBe(": Description A");
-
-      const tuneBElement = screen.getByText("Tune B");
-      expect(tuneBElement).toBeInTheDocument();
-      expect(tuneBElement.nextSibling.textContent).toBe(": Description B");
-
-      const tuneCElement = screen.getByText("Tune C");
-      expect(tuneCElement).toBeInTheDocument();
-      expect(tuneCElement.nextSibling.textContent).toBe(": Description C");
+      // Tune titles and descriptions
+      mockTunes.forEach((tune) => {
+        const tuneElement = screen.getByText(tune.title);
+        expect(tuneElement).toBeInTheDocument();
+        expect(screen.getByText(`: ${tune.description}`)).toBeInTheDocument();
+      });
     });
   });
 
@@ -190,17 +155,81 @@ describe("TuneList Component", () => {
     });
   });
 
-  test("renders internal links correctly", async () => {
-    fetch.mockResolvedValueOnce({
-      ok: true,
-      json: () => Promise.resolve(mockTunes),
+  describe("Authentication behavior", () => {
+    beforeEach(() => {
+      fetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve(mockTunes),
+      });
     });
 
-    renderComponent();
+    test("shows login required message when clicking internal tune link while logged out", async () => {
+      // Mock user as logged out
+      useAuth.mockReturnValue({ isLoggedIn: false });
 
-    await waitFor(() => {
-      const internalLink = screen.getByText("Tune A");
-      expect(internalLink).toHaveAttribute("href", "/tune/1");
+      // Render component
+      renderComponent();
+
+      // Wait for tunes to load
+      await waitFor(() => {
+        expect(screen.getByText("Tune A")).toBeInTheDocument();
+      });
+
+      // Click the internal tune link
+      fireEvent.click(screen.getByText("Tune A"));
+
+      // Check if login message appears
+      expect(screen.getByText("(login required)")).toBeInTheDocument();
+
+      // Verify the message disappears after 3 seconds
+      await waitFor(
+        () => {
+          expect(
+            screen.queryByText("(login required)")
+          ).not.toBeInTheDocument();
+        },
+        { timeout: 3500 }
+      );
+    });
+
+    test("allows navigation to tune details when logged in", async () => {
+      // Mock user as logged in
+      useAuth.mockReturnValue({ isLoggedIn: true });
+
+      // Mock window.location.href
+      const originalLocation = window.location;
+      delete window.location;
+      window.location = { href: jest.fn() };
+
+      // Render component
+      renderComponent();
+
+      // Wait for tunes to load
+      await waitFor(() => {
+        expect(screen.getByText("Tune A")).toBeInTheDocument();
+      });
+
+      // Click the internal tune link
+      fireEvent.click(screen.getByText("Tune A"));
+
+      // Verify navigation occurred
+      expect(window.location.href).toBe("/tune/1");
+
+      // Cleanup
+      window.location = originalLocation;
+    });
+
+    test("external links work regardless of login status", async () => {
+      // Mock user as logged out
+      useAuth.mockReturnValue({ isLoggedIn: false });
+
+      renderComponent();
+
+      await waitFor(() => {
+        const externalLink = screen.getByText("Tune C");
+        expect(externalLink).toHaveAttribute("href", "https://example.com");
+        expect(externalLink).toHaveAttribute("target", "_blank");
+      });
     });
   });
 

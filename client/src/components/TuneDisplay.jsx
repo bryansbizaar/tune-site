@@ -3,23 +3,69 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../useAuth";
 
 const TuneDisplay = ({ tunesOfTheWeek, upNextTunes }) => {
-  const [clickedTuneId, setClickedTuneId] = useState(null);
+  const [loginMessages, setLoginMessages] = useState({});
   const { isLoggedIn } = useAuth();
 
   const handleTuneClick = (tune, e) => {
+    if (!tune) return;
+
+    // Always prevent default to handle navigation manually
     e.preventDefault();
-    if (tune.hasExternalLink) {
+
+    if (tune.hasExternalLink && tune.externalLinkUrl) {
+      // Use window.open for external links
       window.open(tune.externalLinkUrl, "_blank");
       return;
     }
 
     if (!isLoggedIn) {
-      setClickedTuneId(tune.id);
-      setTimeout(() => setClickedTuneId(null), 3000);
+      // Show login message for this specific tune
+      setLoginMessages((prev) => ({
+        ...prev,
+        [tune.id]: true,
+      }));
+
+      // Clear message after 3 seconds
+      setTimeout(() => {
+        setLoginMessages((prev) => ({
+          ...prev,
+          [tune.id]: false,
+        }));
+      }, 3000);
+
       return;
     }
-    // If logged in, allow navigation to tune detail
+
+    // If logged in, navigate to tune detail
     window.location.href = `/tune/${tune.id}`;
+  };
+
+  const renderTuneLink = (tune) => {
+    if (!tune || !tune.id || !tune.title) return null;
+
+    if (tune.hasExternalLink && tune.externalLinkUrl) {
+      return (
+        <a
+          href={tune.externalLinkUrl}
+          onClick={(e) => handleTuneClick(tune, e)}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {tune.title}
+        </a>
+      );
+    }
+
+    return (
+      <>
+        <Link to={`/tune/${tune.id}`} onClick={(e) => handleTuneClick(tune, e)}>
+          {tune.title}
+        </Link>
+        {!isLoggedIn && loginMessages[tune.id] && (
+          <span className="login-message"> (login required)</span>
+        )}
+      </>
+    );
   };
 
   return (
@@ -30,27 +76,7 @@ const TuneDisplay = ({ tunesOfTheWeek, upNextTunes }) => {
       {tunesOfTheWeek.length > 0 ? (
         tunesOfTheWeek.map((tune) => (
           <p key={tune.id} className="tune-name">
-            {tune.hasExternalLink ? (
-              <a
-                href={tune.externalLinkUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {tune.title}
-              </a>
-            ) : (
-              <>
-                <Link
-                  to={`/tune/${tune.id}`}
-                  onClick={(e) => handleTuneClick(tune, e)}
-                >
-                  {tune.title}
-                </Link>
-                {!isLoggedIn && clickedTuneId === tune.id && (
-                  <span className="login-message"> (login required)</span>
-                )}
-              </>
-            )}
+            {renderTuneLink(tune)}
           </p>
         ))
       ) : (
@@ -61,27 +87,7 @@ const TuneDisplay = ({ tunesOfTheWeek, upNextTunes }) => {
       {upNextTunes.length > 0 ? (
         upNextTunes.map((tune) => (
           <p key={tune.id} className="tune-name">
-            {tune.hasExternalLink ? (
-              <a
-                href={tune.externalLinkUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {tune.title}
-              </a>
-            ) : (
-              <>
-                <Link
-                  to={`/tune/${tune.id}`}
-                  onClick={(e) => handleTuneClick(tune, e)}
-                >
-                  {tune.title}
-                </Link>
-                {!isLoggedIn && clickedTuneId === tune.id && (
-                  <span className="login-message"> (login required)</span>
-                )}
-              </>
-            )}
+            {renderTuneLink(tune)}
           </p>
         ))
       ) : (
