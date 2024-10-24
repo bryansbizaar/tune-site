@@ -87,43 +87,6 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// router.post("/login", async (req, res) => {
-//   try {
-//     const { email, password } = req.body;
-
-//     if (!email || !password) {
-//       return res.status(400).json({ error: "Email and password are required" });
-//     }
-
-//     // Find the user by email
-//     const user = await UserModel.findOne({ email });
-
-//     // If no user found or password doesn't match, return error
-//     if (!user || !(await user.comparePassword(password))) {
-//       return res.status(401).json({ error: "Invalid email or password" });
-//     }
-
-//     const token = jwt.sign(
-//       { id: user._id, role: user.role },
-//       process.env.JWT_SECRET,
-//       { expiresIn: "1d" }
-//     );
-
-//     res.status(200).json({
-//       message: "Login successful",
-//       user: {
-//         id: user._id,
-//         email: user.email,
-//         role: user.role,
-//       },
-//       token,
-//     });
-//   } catch (error) {
-//     console.error("Login error:", error);
-//     res.status(500).json({ error: "An unexpected error occurred" });
-//   }
-// });
-
 router.post("/forgot-password", async (req, res) => {
   try {
     const { email } = req.body;
