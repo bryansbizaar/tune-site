@@ -49,21 +49,20 @@ const nodemailer = require("nodemailer");
 
 const createTransporter = () => {
   if (process.env.NODE_ENV === "production") {
-    // SendGrid SMTP configuration
+    // SendGrid configuration
+    console.log("Creating SendGrid transporter");
     return nodemailer.createTransport({
       host: "smtp.sendgrid.net",
       port: 587,
       secure: false,
       auth: {
         user: "apikey", // This is literally the string "apikey"
-        pass:
-          process.env.SENDGRID_API_KEY86c88APmR6StXPqHWVksrQ.DtfFuLu -
-          rhSTEvql5vFt -
-          WDwDhsDxvfj7h5JnYiUv5k, // Your SendGrid API Key
+        pass: process.env.SENDGRID_API_KEY,
       },
     });
   } else {
-    // Your existing Mailtrap configuration for development
+    // Your existing Mailtrap configuration
+    console.log("Creating development transporter");
     return nodemailer.createTransport({
       host: process.env.EMAIL_HOST,
       port: parseInt(process.env.EMAIL_PORT, 10),
@@ -82,14 +81,14 @@ const createTransporter = () => {
 
 const sendResetEmail = async (email, resetUrl) => {
   const transporter = createTransporter();
-  const fromEmail =
-    process.env.NODE_ENV === "production"
-      ? process.env.SENDGRID_VERIFIED_SENDER // Your verified sender email
-      : '"Dev App" <noreply@yourapp.com>';
 
   try {
+    console.log("Sending email to:", email);
     let info = await transporter.sendMail({
-      from: fromEmail,
+      from:
+        process.env.NODE_ENV === "production"
+          ? process.env.SENDGRID_VERIFIED_SENDER
+          : '"Dev App" <noreply@yourapp.com>',
       to: email,
       subject: "Password Reset",
       text: `You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n
@@ -102,6 +101,7 @@ const sendResetEmail = async (email, resetUrl) => {
              <p>If you did not request this, please ignore this email and your password will remain unchanged.</p>`,
     });
 
+    console.log("Email sent successfully:", info);
     return info;
   } catch (error) {
     console.error("Error sending password reset email:", error);

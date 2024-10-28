@@ -154,4 +154,19 @@ router.post("/reset-password", async (req, res) => {
   }
 });
 
+// Test email
+// router.post("/test-email", async (req, res) => {
+//   try {
+//     const testEmail = "your-email@example.com"; // Email where you want to receive the test
+//     const testUrl = "http://example.com/test"; // Dummy URL
+
+//     await sendResetEmail(testEmail, testUrl);
+
+//     res.json({ message: "Test email sent successfully" });
+//   } catch (error) {
+//     console.error("Error sending test email:", error);
+//     res.status(500).json({ error: error.message });
+//   }
+// });
+
 module.exports = router;
