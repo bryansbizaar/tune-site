@@ -32,6 +32,13 @@ jest.mock("../useAuth", () => ({
   useAuth: jest.fn(),
 }));
 
+// Mock useNavigate
+const mockNavigate = jest.fn();
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useNavigate: () => mockNavigate,
+}));
+
 // Mock fetch
 global.fetch = jest.fn();
 
@@ -64,6 +71,7 @@ describe("TuneList Component", () => {
 
   beforeEach(() => {
     fetch.mockClear();
+    mockNavigate.mockClear();
     useAuth.mockReturnValue({ isLoggedIn: false });
   });
 
@@ -155,6 +163,84 @@ describe("TuneList Component", () => {
     });
   });
 
+  // describe("Authentication behavior", () => {
+  //   beforeEach(() => {
+  //     fetch.mockResolvedValueOnce({
+  //       ok: true,
+  //       json: () => Promise.resolve(mockTunes),
+  //     });
+  //   });
+
+  //   test("shows login required message when clicking internal tune link while logged out", async () => {
+  //     // Mock user as logged out
+  //     useAuth.mockReturnValue({ isLoggedIn: false });
+
+  //     // Render component
+  //     renderComponent();
+
+  //     // Wait for tunes to load
+  //     await waitFor(() => {
+  //       expect(screen.getByText("Tune A")).toBeInTheDocument();
+  //     });
+
+  //     // Click the internal tune link
+  //     fireEvent.click(screen.getByText("Tune A"));
+
+  //     // Check if login message appears
+  //     expect(screen.getByText("(login required)")).toBeInTheDocument();
+
+  //     // Verify the message disappears after 3 seconds
+  //     await waitFor(
+  //       () => {
+  //         expect(
+  //           screen.queryByText("(login required)")
+  //         ).not.toBeInTheDocument();
+  //       },
+  //       { timeout: 3500 }
+  //     );
+  //   });
+
+  //   test("allows navigation to tune details when logged in", async () => {
+  //     // Mock user as logged in
+  //     useAuth.mockReturnValue({ isLoggedIn: true });
+
+  //     // Mock window.location.href
+  //     const originalLocation = window.location;
+  //     delete window.location;
+  //     window.location = { href: jest.fn() };
+
+  //     // Render component
+  //     renderComponent();
+
+  //     // Wait for tunes to load
+  //     await waitFor(() => {
+  //       expect(screen.getByText("Tune A")).toBeInTheDocument();
+  //     });
+
+  //     // Click the internal tune link
+  //     fireEvent.click(screen.getByText("Tune A"));
+
+  //     // Verify navigation occurred
+  //     expect(window.location.href).toBe("/tune/1");
+
+  //     // Cleanup
+  //     window.location = originalLocation;
+  //   });
+
+  //   test("external links work regardless of login status", async () => {
+  //     // Mock user as logged out
+  //     useAuth.mockReturnValue({ isLoggedIn: false });
+
+  //     renderComponent();
+
+  //     await waitFor(() => {
+  //       const externalLink = screen.getByText("Tune C");
+  //       expect(externalLink).toHaveAttribute("href", "https://example.com");
+  //       expect(externalLink).toHaveAttribute("target", "_blank");
+  //     });
+  //   });
+  // });
+
   describe("Authentication behavior", () => {
     beforeEach(() => {
       fetch.mockResolvedValueOnce({
@@ -164,24 +250,18 @@ describe("TuneList Component", () => {
     });
 
     test("shows login required message when clicking internal tune link while logged out", async () => {
-      // Mock user as logged out
       useAuth.mockReturnValue({ isLoggedIn: false });
 
-      // Render component
       renderComponent();
 
-      // Wait for tunes to load
       await waitFor(() => {
         expect(screen.getByText("Tune A")).toBeInTheDocument();
       });
 
-      // Click the internal tune link
       fireEvent.click(screen.getByText("Tune A"));
 
-      // Check if login message appears
       expect(screen.getByText("(login required)")).toBeInTheDocument();
 
-      // Verify the message disappears after 3 seconds
       await waitFor(
         () => {
           expect(
@@ -193,34 +273,20 @@ describe("TuneList Component", () => {
     });
 
     test("allows navigation to tune details when logged in", async () => {
-      // Mock user as logged in
       useAuth.mockReturnValue({ isLoggedIn: true });
 
-      // Mock window.location.href
-      const originalLocation = window.location;
-      delete window.location;
-      window.location = { href: jest.fn() };
-
-      // Render component
       renderComponent();
 
-      // Wait for tunes to load
       await waitFor(() => {
         expect(screen.getByText("Tune A")).toBeInTheDocument();
       });
 
-      // Click the internal tune link
       fireEvent.click(screen.getByText("Tune A"));
 
-      // Verify navigation occurred
-      expect(window.location.href).toBe("/tune/1");
-
-      // Cleanup
-      window.location = originalLocation;
+      expect(mockNavigate).toHaveBeenCalledWith("/tune/1");
     });
 
     test("external links work regardless of login status", async () => {
-      // Mock user as logged out
       useAuth.mockReturnValue({ isLoggedIn: false });
 
       renderComponent();

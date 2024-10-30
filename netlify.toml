@@ -1,7 +1,14 @@
 [build]
-  base = "client"
-  command = "npm install && npm run build"
-  publish = "dist"
+  command = "cd client && npm install && npm run build"
+  publish = "client/dist"
+  base = "."
+
+[[redirects]]
+  from = "/api/*"
+  to = "https://tune-site-backend.onrender.com/api/:splat"
+  status = 200
+  force = true
+  headers = {Access-Control-Allow-Origin = "*"}
 
 [[redirects]]
   from = "/*"

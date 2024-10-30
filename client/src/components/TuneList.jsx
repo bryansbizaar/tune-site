@@ -15,7 +15,7 @@ const TuneList = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [clickedTuneId, setClickedTuneId] = useState(null);
   const { isLoggedIn } = useAuth();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchTunes = async () => {
@@ -37,6 +37,17 @@ const TuneList = () => {
     fetchTunes();
   }, []);
 
+  // const handleInternalTuneClick = (tuneId, e) => {
+  //   e.preventDefault();
+  //   if (!isLoggedIn) {
+  //     setClickedTuneId(tuneId);
+  //     setTimeout(() => setClickedTuneId(null), 3000);
+  //     return;
+  //   }
+  //   // If logged in, allow navigation to tune detail
+  //   window.location.href = `/tune/${tuneId}`;
+  // };
+
   const handleInternalTuneClick = (tuneId, e) => {
     e.preventDefault();
     if (!isLoggedIn) {
@@ -44,8 +55,7 @@ const TuneList = () => {
       setTimeout(() => setClickedTuneId(null), 3000);
       return;
     }
-    // If logged in, allow navigation to tune detail
-    window.location.href = `/tune/${tuneId}`;
+    navigate(`/tune/${tuneId}`);
   };
 
   if (isLoading) {

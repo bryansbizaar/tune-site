@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext, createContext } from "react";
-
 import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext(null);
@@ -12,7 +11,14 @@ export const AuthProvider = ({ children }) => {
     const token = localStorage.getItem("token");
     const tokenExpiry = localStorage.getItem("tokenExpiry");
 
-    if (token && tokenExpiry) {
+    if (token) {
+      // If we have a token but no expiry, remove the token
+      if (!tokenExpiry) {
+        localStorage.removeItem("token");
+        setIsLoggedIn(false);
+        return;
+      }
+
       // Check if token has expired
       if (new Date().getTime() < parseInt(tokenExpiry)) {
         setIsLoggedIn(true);
@@ -22,15 +28,34 @@ export const AuthProvider = ({ children }) => {
         localStorage.removeItem("tokenExpiry");
         setIsLoggedIn(false);
       }
-    } else if (token || tokenExpiry) {
-      // Invalid state: has one but not both, clean up
-      localStorage.removeItem("token");
-      localStorage.removeItem("tokenExpiry");
-      setIsLoggedIn(false);
     } else {
       setIsLoggedIn(false);
     }
   }, []);
+
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token");
+  //   const tokenExpiry = localStorage.getItem("tokenExpiry");
+
+  //   if (token && tokenExpiry) {
+  //     // Check if token has expired
+  //     if (new Date().getTime() < parseInt(tokenExpiry)) {
+  //       setIsLoggedIn(true);
+  //     } else {
+  //       // Token has expired, clean up
+  //       localStorage.removeItem("token");
+  //       localStorage.removeItem("tokenExpiry");
+  //       setIsLoggedIn(false);
+  //     }
+  //   } else if (token || tokenExpiry) {
+  //     // Invalid state: has one but not both, clean up
+  //     localStorage.removeItem("token");
+  //     localStorage.removeItem("tokenExpiry");
+  //     setIsLoggedIn(false);
+  //   } else {
+  //     setIsLoggedIn(false);
+  //   }
+  // }, []);
 
   const login = (token, expiresIn = "1d") => {
     localStorage.setItem("token", token);
