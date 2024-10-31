@@ -1,7 +1,7 @@
 const request = require("supertest");
 const mongoose = require("mongoose");
+const { MongoMemoryServer } = require("mongodb-memory-server");
 const express = require("express");
-const jwt = require("jsonwebtoken");
 const app = express();
 const authRoutes = require("../routes/auth");
 const UserModel = require("../models/userModel");
@@ -9,37 +9,74 @@ const { sendResetEmail } = require("../utils/email");
 
 jest.mock("../utils/email");
 
-jest.setTimeout(10000);
-
 app.use(express.json());
 app.use("/api/auth", authRoutes);
 
+let mongoServer;
 let server;
-let testDbName;
 
 beforeAll(async () => {
-  testDbName = "test_auth_" + Math.round(Math.random() * 1000);
-  await mongoose.connect(process.env.MONGODB_URI + testDbName);
+  mongoServer = await MongoMemoryServer.create();
+  const mongoUri = await mongoServer.getUri();
+  await mongoose.connect(mongoUri);
+  server = app.listen(0);
 });
 
 beforeEach(async () => {
-  server = app.listen(0);
-  await UserModel.deleteMany();
+  await UserModel.deleteMany({});
 });
 
 afterEach(async () => {
-  await new Promise((resolve) => server.close(resolve));
+  // No need to close server after each test
 });
 
 afterAll(async () => {
-  await mongoose.connection.db.dropDatabase();
-  await mongoose.connection.close();
+  await server.close();
+  await mongoose.disconnect();
+  await mongoServer.stop();
 });
+// const request = require("supertest");
+// const mongoose = require("mongoose");
+// const express = require("express");
+// const jwt = require("jsonwebtoken");
+// const app = express();
+// const authRoutes = require("../routes/auth");
+// const UserModel = require("../models/userModel");
+// const { sendResetEmail } = require("../utils/email");
 
-// Close the MongoDB connection after all tests
-afterAll(async () => {
-  await mongoose.connection.close();
-});
+// jest.mock("../utils/email");
+
+// jest.setTimeout(10000);
+
+// app.use(express.json());
+// app.use("/api/auth", authRoutes);
+
+// let server;
+// let testDbName;
+
+// beforeAll(async () => {
+//   testDbName = "test_auth_" + Math.round(Math.random() * 1000);
+//   await mongoose.connect(process.env.MONGODB_URI + testDbName);
+// });
+
+// beforeEach(async () => {
+//   server = app.listen(0);
+//   await UserModel.deleteMany();
+// });
+
+// afterEach(async () => {
+//   await new Promise((resolve) => server.close(resolve));
+// });
+
+// afterAll(async () => {
+//   await mongoose.connection.db.dropDatabase();
+//   await mongoose.connection.close();
+// });
+
+// // Close the MongoDB connection after all tests
+// afterAll(async () => {
+//   await mongoose.connection.close();
+// });
 
 describe("Auth Routes - Stay Logged In Tests", () => {
   describe("POST /signup", () => {
