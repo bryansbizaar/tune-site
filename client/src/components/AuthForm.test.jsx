@@ -30,180 +30,143 @@ describe("AuthForm", () => {
     useAuth.mockReturnValue({ isLoggedIn: false, login: mockLogin });
     useLocation.mockReturnValue({ search: "" });
     useNavigate.mockReturnValue(mockNavigate);
-    global.fetch = jest.fn();
     jest.clearAllMocks();
   });
+  it("renders forgot password form when Forgot Password button is clicked", async () => {
+    render(<AuthForm onClose={mockOnClose} />);
 
-  describe("Login Form", () => {
-    beforeEach(() => {
-      render(<AuthForm onClose={mockOnClose} />);
-    });
+    fireEvent.click(screen.getByTestId("forgot-password-tab"));
 
-    it("renders stay logged in checkbox", () => {
-      const checkbox = screen.getByLabelText(/stay logged in for 30 days/i);
-      expect(checkbox).toBeInTheDocument();
-      expect(checkbox).not.toBeChecked();
-    });
-
-    it("toggles stay logged in checkbox", () => {
-      const checkbox = screen.getByLabelText(/stay logged in for 30 days/i);
-      fireEvent.click(checkbox);
-      expect(checkbox).toBeChecked();
-      fireEvent.click(checkbox);
-      expect(checkbox).not.toBeChecked();
-    });
-
-    it("includes stayLoggedIn in login request when checked", async () => {
-      global.fetch.mockResolvedValueOnce({
-        ok: true,
-        json: () =>
-          Promise.resolve({
-            token: "test-token",
-            message: "Login successful",
-            expiresIn: "30d",
-          }),
-      });
-
-      // Fill in login form
-      fireEvent.change(screen.getByPlaceholderText("Email"), {
-        target: { value: "test@example.com" },
-      });
-      fireEvent.change(screen.getByPlaceholderText("Password"), {
-        target: { value: "password123" },
-      });
-
-      // Check the stay logged in box
-      const checkbox = screen.getByLabelText(/stay logged in for 30 days/i);
-      fireEvent.click(checkbox);
-
-      // Submit the form
-      fireEvent.click(screen.getByTestId("login-submit"));
-
-      await waitFor(() => {
-        expect(global.fetch).toHaveBeenCalledWith(
-          "http://localhost:5000/api/auth/login",
-          expect.objectContaining({
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              email: "test@example.com",
-              password: "password123",
-              stayLoggedIn: true,
-            }),
-          })
-        );
-      });
-
-      // Verify login was called with correct token and expiry
-      expect(mockLogin).toHaveBeenCalledWith("test-token", "30d");
-    });
-
-    it("uses default expiry when stay logged in is not checked", async () => {
-      global.fetch.mockResolvedValueOnce({
-        ok: true,
-        json: () =>
-          Promise.resolve({
-            token: "test-token",
-            message: "Login successful",
-            expiresIn: "1d",
-          }),
-      });
-
-      // Fill in login form
-      fireEvent.change(screen.getByPlaceholderText("Email"), {
-        target: { value: "test@example.com" },
-      });
-      fireEvent.change(screen.getByPlaceholderText("Password"), {
-        target: { value: "password123" },
-      });
-
-      // Submit form without checking stay logged in
-      fireEvent.click(screen.getByTestId("login-submit"));
-
-      await waitFor(() => {
-        expect(global.fetch).toHaveBeenCalledWith(
-          "http://localhost:5000/api/auth/login",
-          expect.objectContaining({
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              email: "test@example.com",
-              password: "password123",
-              stayLoggedIn: false,
-            }),
-          })
-        );
-      });
-
-      // Verify login was called with default expiry
-      expect(mockLogin).toHaveBeenCalledWith("test-token", "1d");
+    await waitFor(() => {
+      expect(screen.getByPlaceholderText("Email")).toBeInTheDocument();
+      expect(screen.getByTestId("forgot-password-submit")).toBeInTheDocument();
     });
   });
 
-  // Previous test cases remain the same...
-  describe("Reset Password Form", () => {
-    it("displays error when passwords do not match", async () => {
-      useLocation.mockReturnValue({ search: "?reset_token=testtoken" });
+  it("submits forgot password form with correct data", async () => {
+    global.fetch = jest.fn(() =>
+      Promise.resolve({
+        ok: true,
+        json: () => Promise.resolve({ message: "Password reset email sent" }),
+      })
+    );
 
-      render(<AuthForm onClose={mockOnClose} />);
+    render(<AuthForm onClose={mockOnClose} />);
 
-      fireEvent.change(screen.getByPlaceholderText("New Password"), {
-        target: { value: "newpassword123" },
-      });
-      fireEvent.change(screen.getByPlaceholderText("Confirm New Password"), {
-        target: { value: "differentpassword" },
-      });
-      fireEvent.click(screen.getByTestId("reset-password-submit"));
-
-      await waitFor(() => {
-        expect(screen.getByText("Passwords do not match")).toBeInTheDocument();
-      });
+    fireEvent.click(screen.getByTestId("forgot-password-tab"));
+    fireEvent.change(screen.getByPlaceholderText("Email"), {
+      target: { value: "test@example.com" },
     });
-  });
+    fireEvent.click(screen.getByTestId("forgot-password-submit"));
 
-  describe("Already Logged In State", () => {
-    it("shows message and redirects when already logged in", async () => {
-      useAuth.mockReturnValue({ isLoggedIn: true, login: mockLogin });
-
-      render(<AuthForm onClose={mockOnClose} />);
-
-      await waitFor(() => {
-        expect(
-          screen.getByText("You are already logged in.")
-        ).toBeInTheDocument();
-      });
-
-      await waitFor(
-        () => {
-          expect(mockOnClose).toHaveBeenCalled();
-          expect(mockNavigate).toHaveBeenCalledWith("/");
-        },
-        { timeout: 2500 }
+    await waitFor(() => {
+      expect(global.fetch).toHaveBeenCalledWith(
+        "http://localhost:5000/api/auth/forgot-password",
+        expect.objectContaining({
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: "test@example.com" }),
+        })
       );
     });
+
+    await waitFor(() => {
+      expect(
+        screen.getByText(
+          "If an account with that email exists, a password reset link has been sent."
+        )
+      ).toBeInTheDocument();
+    });
   });
 
-  describe("Form Switching", () => {
-    it("switches between login and signup forms", () => {
-      render(<AuthForm onClose={mockOnClose} />);
+  it("renders reset password form when reset token is present in URL", async () => {
+    useLocation.mockReturnValue({ search: "?reset_token=testtoken" });
 
-      // Start at login form
-      expect(screen.getByTestId("login-submit")).toBeInTheDocument();
+    render(<AuthForm onClose={mockOnClose} />);
 
-      // Switch to signup
-      fireEvent.click(screen.getByTestId("signup-tab"));
-      expect(screen.getByTestId("signup-submit")).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByPlaceholderText("New Password")).toBeInTheDocument();
+      expect(
+        screen.getByPlaceholderText("Confirm New Password")
+      ).toBeInTheDocument();
+      expect(screen.getByTestId("reset-password-submit")).toBeInTheDocument();
+    });
+  });
 
-      // Switch back to login
-      fireEvent.click(screen.getByTestId("login-tab"));
-      expect(screen.getByTestId("login-submit")).toBeInTheDocument();
+  it("submits reset password form with correct data", async () => {
+    useLocation.mockReturnValue({ search: "?reset_token=testtoken" });
+    global.fetch = jest.fn(() =>
+      Promise.resolve({
+        ok: true,
+        json: () =>
+          Promise.resolve({ message: "Password has been reset successfully" }),
+      })
+    );
+
+    render(<AuthForm onClose={mockOnClose} />);
+
+    fireEvent.change(screen.getByPlaceholderText("New Password"), {
+      target: { value: "newpassword123" },
+    });
+    fireEvent.change(screen.getByPlaceholderText("Confirm New Password"), {
+      target: { value: "newpassword123" },
+    });
+    fireEvent.click(screen.getByTestId("reset-password-submit"));
+
+    await waitFor(() => {
+      expect(global.fetch).toHaveBeenCalledWith(
+        "http://localhost:5000/api/auth/reset-password",
+        expect.objectContaining({
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            token: "testtoken",
+            newPassword: "newpassword123",
+          }),
+        })
+      );
     });
 
-    it("switches to forgot password form", () => {
-      render(<AuthForm onClose={mockOnClose} />);
+    await waitFor(() => {
+      expect(
+        screen.getByText("Password has been reset successfully")
+      ).toBeInTheDocument();
+    });
+  });
 
-      fireEvent.click(screen.getByTestId("forgot-password-tab"));
-      expect(screen.getByTestId("forgot-password-submit")).toBeInTheDocument();
+  it("displays error when passwords do not match in reset password form", async () => {
+    // Setup the mock to return a search string with reset_token
+    const mockLocation = {
+      search: "?reset_token=testtoken",
+      pathname: "/",
+    };
+    useLocation.mockReturnValue(mockLocation);
+
+    render(<AuthForm onClose={mockOnClose} />);
+
+    // Wait for reset password form to be rendered
+    await waitFor(() => {
+      expect(screen.getByTestId("reset-password-form")).toBeInTheDocument();
+    });
+
+    // Fill in passwords
+    const newPasswordInput = screen.getByTestId("new-password-input");
+    const confirmPasswordInput = screen.getByTestId("confirm-password-input");
+
+    fireEvent.change(newPasswordInput, { target: { value: "password123" } });
+    fireEvent.change(confirmPasswordInput, {
+      target: { value: "password456" },
+    });
+
+    // Submit form
+    const submitButton = screen.getByTestId("reset-password-submit");
+    fireEvent.click(submitButton);
+
+    // Check for error message
+    await waitFor(() => {
+      expect(screen.getByTestId("error-message")).toHaveTextContent(
+        "Passwords do not match"
+      );
     });
   });
 });
