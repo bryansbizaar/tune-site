@@ -103,36 +103,23 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 // CORS configuration
-const allowedOrigins = [
-  "https://whangareitunes.com", // Production domain
-  "https://www.whangareitunes.com", // www subdomain
-  "http://localhost:5173", // Local development
-  "https://tune-site-backend.onrender.com", // Backend URL
-];
-
 app.use(
   cors({
-    origin: function (origin, callback) {
-      // For development - allow requests with no origin
-      if (!origin) return callback(null, true);
-
-      if (allowedOrigins.indexOf(origin) === -1) {
-        console.log("Blocked request from origin:", origin); // Debug log
-        return callback(new Error("CORS not allowed"));
-      }
-      return callback(null, true);
-    },
+    origin: [
+      "https://whangareitunes.com",
+      "https://www.whangareitunes.com",
+      "http://localhost:5173",
+    ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
-// Add CORS debug middleware
+// Debug middleware - keep this to see what's happening
 app.use((req, res, next) => {
   console.log(`${new Date().toISOString()} - ${req.method} ${req.path}`);
   console.log("Origin:", req.headers.origin);
-  console.log("Headers:", req.headers);
   next();
 });
 

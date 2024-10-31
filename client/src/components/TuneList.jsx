@@ -101,8 +101,6 @@ const TuneList = () => {
         );
         const response = await fetch(`${VITE_API_URL}/api/tuneList`, {
           method: "GET",
-          mode: "cors",
-          credentials: "include",
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
@@ -119,7 +117,6 @@ const TuneList = () => {
         }
 
         const data = await response.json();
-        console.log("Successfully fetched data");
         setTunes(data);
       } catch (err) {
         console.error("Error fetching tunes:", {
