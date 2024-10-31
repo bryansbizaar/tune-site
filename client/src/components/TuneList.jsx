@@ -1,42 +1,3 @@
-// import React, { useState, useEffect } from "react";
-// import { Link, useNavigate } from "react-router-dom";
-// import SpotifyMusicPlayer from "./SpotifyMusicPlayer";
-// import Header from "./Header";
-// import TuneDisplay from "./TuneDisplay";
-// import { sortTunes } from "../utils/sorting";
-// import { VITE_API_URL } from "../env.js";
-// import { useAuth } from "../useAuth";
-
-// const instruments = `${VITE_API_URL}/images/instruments.jpg`;
-
-// const TuneList = () => {
-//   const [tunes, setTunes] = useState([]);
-//   const [error, setError] = useState(null);
-//   const [isLoading, setIsLoading] = useState(true);
-//   const [clickedTuneId, setClickedTuneId] = useState(null);
-//   const { isLoggedIn } = useAuth();
-//   const navigate = useNavigate();
-
-//   useEffect(() => {
-//     const fetchTunes = async () => {
-//       try {
-//         const response = await fetch(`${VITE_API_URL}/api/tuneList`);
-//         if (!response.ok) {
-//           throw new Error("Failed to fetch tune data");
-//         }
-//         const data = await response.json();
-//         setTunes(data);
-//       } catch (err) {
-//         console.error("Error fetching tunes:", err);
-//         setError(err.message);
-//       } finally {
-//         setIsLoading(false);
-//       }
-//     };
-
-//     fetchTunes();
-//   }, []);
-
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import SpotifyMusicPlayer from "./SpotifyMusicPlayer";
@@ -56,42 +17,6 @@ const TuneList = () => {
   const { isLoggedIn } = useAuth();
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   const fetchTunes = async () => {
-  //     try {
-  //       console.log("Fetching from URL:", `${VITE_API_URL}/api/tuneList`);
-
-  //       const response = await fetch(`${VITE_API_URL}/api/tuneList`, {
-  //         method: "GET",
-  //         headers: {
-  //           Accept: "application/json",
-  //           "Content-Type": "application/json",
-  //         },
-  //       });
-
-  //       console.log("Response status:", response.status);
-  //       console.log("Response headers:", [...response.headers.entries()]);
-
-  //       if (!response.ok) {
-  //         throw new Error(`HTTP error! status: ${response.status}`);
-  //       }
-  //       const data = await response.json();
-  //       console.log("Received data:", data);
-  //       setTunes(data);
-  //     } catch (err) {
-  //       console.error("Error details:", {
-  //         message: err.message,
-  //         stack: err.stack,
-  //         VITE_API_URL,
-  //       });
-  //       setError(err.message);
-  //     } finally {
-  //       setIsLoading(false);
-  //     }
-  //   };
-
-  //   fetchTunes();
-  // }, []);
   useEffect(() => {
     const fetchTunes = async () => {
       try {
@@ -133,16 +58,6 @@ const TuneList = () => {
 
     fetchTunes();
   }, []);
-  // const handleInternalTuneClick = (tuneId, e) => {
-  //   e.preventDefault();
-  //   if (!isLoggedIn) {
-  //     setClickedTuneId(tuneId);
-  //     setTimeout(() => setClickedTuneId(null), 3000);
-  //     return;
-  //   }
-  //   // If logged in, allow navigation to tune detail
-  //   window.location.href = `/tune/${tuneId}`;
-  // };
 
   const handleInternalTuneClick = (tuneId, e) => {
     e.preventDefault();
