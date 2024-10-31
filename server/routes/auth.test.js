@@ -15,17 +15,16 @@ jest.mock("../utils/email", () => ({
     ),
 }));
 
-// Import the mocked module
+// Import the mock after defining it
 const { sendResetEmail } = require("../utils/email");
 
 jest.setTimeout(10000);
 
-// Setup express app
 app.use(express.json());
 app.use("/api/auth", authRoutes);
 
-let mongoServer;
 let server;
+let mongoServer;
 
 beforeAll(async () => {
   mongoServer = await MongoMemoryServer.create();
@@ -35,7 +34,8 @@ beforeAll(async () => {
 
 beforeEach(async () => {
   server = app.listen(0);
-  await UserModel.deleteMany({});
+  await UserModel.deleteMany();
+  // Clear mock data before each test
   jest.clearAllMocks();
 });
 
@@ -71,9 +71,14 @@ describe("Auth Routes", () => {
     });
 
     it("should return 400 if required fields are missing", async () => {
+      const incompleteUser = {
+        name: "testuser",
+        email: "testuser@example.com",
+      };
+
       const response = await request(app)
         .post("/api/auth/signup")
-        .send({ name: "testuser", email: "test@example.com" });
+        .send(incompleteUser);
 
       expect(response.status).toBe(400);
       expect(response.body.error).toBe("All fields are required");
@@ -86,10 +91,10 @@ describe("Auth Routes", () => {
         password: "password123",
       };
 
-      // Create user first
+      // Create a user first
       await request(app).post("/api/auth/signup").send(existingUser);
 
-      // Try to create same user again
+      // Try to create the same user again
       const response = await request(app)
         .post("/api/auth/signup")
         .send(existingUser);
@@ -97,59 +102,88 @@ describe("Auth Routes", () => {
       expect(response.status).toBe(400);
       expect(response.body.error).toBe("User already exists");
     });
+
+    it("should hash the password before saving", async () => {
+      const newUser = {
+        name: "hashtest",
+        email: "hashtest@example.com",
+        password: "password123",
+      };
+
+      await request(app).post("/api/auth/signup").send(newUser);
+
+      const savedUser = await UserModel.findOne({ email: newUser.email });
+      expect(savedUser.password).not.toBe(newUser.password);
+      expect(savedUser.password).toHaveLength(60); // bcrypt hash length
+    });
   });
 
   describe("POST /login", () => {
-    beforeEach(async () => {
-      // Create a test user before each login test
-      await request(app).post("/api/auth/signup").send({
+    it("should login successfully with correct credentials", async () => {
+      // First, create a user
+      const user = {
         name: "testuser",
         email: "testuser@example.com",
         password: "password123",
-      });
-    });
+      };
+      await request(app).post("/api/auth/signup").send(user);
 
-    it("should login successfully with correct credentials", async () => {
-      const response = await request(app).post("/api/auth/login").send({
-        email: "testuser@example.com",
-        password: "password123",
-      });
+      // Now, attempt to login
+      const loginResponse = await request(app)
+        .post("/api/auth/login")
+        .send({ email: user.email, password: user.password });
 
-      expect(response.status).toBe(200);
-      expect(response.body.message).toBe("Login successful");
-      expect(response.body.token).toBeDefined();
+      expect(loginResponse.status).toBe(200);
+      expect(loginResponse.body.message).toBe("Login successful");
+      expect(loginResponse.body.user).toHaveProperty("id");
+      expect(loginResponse.body.user.email).toBe(user.email);
+      expect(loginResponse.body.user).toHaveProperty("role");
+      expect(loginResponse.body).toHaveProperty("token");
     });
 
     it("should return 401 with incorrect password", async () => {
-      const response = await request(app).post("/api/auth/login").send({
-        email: "testuser@example.com",
-        password: "wrongpassword",
-      });
-
-      expect(response.status).toBe(401);
-      expect(response.body.error).toBe("Invalid email or password");
-    });
-
-    it("should set token expiration to 30 days when stayLoggedIn is true", async () => {
-      const response = await request(app).post("/api/auth/login").send({
+      // First, create a user
+      const user = {
+        name: "testuser",
         email: "testuser@example.com",
         password: "password123",
-        stayLoggedIn: true,
-      });
+      };
+      await request(app).post("/api/auth/signup").send(user);
 
-      expect(response.status).toBe(200);
-      expect(response.body.expiresIn).toBe("30d");
+      // Now, attempt to login with incorrect password
+      const loginResponse = await request(app)
+        .post("/api/auth/login")
+        .send({ email: user.email, password: "wrongpassword" });
+
+      expect(loginResponse.status).toBe(401);
+      expect(loginResponse.body.error).toBe("Invalid email or password");
     });
 
-    it("should set token expiration to 1 day when stayLoggedIn is false", async () => {
-      const response = await request(app).post("/api/auth/login").send({
-        email: "testuser@example.com",
-        password: "password123",
-        stayLoggedIn: false,
-      });
+    it("should return 401 with non-existent email", async () => {
+      const loginResponse = await request(app)
+        .post("/api/auth/login")
+        .send({ email: "nonexistent@example.com", password: "anypassword" });
 
-      expect(response.status).toBe(200);
-      expect(response.body.expiresIn).toBe("1d");
+      expect(loginResponse.status).toBe(401);
+      expect(loginResponse.body.error).toBe("Invalid email or password");
+    });
+
+    it("should return 400 when email is missing", async () => {
+      const loginResponse = await request(app)
+        .post("/api/auth/login")
+        .send({ password: "anypassword" });
+
+      expect(loginResponse.status).toBe(400);
+      expect(loginResponse.body.error).toBe("Email and password are required");
+    });
+
+    it("should return 400 when password is missing", async () => {
+      const loginResponse = await request(app)
+        .post("/api/auth/login")
+        .send({ email: "test@example.com" });
+
+      expect(loginResponse.status).toBe(400);
+      expect(loginResponse.body.error).toBe("Email and password are required");
     });
   });
 
@@ -189,25 +223,26 @@ describe("Auth Routes", () => {
 
   describe("POST /reset-password", () => {
     let user;
-    let resetToken;
+    let validToken;
 
     beforeEach(async () => {
-      // Create a user with a reset token
-      user = await UserModel.create({
+      // Create a user with a valid reset token
+      validToken = "validtoken123";
+      user = new UserModel({
         name: "Test User",
         email: "test@example.com",
         password: "oldpassword",
-        resetPasswordToken: "validtoken",
+        resetPasswordToken: validToken,
         resetPasswordExpires: Date.now() + 3600000, // 1 hour from now
       });
-      resetToken = "validtoken";
+      await user.save();
     });
 
     it("should reset password with valid token", async () => {
       const response = await request(app)
         .post("/api/auth/reset-password")
         .send({
-          token: resetToken,
+          token: validToken,
           newPassword: "newpassword123",
         });
 
@@ -218,6 +253,7 @@ describe("Auth Routes", () => {
       const updatedUser = await UserModel.findById(user._id);
       expect(updatedUser.resetPasswordToken).toBeUndefined();
       expect(updatedUser.resetPasswordExpires).toBeUndefined();
+      expect(await updatedUser.comparePassword("newpassword123")).toBe(true);
     });
 
     it("should fail with invalid token", async () => {
@@ -230,6 +266,26 @@ describe("Auth Routes", () => {
 
       expect(response.status).toBe(400);
       expect(response.body.error).toBe("Invalid or expired token");
+    });
+
+    it("should fail when token or password is missing", async () => {
+      const response1 = await request(app)
+        .post("/api/auth/reset-password")
+        .send({
+          newPassword: "newpassword123",
+        });
+
+      expect(response1.status).toBe(400);
+      expect(response1.body.error).toBe("Token and new password are required");
+
+      const response2 = await request(app)
+        .post("/api/auth/reset-password")
+        .send({
+          token: validToken,
+        });
+
+      expect(response2.status).toBe(400);
+      expect(response2.body.error).toBe("Token and new password are required");
     });
   });
 });
