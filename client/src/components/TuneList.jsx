@@ -1,3 +1,42 @@
+// import React, { useState, useEffect } from "react";
+// import { Link, useNavigate } from "react-router-dom";
+// import SpotifyMusicPlayer from "./SpotifyMusicPlayer";
+// import Header from "./Header";
+// import TuneDisplay from "./TuneDisplay";
+// import { sortTunes } from "../utils/sorting";
+// import { VITE_API_URL } from "../env.js";
+// import { useAuth } from "../useAuth";
+
+// const instruments = `${VITE_API_URL}/images/instruments.jpg`;
+
+// const TuneList = () => {
+//   const [tunes, setTunes] = useState([]);
+//   const [error, setError] = useState(null);
+//   const [isLoading, setIsLoading] = useState(true);
+//   const [clickedTuneId, setClickedTuneId] = useState(null);
+//   const { isLoggedIn } = useAuth();
+//   const navigate = useNavigate();
+
+//   useEffect(() => {
+//     const fetchTunes = async () => {
+//       try {
+//         const response = await fetch(`${VITE_API_URL}/api/tuneList`);
+//         if (!response.ok) {
+//           throw new Error("Failed to fetch tune data");
+//         }
+//         const data = await response.json();
+//         setTunes(data);
+//       } catch (err) {
+//         console.error("Error fetching tunes:", err);
+//         setError(err.message);
+//       } finally {
+//         setIsLoading(false);
+//       }
+//     };
+
+//     fetchTunes();
+//   }, []);
+
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import SpotifyMusicPlayer from "./SpotifyMusicPlayer";
@@ -6,6 +45,7 @@ import TuneDisplay from "./TuneDisplay";
 import { sortTunes } from "../utils/sorting";
 import { VITE_API_URL } from "../env.js";
 import { useAuth } from "../useAuth";
+import { testApiConnection } from "../utils/apiTest";
 
 const instruments = `${VITE_API_URL}/images/instruments.jpg`;
 
@@ -20,14 +60,31 @@ const TuneList = () => {
   useEffect(() => {
     const fetchTunes = async () => {
       try {
-        const response = await fetch(`${VITE_API_URL}/api/tuneList`);
+        console.log("Fetching from URL:", `${VITE_API_URL}/api/tuneList`);
+
+        const response = await fetch(`${VITE_API_URL}/api/tuneList`, {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        });
+
+        console.log("Response status:", response.status);
+        console.log("Response headers:", [...response.headers.entries()]);
+
         if (!response.ok) {
-          throw new Error("Failed to fetch tune data");
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
+        console.log("Received data:", data);
         setTunes(data);
       } catch (err) {
-        console.error("Error fetching tunes:", err);
+        console.error("Error details:", {
+          message: err.message,
+          stack: err.stack,
+          VITE_API_URL,
+        });
         setError(err.message);
       } finally {
         setIsLoading(false);
@@ -36,7 +93,6 @@ const TuneList = () => {
 
     fetchTunes();
   }, []);
-
   // const handleInternalTuneClick = (tuneId, e) => {
   //   e.preventDefault();
   //   if (!isLoggedIn) {
@@ -77,6 +133,22 @@ const TuneList = () => {
   return (
     <>
       <Header isFixed={true} />
+      {process.env.NODE_ENV === "development" && (
+        <button
+          onClick={async () => {
+            const result = await testApiConnection();
+            console.log("API Test Result:", result);
+          }}
+          style={{
+            position: "fixed",
+            bottom: "10px",
+            right: "10px",
+            zIndex: 1000,
+          }}
+        >
+          Test API
+        </button>
+      )}
       <div>
         <img className="img" src={instruments} alt="instruments" />
       </div>
