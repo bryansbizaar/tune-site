@@ -89,48 +89,110 @@ router.post("/login", async (req, res) => {
 
 router.post("/forgot-password", async (req, res) => {
   try {
+    console.log("=== Starting password reset process ===");
     const { email } = req.body;
+    console.log("Request received for email:", email);
+
+    // Log environment configuration
+    console.log("Environment configuration:", {
+      nodeEnv: process.env.NODE_ENV,
+      frontendUrl: process.env.FRONTEND_URL,
+      sendgridConfigured: !!process.env.SENDGRID_API_KEY,
+      senderEmail: process.env.SENDGRID_VERIFIED_SENDER,
+    });
 
     if (!email) {
+      console.log("No email provided in request");
       return res.status(400).json({ error: "Email is required" });
     }
 
     // Check if user exists
+    console.log("Looking up user in database...");
     const user = await UserModel.findOne({ email });
+
     if (!user) {
+      console.log("No user found with this email");
+      // We still return 200 for security reasons
       return res.status(200).json({
         message:
           "If an account with that email exists, a password reset link has been sent.",
       });
     }
 
+    console.log("User found, generating reset token...");
     // Generate reset token
     const token = crypto.randomBytes(20).toString("hex");
+    console.log("Token generated");
 
     // Save token to user
     user.resetPasswordToken = token;
     user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+    console.log("Saving token to user...");
     await user.save();
+    console.log("Token saved successfully");
 
-    // Send email
+    // Construct reset URL
     const resetUrl = `${process.env.FRONTEND_URL}?reset_token=${token}`;
-    await sendResetEmail(user.email, resetUrl);
+    console.log("Reset URL generated:", resetUrl);
 
-    res.status(200).json({
-      message:
-        "If an account with that email exists, a password reset link has been sent.",
-    });
+    try {
+      console.log("Attempting to send reset email...");
+      // Add more detailed logging to sendResetEmail function call
+      const emailInfo = await sendResetEmail(user.email, resetUrl);
+      console.log("Email sent successfully:", emailInfo);
+
+      res.status(200).json({
+        message:
+          "If an account with that email exists, a password reset link has been sent.",
+      });
+    } catch (emailError) {
+      console.error("Failed to send reset email:", {
+        error: emailError.message,
+        stack: emailError.stack,
+        code: emailError.code,
+        response: emailError.response?.body,
+      });
+
+      // Clean up the token since email failed
+      console.log("Cleaning up reset token due to email failure");
+      user.resetPasswordToken = undefined;
+      user.resetPasswordExpires = undefined;
+      await user.save();
+
+      throw new Error(`Failed to send reset email: ${emailError.message}`);
+    }
   } catch (error) {
-    console.error("Forgot password error:", error);
-    res.status(500).json({ error: "An unexpected error occurred" });
+    console.error("Password reset process failed:", {
+      message: error.message,
+      stack: error.stack,
+      code: error.code,
+      response: error.response?.body,
+    });
+
+    res.status(500).json({
+      error: "An unexpected error occurred",
+      details:
+        process.env.NODE_ENV === "development" ? error.message : undefined,
+    });
   }
 });
 
-// Add a new route for resetting the password
 router.post("/reset-password", async (req, res) => {
   try {
+    console.log("=== Starting password reset process ===");
     const { token, newPassword } = req.body;
 
+    if (!token || !newPassword) {
+      console.log("Missing required fields:", {
+        hasToken: !!token,
+        hasPassword: !!newPassword,
+      });
+      return res.status(400).json({
+        error: "Token and new password are required",
+      });
+    }
+
+    console.log("Looking up user by reset token...");
     // Find user by token
     const user = await UserModel.findOne({
       resetPasswordToken: token,
@@ -138,34 +200,78 @@ router.post("/reset-password", async (req, res) => {
     });
 
     if (!user) {
+      console.log("Invalid or expired token:", {
+        tokenProvided: token,
+        currentTime: new Date(),
+        tokenExpiry: user?.resetPasswordExpires,
+      });
       return res.status(400).json({ error: "Invalid or expired token" });
     }
 
-    // Set new password
-    user.password = newPassword;
-    user.resetPasswordToken = undefined;
-    user.resetPasswordExpires = undefined;
-    await user.save();
+    console.log("Valid token found for user:", user.email);
 
-    res.status(200).json({ message: "Password has been reset" });
+    try {
+      // Set new password
+      console.log("Updating password...");
+      user.password = newPassword;
+      user.resetPasswordToken = undefined;
+      user.resetPasswordExpires = undefined;
+
+      await user.save();
+      console.log("Password successfully updated");
+
+      res.status(200).json({ message: "Password has been reset" });
+    } catch (saveError) {
+      console.error("Error saving new password:", {
+        error: saveError.message,
+        stack: saveError.stack,
+        code: saveError.code,
+      });
+      throw saveError;
+    }
   } catch (error) {
-    console.error("Reset password error:", error);
-    res.status(500).json({ error: "An unexpected error occurred" });
+    console.error("Password reset error:", {
+      message: error.message,
+      stack: error.stack,
+      code: error.code,
+      name: error.name,
+    });
+
+    // Send a more specific error message in development
+    const errorMessage =
+      process.env.NODE_ENV === "development"
+        ? error.message
+        : "An unexpected error occurred";
+
+    res.status(500).json({ error: errorMessage });
   }
 });
 
-// Test email
-// router.post("/test-email", async (req, res) => {
+// Add a new route for resetting the password
+// router.post("/reset-password", async (req, res) => {
 //   try {
-//     const testEmail = "your-email@example.com"; // Email where you want to receive the test
-//     const testUrl = "http://example.com/test"; // Dummy URL
+//     const { token, newPassword } = req.body;
 
-//     await sendResetEmail(testEmail, testUrl);
+//     // Find user by token
+//     const user = await UserModel.findOne({
+//       resetPasswordToken: token,
+//       resetPasswordExpires: { $gt: Date.now() },
+//     });
 
-//     res.json({ message: "Test email sent successfully" });
+//     if (!user) {
+//       return res.status(400).json({ error: "Invalid or expired token" });
+//     }
+
+//     // Set new password
+//     user.password = newPassword;
+//     user.resetPasswordToken = undefined;
+//     user.resetPasswordExpires = undefined;
+//     await user.save();
+
+//     res.status(200).json({ message: "Password has been reset" });
 //   } catch (error) {
-//     console.error("Error sending test email:", error);
-//     res.status(500).json({ error: error.message });
+//     console.error("Reset password error:", error);
+//     res.status(500).json({ error: "An unexpected error occurred" });
 //   }
 // });
 
