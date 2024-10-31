@@ -45,7 +45,6 @@ import TuneDisplay from "./TuneDisplay";
 import { sortTunes } from "../utils/sorting";
 import { VITE_API_URL } from "../env.js";
 import { useAuth } from "../useAuth";
-import { testApiConnection } from "../utils/apiTest";
 
 const instruments = `${VITE_API_URL}/images/instruments.jpg`;
 
@@ -57,33 +56,67 @@ const TuneList = () => {
   const { isLoggedIn } = useAuth();
   const navigate = useNavigate();
 
+  // useEffect(() => {
+  //   const fetchTunes = async () => {
+  //     try {
+  //       console.log("Fetching from URL:", `${VITE_API_URL}/api/tuneList`);
+
+  //       const response = await fetch(`${VITE_API_URL}/api/tuneList`, {
+  //         method: "GET",
+  //         headers: {
+  //           Accept: "application/json",
+  //           "Content-Type": "application/json",
+  //         },
+  //       });
+
+  //       console.log("Response status:", response.status);
+  //       console.log("Response headers:", [...response.headers.entries()]);
+
+  //       if (!response.ok) {
+  //         throw new Error(`HTTP error! status: ${response.status}`);
+  //       }
+  //       const data = await response.json();
+  //       console.log("Received data:", data);
+  //       setTunes(data);
+  //     } catch (err) {
+  //       console.error("Error details:", {
+  //         message: err.message,
+  //         stack: err.stack,
+  //         VITE_API_URL,
+  //       });
+  //       setError(err.message);
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   };
+
+  //   fetchTunes();
+  // }, []);
   useEffect(() => {
     const fetchTunes = async () => {
       try {
-        console.log("Fetching from URL:", `${VITE_API_URL}/api/tuneList`);
-
-        const response = await fetch(`${VITE_API_URL}/api/tuneList`, {
-          method: "GET",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-        });
-
-        console.log("Response status:", response.status);
-        console.log("Response headers:", [...response.headers.entries()]);
+        console.log(
+          "Attempting to fetch from:",
+          `${VITE_API_URL}/api/tuneList`
+        );
+        const response = await fetch(`${VITE_API_URL}/api/tuneList`);
 
         if (!response.ok) {
+          console.error("Response not OK:", {
+            status: response.status,
+            statusText: response.statusText,
+          });
           throw new Error(`HTTP error! status: ${response.status}`);
         }
+
         const data = await response.json();
-        console.log("Received data:", data);
+        console.log("Successfully fetched data");
         setTunes(data);
       } catch (err) {
-        console.error("Error details:", {
+        console.error("Error fetching tunes:", {
           message: err.message,
-          stack: err.stack,
-          VITE_API_URL,
+          apiUrl: VITE_API_URL,
+          error: err,
         });
         setError(err.message);
       } finally {
@@ -133,22 +166,7 @@ const TuneList = () => {
   return (
     <>
       <Header isFixed={true} />
-      {process.env.NODE_ENV === "development" && (
-        <button
-          onClick={async () => {
-            const result = await testApiConnection();
-            console.log("API Test Result:", result);
-          }}
-          style={{
-            position: "fixed",
-            bottom: "10px",
-            right: "10px",
-            zIndex: 1000,
-          }}
-        >
-          Test API
-        </button>
-      )}
+
       <div>
         <img className="img" src={instruments} alt="instruments" />
       </div>
