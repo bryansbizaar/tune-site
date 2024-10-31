@@ -325,9 +325,14 @@ describe("Auth Routes - Stay Logged In Tests", () => {
     });
   });
 
+  //
   describe("POST /reset-password", () => {
-    it("should reset password with valid token", async () => {
-      const user = new UserModel({
+    let user;
+    let resetToken;
+
+    beforeEach(async () => {
+      // Create a user with a valid reset token
+      user = new UserModel({
         name: "Test User",
         email: "test@example.com",
         password: "oldpassword",
@@ -335,10 +340,13 @@ describe("Auth Routes - Stay Logged In Tests", () => {
         resetPasswordExpires: Date.now() + 3600000, // 1 hour from now
       });
       await user.save();
+      resetToken = "validtoken";
+    });
 
+    it("should reset password with valid token", async () => {
       const response = await request(app)
         .post("/api/auth/reset-password")
-        .send({ token: "validtoken", newPassword: "newpassword123" });
+        .send({ token: resetToken, newPassword: "newpassword123" });
 
       expect(response.status).toBe(200);
       expect(response.body.message).toBe("Password has been reset");
@@ -359,9 +367,37 @@ describe("Auth Routes - Stay Logged In Tests", () => {
     });
 
     it("should return 400 when token or new password is missing", async () => {
+      const response1 = await request(app)
+        .post("/api/auth/reset-password")
+        .send({ token: resetToken }); // missing new password
+
+      expect(response1.status).toBe(400);
+      expect(response1.body.error).toBe("Token and new password are required");
+
+      const response2 = await request(app)
+        .post("/api/auth/reset-password")
+        .send({ newPassword: "newpassword123" }); // missing token
+
+      expect(response2.status).toBe(400);
+      expect(response2.body.error).toBe("Token and new password are required");
+
+      const response3 = await request(app)
+        .post("/api/auth/reset-password")
+        .send({}); // missing both
+
+      expect(response3.status).toBe(400);
+      expect(response3.body.error).toBe("Token and new password are required");
+    });
+
+    it("should return 400 for expired token", async () => {
+      // Update user to have expired token
+      await UserModel.findByIdAndUpdate(user._id, {
+        resetPasswordExpires: Date.now() - 3600000, // 1 hour ago
+      });
+
       const response = await request(app)
         .post("/api/auth/reset-password")
-        .send({ token: "validtoken" });
+        .send({ token: resetToken, newPassword: "newpassword123" });
 
       expect(response.status).toBe(400);
       expect(response.body.error).toBe("Invalid or expired token");

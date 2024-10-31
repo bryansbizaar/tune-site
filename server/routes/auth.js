@@ -5,6 +5,20 @@ const crypto = require("crypto");
 const router = express.Router();
 const { sendResetEmail } = require("../utils/email");
 
+// Debug middleware for all auth routes
+router.use((req, res, next) => {
+  console.log("Auth Route accessed:", {
+    method: req.method,
+    path: req.path,
+    body: req.body ? { ...req.body, password: "[REDACTED]" } : null,
+    headers: {
+      "content-type": req.headers["content-type"],
+      "user-agent": req.headers["user-agent"],
+    },
+  });
+  next();
+});
+
 router.post("/signup", async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -87,148 +101,120 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.post("/forgot-password", async (req, res) => {
-  try {
-    console.log("=== Starting password reset process ===");
-    const { email } = req.body;
-    console.log("Request received for email:", email);
+// router.post("/forgot-password", async (req, res) => {
+//   try {
+//     console.log("=== Starting password reset process ===");
+//     const { email } = req.body;
+//     console.log("Request received for email:", email);
 
-    // Log environment configuration
-    console.log("Environment configuration:", {
-      nodeEnv: process.env.NODE_ENV,
-      frontendUrl: process.env.FRONTEND_URL,
-      sendgridConfigured: !!process.env.SENDGRID_API_KEY,
-      senderEmail: process.env.SENDGRID_VERIFIED_SENDER,
-    });
+//     // Log environment configuration
+//     console.log("Environment configuration:", {
+//       nodeEnv: process.env.NODE_ENV,
+//       frontendUrl: process.env.FRONTEND_URL,
+//       sendgridConfigured: !!process.env.SENDGRID_API_KEY,
+//       senderEmail: process.env.SENDGRID_VERIFIED_SENDER,
+//     });
 
-    if (!email) {
-      console.log("No email provided in request");
-      return res.status(400).json({ error: "Email is required" });
-    }
+//     if (!email) {
+//       console.log("No email provided in request");
+//       return res.status(400).json({ error: "Email is required" });
+//     }
 
-    // Check if user exists
-    console.log("Looking up user in database...");
-    const user = await UserModel.findOne({ email });
+//     // Check if user exists
+//     console.log("Looking up user in database...");
+//     const user = await UserModel.findOne({ email });
 
-    if (!user) {
-      console.log("No user found with this email");
-      // We still return 200 for security reasons
-      return res.status(200).json({
-        message:
-          "If an account with that email exists, a password reset link has been sent.",
-      });
-    }
+//     if (!user) {
+//       console.log("No user found with this email");
+//       // We still return 200 for security reasons
+//       return res.status(200).json({
+//         message:
+//           "If an account with that email exists, a password reset link has been sent.",
+//       });
+//     }
 
-    console.log("User found, generating reset token...");
-    // Generate reset token
-    const token = crypto.randomBytes(20).toString("hex");
-    console.log("Token generated");
+//     console.log("User found, generating reset token...");
+//     // Generate reset token
+//     const token = crypto.randomBytes(20).toString("hex");
+//     console.log("Token generated");
 
-    // Save token to user
-    user.resetPasswordToken = token;
-    user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
-    console.log("Saving token to user...");
-    await user.save();
-    console.log("Token saved successfully");
+//     // Save token to user
+//     user.resetPasswordToken = token;
+//     user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+//     console.log("Saving token to user...");
+//     await user.save();
+//     console.log("Token saved successfully");
 
-    // Construct reset URL
-    const resetUrl = `${process.env.FRONTEND_URL}?reset_token=${token}`;
-    console.log("Reset URL generated:", resetUrl);
+//     // Construct reset URL
+//     const resetUrl = `${process.env.FRONTEND_URL}?reset_token=${token}`;
+//     console.log("Reset URL generated:", resetUrl);
 
-    try {
-      console.log("Attempting to send reset email...");
-      // Add more detailed logging to sendResetEmail function call
-      const emailInfo = await sendResetEmail(user.email, resetUrl);
-      console.log("Email sent successfully:", emailInfo);
+//     try {
+//       console.log("Attempting to send reset email...");
+//       // Add more detailed logging to sendResetEmail function call
+//       const emailInfo = await sendResetEmail(user.email, resetUrl);
+//       console.log("Email sent successfully:", emailInfo);
 
-      res.status(200).json({
-        message:
-          "If an account with that email exists, a password reset link has been sent.",
-      });
-    } catch (emailError) {
-      console.error("Failed to send reset email:", {
-        error: emailError.message,
-        stack: emailError.stack,
-        code: emailError.code,
-        response: emailError.response?.body,
-      });
+//       res.status(200).json({
+//         message:
+//           "If an account with that email exists, a password reset link has been sent.",
+//       });
+//     } catch (emailError) {
+//       console.error("Failed to send reset email:", {
+//         error: emailError.message,
+//         stack: emailError.stack,
+//         code: emailError.code,
+//         response: emailError.response?.body,
+//       });
 
-      // Clean up the token since email failed
-      console.log("Cleaning up reset token due to email failure");
-      user.resetPasswordToken = undefined;
-      user.resetPasswordExpires = undefined;
-      await user.save();
+//       // Clean up the token since email failed
+//       console.log("Cleaning up reset token due to email failure");
+//       user.resetPasswordToken = undefined;
+//       user.resetPasswordExpires = undefined;
+//       await user.save();
 
-      throw new Error(`Failed to send reset email: ${emailError.message}`);
-    }
-  } catch (error) {
-    console.error("Password reset process failed:", {
-      message: error.message,
-      stack: error.stack,
-      code: error.code,
-      response: error.response?.body,
-    });
+//       throw new Error(`Failed to send reset email: ${emailError.message}`);
+//     }
+//   } catch (error) {
+//     console.error("Password reset process failed:", {
+//       message: error.message,
+//       stack: error.stack,
+//       code: error.code,
+//       response: error.response?.body,
+//     });
 
-    res.status(500).json({
-      error: "An unexpected error occurred",
-      details:
-        process.env.NODE_ENV === "development" ? error.message : undefined,
-    });
-  }
-});
+//     res.status(500).json({
+//       error: "An unexpected error occurred",
+//       details:
+//         process.env.NODE_ENV === "development" ? error.message : undefined,
+//     });
+//   }
+// });
 
-router.post("/reset-password", async (req, res) => {
-  try {
-    console.log("=== Starting password reset process ===");
-    const { token, newPassword } = req.body;
-
-    // Find user by token
-    console.log("Looking up user by reset token...");
-    const user = await UserModel.findOne({
-      resetPasswordToken: token,
-      resetPasswordExpires: { $gt: Date.now() },
-    });
-
-    if (!user) {
-      console.log("Invalid or expired token");
-      return res.status(400).json({ error: "Invalid or expired token" });
-    }
-
-    // Set new password
-    console.log("Valid token found, updating password...");
-    user.password = newPassword;
-    user.resetPasswordToken = undefined;
-    user.resetPasswordExpires = undefined;
-    await user.save();
-    console.log("Password successfully updated");
-
-    res.status(200).json({ message: "Password has been reset" });
-  } catch (error) {
-    console.error("Reset password error:", error);
-    res.status(500).json({ error: "An unexpected error occurred" });
-  }
-});
-
-// Add a new route for resetting the password
 // router.post("/reset-password", async (req, res) => {
 //   try {
+//     console.log("=== Starting password reset process ===");
 //     const { token, newPassword } = req.body;
 
 //     // Find user by token
+//     console.log("Looking up user by reset token...");
 //     const user = await UserModel.findOne({
 //       resetPasswordToken: token,
 //       resetPasswordExpires: { $gt: Date.now() },
 //     });
 
 //     if (!user) {
+//       console.log("Invalid or expired token");
 //       return res.status(400).json({ error: "Invalid or expired token" });
 //     }
 
 //     // Set new password
+//     console.log("Valid token found, updating password...");
 //     user.password = newPassword;
 //     user.resetPasswordToken = undefined;
 //     user.resetPasswordExpires = undefined;
 //     await user.save();
+//     console.log("Password successfully updated");
 
 //     res.status(200).json({ message: "Password has been reset" });
 //   } catch (error) {
@@ -236,5 +222,95 @@ router.post("/reset-password", async (req, res) => {
 //     res.status(500).json({ error: "An unexpected error occurred" });
 //   }
 // });
+
+router.post("/forgot-password", async (req, res) => {
+  console.log("=== Starting forgot password process ===");
+  try {
+    const { email } = req.body;
+
+    if (!email) {
+      console.log("No email provided");
+      return res.status(400).json({ error: "Email is required" });
+    }
+
+    console.log(`Processing reset request for email: ${email}`);
+
+    const user = await UserModel.findOne({ email });
+    if (!user) {
+      console.log("No user found with this email");
+      return res.status(200).json({
+        message:
+          "If an account with that email exists, a password reset link has been sent.",
+      });
+    }
+
+    const token = crypto.randomBytes(20).toString("hex");
+    console.log("Generated reset token:", { tokenLength: token.length });
+
+    user.resetPasswordToken = token;
+    user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+    await user.save();
+
+    const resetUrl = `${process.env.FRONTEND_URL}?reset_token=${token}`;
+    console.log("Reset URL generated:", resetUrl);
+
+    await sendResetEmail(user.email, resetUrl);
+    console.log("Reset email sent successfully");
+
+    res.status(200).json({
+      message:
+        "If an account with that email exists, a password reset link has been sent.",
+    });
+  } catch (error) {
+    console.error("Error in forgot-password:", error);
+    res.status(500).json({ error: "An unexpected error occurred" });
+  }
+});
+
+router.post("/reset-password", async (req, res) => {
+  console.log("=== Starting password reset process ===");
+  try {
+    const { token, newPassword } = req.body;
+
+    console.log("Reset password request received:", {
+      hasToken: !!token,
+      tokenLength: token?.length,
+      hasNewPassword: !!newPassword,
+    });
+
+    if (!token || !newPassword) {
+      return res
+        .status(400)
+        .json({ error: "Token and new password are required" });
+    }
+
+    const user = await UserModel.findOne({
+      resetPasswordToken: token,
+      resetPasswordExpires: { $gt: Date.now() },
+    });
+
+    if (!user) {
+      console.log("No user found with valid reset token");
+      return res.status(400).json({ error: "Invalid or expired token" });
+    }
+
+    console.log("Found user with valid token:", { userId: user._id });
+
+    user.password = newPassword;
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpires = undefined;
+
+    await user.save();
+    console.log("Password successfully reset");
+
+    res.status(200).json({ message: "Password has been reset" });
+  } catch (error) {
+    console.error("Error in reset-password:", {
+      error: error.message,
+      stack: error.stack,
+    });
+    res.status(500).json({ error: "An unexpected error occurred" });
+  }
+});
 
 module.exports = router;
