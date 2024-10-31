@@ -29,6 +29,15 @@ jobs:
           npm test
 
       - name: Run server tests
+        env:
+          JWT_SECRET: test-jwt-secret-key
+          MONGODB_URI: mongodb://localhost:27017/
+          NODE_ENV: test
+          FRONTEND_URL: http://localhost:5173
+          EMAIL_HOST: smtp.example.com
+          EMAIL_PORT: 587
+          EMAIL_USER: test@example.com
+          EMAIL_PASS: test-password
         run: |
           cd server
           npm test
