@@ -10,11 +10,34 @@ dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 5000;
+const allowedOrigins = [
+  "http://localhost:5173", // Local development
+  "https://tune-site-backend.onrender.com", // Replace with your Netlify URL
+  "http://localhost:3000", // Optional: for local backend testing
+];
 
 // Middleware
+// app.use(
+//   cors({
+//     origin: ["https://tune-site-backend.onrender.com", "http://localhost:5173"],
+//     credentials: true,
+//     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+//     allowedHeaders: ["Content-Type", "Authorization"],
+//   })
+// );
 app.use(
   cors({
-    origin: ["https://your-netlify-app.netlify.app", "http://localhost:5173"],
+    origin: function (origin, callback) {
+      // Allow requests with no origin (like mobile apps or curl requests)
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.indexOf(origin) === -1) {
+        const msg =
+          "The CORS policy for this site does not allow access from the specified Origin.";
+        return callback(new Error(msg), false);
+      }
+      return callback(null, true);
+    },
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
