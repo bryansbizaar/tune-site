@@ -287,6 +287,7 @@
 
 import React, { useState, useEffect } from "react";
 import { VITE_API_URL } from "../env.js";
+console.log("API URL:", VITE_API_URL);
 import { useAuth } from "../useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
 
