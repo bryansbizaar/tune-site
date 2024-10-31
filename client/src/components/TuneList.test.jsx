@@ -5,6 +5,11 @@ import { MemoryRouter } from "react-router-dom";
 import TuneList from "./TuneList";
 import { useAuth } from "../useAuth";
 
+// Mock apiTest
+jest.mock("../utils/apiTest", () => ({
+  testApiConnection: jest.fn().mockResolvedValue({ success: true, data: [] }),
+}));
+
 // Mock child components
 jest.mock("./Header", () => () => <div data-testid="header">Header</div>);
 jest.mock("./TuneDisplay", () => ({ tunesOfTheWeek, upNextTunes }) => (
