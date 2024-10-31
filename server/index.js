@@ -104,24 +104,21 @@ const port = process.env.PORT || 5000;
 
 // CORS configuration
 const allowedOrigins = [
-  "https://tune-site.netlify.app", // Your Netlify production URL
-  "http://localhost:5173", // Vite dev server
-  "https://bryansbizaar.github.io", // GitHub Pages
-  "https://tune-site-backend.onrender.com", // Your Render backend
+  "https://whangareitunes.com", // Production domain
+  "https://www.whangareitunes.com", // www subdomain
+  "http://localhost:5173", // Local development
+  "https://tune-site-backend.onrender.com", // Backend URL
 ];
 
-// Updated CORS configuration
 app.use(
   cors({
     origin: function (origin, callback) {
-      // Allow requests with no origin (like mobile apps, Postman)
+      // For development - allow requests with no origin
       if (!origin) return callback(null, true);
 
       if (allowedOrigins.indexOf(origin) === -1) {
-        console.log("Request from origin:", origin); // Debug log
-        const msg =
-          "The CORS policy for this site does not allow access from the specified Origin.";
-        return callback(new Error(msg), false);
+        console.log("Blocked request from origin:", origin); // Debug log
+        return callback(new Error("CORS not allowed"));
       }
       return callback(null, true);
     },
@@ -130,6 +127,14 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
+
+// Add CORS debug middleware
+app.use((req, res, next) => {
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.path}`);
+  console.log("Origin:", req.headers.origin);
+  console.log("Headers:", req.headers);
+  next();
+});
 
 // Middleware
 app.use(express.json());

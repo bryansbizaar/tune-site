@@ -99,12 +99,21 @@ const TuneList = () => {
           "Attempting to fetch from:",
           `${VITE_API_URL}/api/tuneList`
         );
-        const response = await fetch(`${VITE_API_URL}/api/tuneList`);
+        const response = await fetch(`${VITE_API_URL}/api/tuneList`, {
+          method: "GET",
+          mode: "cors",
+          credentials: "include",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        });
 
         if (!response.ok) {
           console.error("Response not OK:", {
             status: response.status,
             statusText: response.statusText,
+            url: response.url,
           });
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -117,6 +126,7 @@ const TuneList = () => {
           message: err.message,
           apiUrl: VITE_API_URL,
           error: err,
+          origin: window.location.origin,
         });
         setError(err.message);
       } finally {
