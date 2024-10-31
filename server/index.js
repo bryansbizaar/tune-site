@@ -1,12 +1,25 @@
+const path = require("path");
+const dotenv = require("dotenv");
+
+// Load the correct env file based on environment
+const envFile =
+  process.env.NODE_ENV === "production"
+    ? ".env.production"
+    : ".env.development";
+
+dotenv.config({
+  path: path.resolve(__dirname, envFile),
+});
+
+// Add these lines for debugging
+console.log("Current environment:", process.env.NODE_ENV);
+console.log("MongoDB URI:", process.env.MONGODB_URI);
+
 const express = require("express");
 const connectDB = require("./config/db");
-const path = require("path");
 const fs = require("fs").promises;
 const cors = require("cors");
-const dotenv = require("dotenv");
 const authRoutes = require("./routes/auth");
-
-dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 5000;
