@@ -182,68 +182,30 @@ router.post("/reset-password", async (req, res) => {
     console.log("=== Starting password reset process ===");
     const { token, newPassword } = req.body;
 
-    if (!token || !newPassword) {
-      console.log("Missing required fields:", {
-        hasToken: !!token,
-        hasPassword: !!newPassword,
-      });
-      return res.status(400).json({
-        error: "Token and new password are required",
-      });
-    }
-
-    console.log("Looking up user by reset token...");
     // Find user by token
+    console.log("Looking up user by reset token...");
     const user = await UserModel.findOne({
       resetPasswordToken: token,
       resetPasswordExpires: { $gt: Date.now() },
     });
 
     if (!user) {
-      console.log("Invalid or expired token:", {
-        tokenProvided: token,
-        currentTime: new Date(),
-        tokenExpiry: user?.resetPasswordExpires,
-      });
+      console.log("Invalid or expired token");
       return res.status(400).json({ error: "Invalid or expired token" });
     }
 
-    console.log("Valid token found for user:", user.email);
+    // Set new password
+    console.log("Valid token found, updating password...");
+    user.password = newPassword;
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpires = undefined;
+    await user.save();
+    console.log("Password successfully updated");
 
-    try {
-      // Set new password
-      console.log("Updating password...");
-      user.password = newPassword;
-      user.resetPasswordToken = undefined;
-      user.resetPasswordExpires = undefined;
-
-      await user.save();
-      console.log("Password successfully updated");
-
-      res.status(200).json({ message: "Password has been reset" });
-    } catch (saveError) {
-      console.error("Error saving new password:", {
-        error: saveError.message,
-        stack: saveError.stack,
-        code: saveError.code,
-      });
-      throw saveError;
-    }
+    res.status(200).json({ message: "Password has been reset" });
   } catch (error) {
-    console.error("Password reset error:", {
-      message: error.message,
-      stack: error.stack,
-      code: error.code,
-      name: error.name,
-    });
-
-    // Send a more specific error message in development
-    const errorMessage =
-      process.env.NODE_ENV === "development"
-        ? error.message
-        : "An unexpected error occurred";
-
-    res.status(500).json({ error: errorMessage });
+    console.error("Reset password error:", error);
+    res.status(500).json({ error: "An unexpected error occurred" });
   }
 });
 
