@@ -1,3 +1,107 @@
+// import React, { useState, useEffect } from "react";
+// import { VITE_API_URL } from "../env.js";
+// import { useAuth } from "../useAuth";
+// import { useLocation, useNavigate } from "react-router-dom";
+
+// const AuthForm = ({ onClose }) => {
+//   const [email, setEmail] = useState("");
+//   const [password, setPassword] = useState("");
+//   const [name, setName] = useState("");
+//   const [confirmPassword, setConfirmPassword] = useState("");
+//   const [error, setError] = useState("");
+//   const [message, setMessage] = useState("");
+//   const [activeTab, setActiveTab] = useState("login");
+//   const [resetToken, setResetToken] = useState("");
+//   const [stayLoggedIn, setStayLoggedIn] = useState(false);
+//   const { isLoggedIn, login } = useAuth();
+//   const location = useLocation();
+//   const navigate = useNavigate();
+
+//   useEffect(() => {
+//     const query = new URLSearchParams(location.search);
+//     const token = query.get("reset_token");
+//     if (token) {
+//       console.log("Reset token found:", token); // Debug log
+//       setResetToken(token);
+//       setActiveTab("resetPassword");
+//     }
+//   }, [location]);
+
+//   useEffect(() => {
+//     if (isLoggedIn) {
+//       setMessage("You are already logged in.");
+//       setTimeout(() => {
+//         onClose();
+//         navigate("/");
+//       }, 2000);
+//     }
+//   }, [isLoggedIn, onClose, navigate]);
+
+//   const handleSubmit = async (e, type) => {
+//     e.preventDefault();
+//     setError("");
+//     setMessage("");
+
+//     // Password match validation for reset password
+//     if (type === "resetPassword" && password !== confirmPassword) {
+//       setError("Passwords do not match");
+//       return;
+//     }
+
+//     try {
+//       let endpoint, body;
+
+//       switch (type) {
+//         case "login":
+//           endpoint = "/api/auth/login";
+//           body = JSON.stringify({ email, password, stayLoggedIn });
+//           break;
+//         case "signup":
+//           endpoint = "/api/auth/signup";
+//           body = JSON.stringify({ name, email, password });
+//           break;
+//         case "forgotPassword":
+//           endpoint = "/api/auth/forgot-password";
+//           body = JSON.stringify({ email });
+//           break;
+//         case "resetPassword":
+//           endpoint = "/api/auth/reset-password";
+//           body = JSON.stringify({ token: resetToken, newPassword: password });
+//           break;
+//         default:
+//           throw new Error("Invalid form type");
+//       }
+
+//       const response = await fetch(`${VITE_API_URL}${endpoint}`, {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: body,
+//       });
+
+//       const data = await response.json();
+
+//       if (!response.ok) {
+//         throw new Error(data.error || "An unexpected error occurred");
+//       }
+
+//       setMessage(data.message || "Operation successful");
+//       if (data.token) {
+//         login(data.token, stayLoggedIn ? "30d" : "1d");
+//       }
+//       if (type === "resetPassword") {
+//         setActiveTab("login");
+//       } else if (type === "forgotPassword") {
+//         setMessage(
+//           "If an account with that email exists, a password reset link has been sent."
+//         );
+//       }
+//       setTimeout(onClose, 2000);
+//     } catch (err) {
+//       console.error("Error during auth operation:", err);
+//       setError(err.message || "An unexpected error occurred");
+//     }
+//   };
+
 import React, { useState, useEffect } from "react";
 import { VITE_API_URL } from "../env.js";
 import { useAuth } from "../useAuth";
@@ -21,32 +125,31 @@ const AuthForm = ({ onClose }) => {
     const query = new URLSearchParams(location.search);
     const token = query.get("reset_token");
     if (token) {
-      console.log("Reset token found:", token); // Debug log
+      console.log("Reset password flow initiated with token:", {
+        tokenLength: token.length,
+        tokenStart: token.substring(0, 4) + "...",
+        tokenEnd: token.substring(token.length - 4),
+      });
       setResetToken(token);
       setActiveTab("resetPassword");
     }
   }, [location]);
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      setMessage("You are already logged in.");
-      setTimeout(() => {
-        onClose();
-        navigate("/");
-      }, 2000);
+  const validateResetPasswordData = (token, password) => {
+    if (!token) {
+      throw new Error("Reset token is missing");
     }
-  }, [isLoggedIn, onClose, navigate]);
+    if (!password || password.length < 6) {
+      throw new Error("Password must be at least 6 characters long");
+    }
+    return true;
+  };
 
   const handleSubmit = async (e, type) => {
     e.preventDefault();
+    console.log(`Handling ${type} submission`);
     setError("");
     setMessage("");
-
-    // Password match validation for reset password
-    if (type === "resetPassword" && password !== confirmPassword) {
-      setError("Passwords do not match");
-      return;
-    }
 
     try {
       let endpoint, body;
@@ -65,8 +168,29 @@ const AuthForm = ({ onClose }) => {
           body = JSON.stringify({ email });
           break;
         case "resetPassword":
+          // Validate passwords match
+          if (password !== confirmPassword) {
+            setError("Passwords do not match");
+            return;
+          }
+
+          // Validate data before sending
+          try {
+            validateResetPasswordData(resetToken, password);
+          } catch (validationError) {
+            setError(validationError.message);
+            return;
+          }
+
           endpoint = "/api/auth/reset-password";
           body = JSON.stringify({ token: resetToken, newPassword: password });
+
+          console.log("Attempting password reset with:", {
+            endpoint: `${VITE_API_URL}${endpoint}`,
+            tokenPresent: !!resetToken,
+            tokenLength: resetToken?.length,
+            passwordLength: password?.length,
+          });
           break;
         default:
           throw new Error("Invalid form type");
@@ -74,11 +198,24 @@ const AuthForm = ({ onClose }) => {
 
       const response = await fetch(`${VITE_API_URL}${endpoint}`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: body,
       });
 
-      const data = await response.json();
+      console.log(`${type} response:`, {
+        status: response.status,
+        statusText: response.statusText,
+        ok: response.ok,
+      });
+
+      const data = await response.json().catch((e) => {
+        console.error("Error parsing response:", e);
+        throw new Error("Invalid server response");
+      });
+
+      console.log(`${type} response data:`, data);
 
       if (!response.ok) {
         throw new Error(data.error || "An unexpected error occurred");
@@ -97,7 +234,14 @@ const AuthForm = ({ onClose }) => {
       }
       setTimeout(onClose, 2000);
     } catch (err) {
-      console.error("Error during auth operation:", err);
+      console.error(`Error during ${type}:`, {
+        name: err.name,
+        message: err.message,
+        stack: err.stack,
+        type: type,
+        endpoint: `/api/auth/${type}`,
+        resetTokenPresent: !!resetToken,
+      });
       setError(err.message || "An unexpected error occurred");
     }
   };
