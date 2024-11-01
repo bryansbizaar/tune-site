@@ -123,7 +123,9 @@ describe("Password Reset Flow", () => {
         });
 
       expect(response.statusCode).toBe(200);
-      expect(response.body.message).toBe("Password has been reset");
+      expect(response.body.message).toBe(
+        "Password successfully reset. Please log in with your new password."
+      );
 
       // Verify password was changed
       const updatedUser = await UserModel.findById(user._id);
@@ -131,6 +133,26 @@ describe("Password Reset Flow", () => {
       expect(updatedUser.resetPasswordToken).toBeUndefined();
       expect(updatedUser.resetPasswordExpires).toBeUndefined();
     });
+
+    // it("should successfully reset password with valid token", async () => {
+    //   const response = await request(app)
+    //     .post("/api/auth/reset-password")
+    //     .send({
+    //       token: resetToken,
+    //       newPassword: "newpassword123",
+    //     });
+
+    //   expect(response.statusCode).toBe(200);
+    //   expect(response.body.message).toBe(
+    //     "Password successfully reset. Please log in with your new password."
+    //   );
+
+    //   // Verify password was changed
+    //   const updatedUser = await UserModel.findById(user._id);
+    //   expect(await updatedUser.comparePassword("newpassword123")).toBe(true);
+    //   expect(updatedUser.resetPasswordToken).toBeUndefined();
+    //   expect(updatedUser.resetPasswordExpires).toBeUndefined();
+    // });
 
     it("should fail to reset password with invalid token", async () => {
       const response = await request(app)
@@ -182,6 +204,9 @@ describe("Password Reset Flow", () => {
         });
 
       expect(resetResponse.statusCode).toBe(200);
+      expect(resetResponse.body.message).toBe(
+        "Password successfully reset. Please log in with your new password."
+      );
 
       // 4. Verify login works with new password
       const loginResponse = await request(app).post("/api/auth/login").send({
@@ -194,3 +219,37 @@ describe("Password Reset Flow", () => {
     });
   });
 });
+
+//     it("should verify the complete password reset flow", async () => {
+//       // 1. Request password reset
+//       const forgotResponse = await request(app)
+//         .post("/api/auth/forgot-password")
+//         .send({ email: user.email });
+
+//       expect(forgotResponse.statusCode).toBe(200);
+
+//       // 2. Get the token from the updated user
+//       const userAfterRequest = await UserModel.findById(user._id);
+//       const newResetToken = userAfterRequest.resetPasswordToken;
+
+//       // 3. Reset password with the token
+//       const resetResponse = await request(app)
+//         .post("/api/auth/reset-password")
+//         .send({
+//           token: newResetToken,
+//           newPassword: "completelynewpassword",
+//         });
+
+//       expect(resetResponse.statusCode).toBe(200);
+
+//       // 4. Verify login works with new password
+//       const loginResponse = await request(app).post("/api/auth/login").send({
+//         email: user.email,
+//         password: "completelynewpassword",
+//       });
+
+//       expect(loginResponse.statusCode).toBe(200);
+//       expect(loginResponse.body.token).toBeDefined();
+//     });
+//   });
+// });

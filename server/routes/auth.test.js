@@ -247,7 +247,9 @@ describe("Auth Routes", () => {
         });
 
       expect(response.status).toBe(200);
-      expect(response.body.message).toBe("Password has been reset");
+      expect(response.body.message).toBe(
+        "Password successfully reset. Please log in with your new password."
+      );
 
       // Verify password was changed
       const updatedUser = await UserModel.findById(user._id);
