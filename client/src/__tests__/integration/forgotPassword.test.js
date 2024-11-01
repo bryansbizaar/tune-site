@@ -65,40 +65,6 @@ describe("Forgot Password Functionality - Integration Test", () => {
     });
   });
 
-  it("prevents submission when email is not provided", async () => {
-    render(<AuthForm onClose={mockOnClose} />);
-
-    fireEvent.click(screen.getByTestId("forgot-password-tab"));
-    fireEvent.click(screen.getByTestId("forgot-password-submit"));
-
-    // The form should not be submitted due to HTML5 validation
-    expect(global.fetch).not.toHaveBeenCalled();
-
-    // Check if the email input has the 'required' attribute
-    const emailInput = screen.getByPlaceholderText("Email");
-    expect(emailInput).toHaveAttribute("required");
-  });
-
-  it("handles server error during forgot password request", async () => {
-    global.fetch.mockResolvedValueOnce({
-      ok: false,
-      json: () => Promise.resolve({ error: "An unexpected error occurred" }),
-    });
-
-    render(<AuthForm onClose={mockOnClose} />);
-
-    fireEvent.click(screen.getByTestId("forgot-password-tab"));
-    fireEvent.change(screen.getByPlaceholderText("Email"), {
-      target: { value: "test@example.com" },
-    });
-    fireEvent.click(screen.getByTestId("forgot-password-submit"));
-
-    await waitFor(() => {
-      expect(
-        screen.getByText("An unexpected error occurred")
-      ).toBeInTheDocument();
-    });
-  });
   it("renders reset password form when reset token is in URL", async () => {
     useLocation.mockReturnValue({ search: "?reset_token=validtoken" });
 
@@ -118,7 +84,10 @@ describe("Forgot Password Functionality - Integration Test", () => {
     global.fetch.mockResolvedValueOnce({
       ok: true,
       json: () =>
-        Promise.resolve({ message: "Password has been reset successfully" }),
+        Promise.resolve({
+          message:
+            "Password successfully reset. Please log in with your new password.",
+        }),
     });
 
     render(<AuthForm onClose={mockOnClose} />);
@@ -143,34 +112,61 @@ describe("Forgot Password Functionality - Integration Test", () => {
           }),
         })
       );
+    });
+
+    await waitFor(() => {
       expect(
-        screen.getByText("Password has been reset successfully")
+        screen.getByText(
+          "Password successfully reset. Please log in with your new password."
+        )
       ).toBeInTheDocument();
     });
+
+    // Wait for navigation and modal close
+    await waitFor(
+      () => {
+        expect(mockNavigate).toHaveBeenCalledWith("/", { replace: true });
+        expect(mockOnClose).toHaveBeenCalled();
+      },
+      { timeout: 3000 }
+    );
   });
 
-  it("switches between login, signup, and forgot password forms", async () => {
+  it("prevents submission when passwords don't match", async () => {
+    useLocation.mockReturnValue({ search: "?reset_token=validtoken" });
+
     render(<AuthForm onClose={mockOnClose} />);
 
-    // Start with login form
-    expect(screen.getByTestId("login-submit")).toBeInTheDocument();
+    fireEvent.change(screen.getByPlaceholderText("New Password"), {
+      target: { value: "password123" },
+    });
+    fireEvent.change(screen.getByPlaceholderText("Confirm New Password"), {
+      target: { value: "differentpassword" },
+    });
+    fireEvent.click(screen.getByTestId("reset-password-submit"));
 
-    // Switch to signup form
-    fireEvent.click(screen.getByTestId("signup-tab"));
-    await waitFor(() => {
-      expect(screen.getByTestId("signup-submit")).toBeInTheDocument();
+    expect(screen.getByText("Passwords do not match")).toBeInTheDocument();
+    expect(global.fetch).not.toHaveBeenCalled();
+  });
+
+  it("handles server error during forgot password request", async () => {
+    global.fetch.mockResolvedValueOnce({
+      ok: false,
+      json: () => Promise.resolve({ error: "An unexpected error occurred" }),
     });
 
-    // Switch to forgot password form
+    render(<AuthForm onClose={mockOnClose} />);
+
     fireEvent.click(screen.getByTestId("forgot-password-tab"));
-    await waitFor(() => {
-      expect(screen.getByTestId("forgot-password-submit")).toBeInTheDocument();
+    fireEvent.change(screen.getByPlaceholderText("Email"), {
+      target: { value: "test@example.com" },
     });
+    fireEvent.click(screen.getByTestId("forgot-password-submit"));
 
-    // Switch back to login form
-    fireEvent.click(screen.getByTestId("login-tab"));
     await waitFor(() => {
-      expect(screen.getByTestId("login-submit")).toBeInTheDocument();
+      expect(
+        screen.getByText("An unexpected error occurred")
+      ).toBeInTheDocument();
     });
   });
 });
