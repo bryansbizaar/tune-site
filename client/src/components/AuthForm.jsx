@@ -35,23 +35,21 @@ const AuthForm = ({ onClose }) => {
 
   const handleSubmit = async (e, type) => {
     e.preventDefault();
-    console.log(`Starting ${type} submission`);
     setError("");
     setMessage("");
 
-    if (type === "resetPassword") {
-      // Password match validation
-      if (password !== confirmPassword) {
-        setError("Passwords do not match");
-        return;
-      }
+    if (isLoggedIn && type !== "resetPassword") {
+      setMessage("You are already logged in.");
+      setTimeout(() => {
+        onClose();
+        navigate("/");
+      }, 2000);
+      return;
+    }
 
-      // Log reset attempt details
-      console.log("Attempting password reset:", {
-        hasToken: !!resetToken,
-        tokenLength: resetToken?.length,
-        passwordLength: password?.length,
-      });
+    if (type === "resetPassword" && password !== confirmPassword) {
+      setError("Passwords do not match");
+      return;
     }
 
     try {
@@ -62,73 +60,64 @@ const AuthForm = ({ onClose }) => {
           endpoint = "/api/auth/login";
           body = JSON.stringify({ email, password, stayLoggedIn });
           break;
+
         case "signup":
           endpoint = "/api/auth/signup";
           body = JSON.stringify({ name, email, password });
           break;
+
         case "forgotPassword":
           endpoint = "/api/auth/forgot-password";
           body = JSON.stringify({ email });
           break;
+
         case "resetPassword":
           endpoint = "/api/auth/reset-password";
           body = JSON.stringify({ token: resetToken, newPassword: password });
-          console.log(
-            "Making reset password request to:",
-            `${VITE_API_URL}${endpoint}`
-          );
           break;
-      }
 
-      console.log(`Sending request to: ${VITE_API_URL}${endpoint}`);
+        default:
+          throw new Error("Invalid form type");
+      }
 
       const response = await fetch(`${VITE_API_URL}${endpoint}`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: body,
       });
 
-      console.log("Response received:", {
-        status: response.status,
-        statusText: response.statusText,
-      });
-
-      let data;
-      try {
-        data = await response.json();
-        console.log("Response data:", data);
-      } catch (parseError) {
-        console.error("Error parsing response:", parseError);
-        throw new Error("Invalid response from server");
-      }
+      const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || "An unexpected error occurred");
+        throw new Error(data.error || "An error occurred");
       }
 
-      setMessage(data.message || "Operation successful");
-      if (data.token) {
-        login(data.token, stayLoggedIn ? "30d" : "1d");
-      }
+      // Handle successful response
       if (type === "resetPassword") {
-        setActiveTab("login");
+        setMessage(
+          "Password successfully reset. Please log in with your new password."
+        );
+        setTimeout(() => {
+          onClose();
+          navigate("/", { replace: true });
+          setResetToken("");
+          setActiveTab("login");
+        }, 2000);
       } else if (type === "forgotPassword") {
         setMessage(
           "If an account with that email exists, a password reset link has been sent."
         );
+        setTimeout(onClose, 2000);
+      } else {
+        setMessage(data.message || "Operation successful");
+        if (data.token) {
+          login(data.token, stayLoggedIn ? "30d" : "1d");
+        }
+        setTimeout(onClose, 2000);
       }
-      setTimeout(onClose, 2000);
     } catch (err) {
-      console.error("Request error details:", {
-        name: err.name,
-        message: err.message,
-        type: type,
-        endpoint: `/api/auth/${type}`,
-        hasResetToken: !!resetToken,
-      });
-      setError(err.message || "An unexpected error occurred");
+      console.error("Error during auth operation:", err);
+      setError(err.message || "An error occurred. Please try again.");
     }
   };
 

@@ -99,7 +99,10 @@ describe("AuthForm", () => {
       Promise.resolve({
         ok: true,
         json: () =>
-          Promise.resolve({ message: "Password has been reset successfully" }),
+          Promise.resolve({
+            message:
+              "Password successfully reset. Please log in with your new password.",
+          }),
       })
     );
 
@@ -129,9 +132,20 @@ describe("AuthForm", () => {
 
     await waitFor(() => {
       expect(
-        screen.getByText("Password has been reset successfully")
+        screen.getByText(
+          "Password successfully reset. Please log in with your new password."
+        )
       ).toBeInTheDocument();
     });
+
+    // Verify navigation and cleanup
+    await waitFor(
+      () => {
+        expect(mockNavigate).toHaveBeenCalledWith("/", { replace: true });
+        expect(mockOnClose).toHaveBeenCalled();
+      },
+      { timeout: 3000 }
+    ); // Increased timeout to account for setTimeout
   });
 
   it("displays error when passwords do not match in reset password form", async () => {
