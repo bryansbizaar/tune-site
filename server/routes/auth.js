@@ -3,7 +3,8 @@ const jwt = require("jsonwebtoken");
 const UserModel = require("../models/userModel");
 const crypto = require("crypto");
 const router = express.Router();
-const { sendResetEmail } = require("../utils/email");
+const emailUtils = require("../utils/email");
+// const { sendResetEmail } = require("../utils/email");
 
 // Debug middleware for all auth routes
 router.use((req, res, next) => {
@@ -103,6 +104,14 @@ router.post("/login", async (req, res) => {
 
 router.post("/forgot-password", async (req, res) => {
   console.log("=== Starting forgot password process ===");
+
+  // Add SendGrid configuration check
+  console.log("SendGrid Config:", {
+    apiKeyExists: !!process.env.SENDGRID_API_KEY,
+    apiKeyLength: process.env.SENDGRID_API_KEY?.length,
+    fromEmail: process.env.FROM_EMAIL,
+  });
+
   try {
     const { email } = req.body;
 
@@ -133,10 +142,14 @@ router.post("/forgot-password", async (req, res) => {
       const resetUrl = `${process.env.FRONTEND_URL}?reset_token=${token}`;
       console.log("Reset URL generated:", resetUrl);
 
-      await sendResetEmail(user.email, resetUrl);
+      await emailUtils.sendResetEmail(user.email, resetUrl); // Use the imported function
       console.log("Reset email sent successfully");
     } catch (emailError) {
-      console.error("Email sending failed:", emailError);
+      console.error("Email sending failed:", {
+        error: emailError.message,
+        code: emailError.code,
+        response: emailError.response?.body,
+      });
       // Remove the token if email fails
       user.resetPasswordToken = undefined;
       user.resetPasswordExpires = undefined;
@@ -153,52 +166,6 @@ router.post("/forgot-password", async (req, res) => {
     });
   } catch (error) {
     console.error("Error in forgot-password:", error);
-    res.status(500).json({ error: "An unexpected error occurred" });
-  }
-});
-
-router.post("/reset-password", async (req, res) => {
-  console.log("=== Starting password reset process ===");
-  try {
-    const { token, newPassword } = req.body;
-
-    console.log("Reset password request received:", {
-      hasToken: !!token,
-      tokenLength: token?.length,
-      hasNewPassword: !!newPassword,
-    });
-
-    if (!token || !newPassword) {
-      return res
-        .status(400)
-        .json({ error: "Token and new password are required" });
-    }
-
-    const user = await UserModel.findOne({
-      resetPasswordToken: token,
-      resetPasswordExpires: { $gt: Date.now() },
-    });
-
-    if (!user) {
-      console.log("No user found with valid reset token");
-      return res.status(400).json({ error: "Invalid or expired token" });
-    }
-
-    console.log("Found user with valid token:", { userId: user._id });
-
-    user.password = newPassword;
-    user.resetPasswordToken = undefined;
-    user.resetPasswordExpires = undefined;
-
-    await user.save();
-    console.log("Password successfully reset");
-
-    res.status(200).json({ message: "Password has been reset" });
-  } catch (error) {
-    console.error("Error in reset-password:", {
-      error: error.message,
-      stack: error.stack,
-    });
     res.status(500).json({ error: "An unexpected error occurred" });
   }
 });

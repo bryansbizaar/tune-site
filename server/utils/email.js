@@ -258,7 +258,8 @@ const validateEmailConfig = () => {
   return true;
 };
 
-const sendResetEmail = async (email, resetUrl) => {
+// Export the function directly
+exports.sendResetEmail = async (email, resetUrl) => {
   console.log("Attempting to send reset email to:", email);
 
   try {
@@ -325,5 +326,3 @@ const sendResetEmail = async (email, resetUrl) => {
     }
   }
 };
-
-module.exports = { sendResetEmail };
