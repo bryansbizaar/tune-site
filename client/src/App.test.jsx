@@ -84,16 +84,6 @@ describe("App Component", () => {
     expect(screen.getByTestId("resources")).toBeInTheDocument();
   });
 
-  // test("renders LoginForm component for /login route", () => {
-  //   renderWithRouter("/login");
-  //   expect(screen.getByTestId("login-form")).toBeInTheDocument();
-  // });
-
-  // test("renders SignupForm component for /signup route", () => {
-  //   renderWithRouter("/signup");
-  //   expect(screen.getByTestId("signup-form")).toBeInTheDocument();
-  // });
-
   test("renders Not Found for unknown route", () => {
     renderWithRouter("/unknown");
     expect(screen.getByText("Not Found")).toBeInTheDocument();

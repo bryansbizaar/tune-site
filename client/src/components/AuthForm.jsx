@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { VITE_API_URL } from "../env.js";
-console.log("API URL:", VITE_API_URL);
 import { useAuth } from "../useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -22,12 +21,6 @@ const AuthForm = ({ onClose }) => {
     const query = new URLSearchParams(location.search);
     const token = query.get("reset_token");
     if (token) {
-      console.log("Reset token found in URL:", {
-        tokenLength: token.length,
-        tokenPreview: `${token.substring(0, 4)}...${token.substring(
-          token.length - 4
-        )}`,
-      });
       setResetToken(token);
       setActiveTab("resetPassword");
     }
