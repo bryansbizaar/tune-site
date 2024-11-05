@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="card undefined"
+  >
+    <h2>
+      Card Title
+    </h2>
+    <p>
+      Card content
+    </p>
+  </div>
+</DocumentFragment>
+`;

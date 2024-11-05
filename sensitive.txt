@@ -1,0 +1,4 @@
+echo "server/.env" > sensitive.txt
+echo "*.env" > sensitive.txt
+echo "server/.env*" >> sensitive.txt
+echo ".env*" >> sensitive.txt
