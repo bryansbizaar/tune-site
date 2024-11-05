@@ -20,10 +20,6 @@ const TuneList = () => {
   useEffect(() => {
     const fetchTunes = async () => {
       try {
-        console.log(
-          "Attempting to fetch from:",
-          `${VITE_API_URL}/api/tuneList`
-        );
         const response = await fetch(`${VITE_API_URL}/api/tuneList`, {
           method: "GET",
           headers: {
