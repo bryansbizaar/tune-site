@@ -1,17 +1,11 @@
 const mongoose = require("mongoose");
 
 const connectDB = async () => {
-  mongoose
-    .connect(process.env.MONGODB_URI)
-    .then(() => {
-      console.log(
-        "Connected to MongoDB:",
-        process.env.MONGODB_URI.includes("mongodb+srv") ? "Atlas" : "Local"
-      );
-    })
-    .catch((error) => {
-      console.error("Error connecting to MongoDB:", error);
-    });
+  try {
+    await mongoose.connect(process.env.MONGODB_URI);
+  } catch (error) {
+    throw new Error(`Error connecting to MongoDB: ${error.message}`);
+  }
 };
 
 module.exports = connectDB;
