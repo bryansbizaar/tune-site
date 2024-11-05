@@ -1,27 +1,3 @@
-// const getEnv = () => {
-//   if (typeof process !== "undefined" && process.env) {
-//     return process.env;
-//   }
-//   if (typeof import.meta !== "undefined" && import.meta.env) {
-//     return import.meta.env;
-//   }
-//   return {};
-// };
-
-// export const VITE_API_URL = getEnv().VITE_API_URL || "http://localhost:5000";
-
-// export const getEnv = () => {
-//   if (import.meta && import.meta.env) {
-//     return import.meta.env;
-//   }
-//   return process.env;
-// };
-
-// export const VITE_API_URL = getEnv().VITE_API_URL || "http://localhost:5000";
-
-// // Add debug logging
-// console.log("API URL:", VITE_API_URL);
-
 export const getEnv = () => {
   console.log("Environment variables:", {
     import_meta: !!import.meta,

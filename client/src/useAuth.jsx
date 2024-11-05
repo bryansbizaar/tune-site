@@ -33,30 +33,6 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
-  // useEffect(() => {
-  //   const token = localStorage.getItem("token");
-  //   const tokenExpiry = localStorage.getItem("tokenExpiry");
-
-  //   if (token && tokenExpiry) {
-  //     // Check if token has expired
-  //     if (new Date().getTime() < parseInt(tokenExpiry)) {
-  //       setIsLoggedIn(true);
-  //     } else {
-  //       // Token has expired, clean up
-  //       localStorage.removeItem("token");
-  //       localStorage.removeItem("tokenExpiry");
-  //       setIsLoggedIn(false);
-  //     }
-  //   } else if (token || tokenExpiry) {
-  //     // Invalid state: has one but not both, clean up
-  //     localStorage.removeItem("token");
-  //     localStorage.removeItem("tokenExpiry");
-  //     setIsLoggedIn(false);
-  //   } else {
-  //     setIsLoggedIn(false);
-  //   }
-  // }, []);
-
   const login = (token, expiresIn = "1d") => {
     localStorage.setItem("token", token);
 
