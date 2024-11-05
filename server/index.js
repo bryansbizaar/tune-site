@@ -11,10 +11,6 @@ dotenv.config({
   path: path.resolve(__dirname, envFile),
 });
 
-// Add these lines for debugging
-console.log("Current environment:", process.env.NODE_ENV);
-console.log("MongoDB URI:", process.env.MONGODB_URI);
-
 const express = require("express");
 const connectDB = require("./config/db");
 const fs = require("fs").promises;
@@ -38,22 +34,8 @@ app.use(
   })
 );
 
-// Debug middleware - keep this to see what's happening
-app.use((req, res, next) => {
-  console.log(`${new Date().toISOString()} - ${req.method} ${req.path}`);
-  console.log("Origin:", req.headers.origin);
-  next();
-});
-
 // Middleware
 app.use(express.json());
-
-// Debug middleware
-app.use((req, res, next) => {
-  console.log(`${req.method} ${req.url}`);
-  console.log("Origin:", req.headers.origin);
-  next();
-});
 
 // Routes
 app.use("/api/auth", authRoutes);
@@ -114,9 +96,7 @@ app.use((err, req, res, next) => {
 const startServer = async () => {
   try {
     await connectDB();
-    app.listen(port, () => {
-      console.log(`Server running on port ${port}`);
-    });
+    app.listen(port, () => {});
   } catch (error) {
     console.error("Failed to connect to the database:", error);
     process.exit(1);
