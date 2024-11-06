@@ -1,15 +1,13 @@
 import React from "react";
 import Header from "./Header";
-import { VITE_API_URL } from "../env.js";
-
-const instruments = `${VITE_API_URL}/images/instruments.jpg`;
+import instrumentsImage from "../assets/images/instruments.jpg";
 
 function Resources() {
   return (
     <>
       <Header isFixed={true} />
       <div>
-        <img className="img" src={instruments} alt="instruments" />
+        <img className="img" src={instrumentsImage} alt="instruments" />
       </div>
       <div className="container">
         <div className="container-content cc-resources">

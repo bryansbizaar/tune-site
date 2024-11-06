@@ -10,10 +10,7 @@ jest.mock("./Header", () => {
   };
 });
 
-// Mock the environment utility
-jest.mock("../env", () => ({
-  VITE_API_URL: "http://localhost:5000",
-}));
+jest.mock("../assets/images/instruments.jpg", () => "instruments.jpg");
 
 describe("Home Component", () => {
   test("renders Header component with isFixed prop", () => {
@@ -22,14 +19,11 @@ describe("Home Component", () => {
     expect(headerElement).toBeInTheDocument();
   });
 
-  test("renders instruments image with correct src", () => {
+  test("renders instruments image", () => {
     render(<Home />);
     const imageElement = screen.getByAltText("instruments");
     expect(imageElement).toBeInTheDocument();
-    expect(imageElement).toHaveAttribute(
-      "src",
-      "http://localhost:5000/images/instruments.jpg"
-    );
+    expect(imageElement).toHaveAttribute("src", "instruments.jpg");
   });
 
   test("renders welcome text", () => {

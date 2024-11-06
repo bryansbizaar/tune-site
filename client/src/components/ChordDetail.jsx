@@ -3,11 +3,14 @@ import { useParams, Link } from "react-router-dom";
 import SpotifyMusicPlayer from "./SpotifyMusicPlayer";
 import YouTubePlayer from "./YouTubePlayer";
 import Header from "./Header";
+import Spinner from "./Spinner";
 import { VITE_API_URL } from "../env";
 
 const ChordDetail = () => {
   const [tune, setTune] = useState(null);
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [imageLoaded, setImageLoaded] = useState(false);
   const { id } = useParams();
 
   useEffect(() => {
@@ -22,14 +25,24 @@ const ChordDetail = () => {
       } catch (err) {
         console.error("Error fetching tune:", err);
         setError(err.message);
+      } finally {
+        if (!tune?.chords) {
+          setIsLoading(false);
+        }
       }
     };
 
     fetchChord();
   }, [id]);
 
+  const handleImageLoad = () => {
+    setImageLoaded(true);
+    setIsLoading(false);
+  };
+
   if (error) return <div>Error: {error}</div>;
-  if (!tune) return <div>Loading...</div>;
+  if (isLoading) return <Spinner loading={isLoading} />;
+  if (!tune) return <div>No tune found</div>;
 
   return (
     <>
@@ -45,7 +58,10 @@ const ChordDetail = () => {
               className="img-tune"
               src={`${VITE_API_URL}${tune.chords}`}
               alt={`Chord diagram for ${tune.title}`}
+              onLoad={handleImageLoad}
+              style={{ display: imageLoaded ? "block" : "none" }}
             />
+            {!imageLoaded && <Spinner loading={!imageLoaded} />}
           </div>
         ) : (
           <p>No chord diagram available for this tune.</p>

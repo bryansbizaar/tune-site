@@ -11,6 +11,9 @@ jest.mock("react-router-dom", () => ({
 
 // Mock child components
 jest.mock("./Header", () => () => <div data-testid="header">Header</div>);
+jest.mock("./Spinner", () => ({ loading }) => (
+  <div data-testid="spinner">Loading...</div>
+));
 
 // Mock the API_URL
 jest.mock("../env", () => ({
@@ -53,7 +56,7 @@ describe("ChordList Component", () => {
   test("displays loading state initially", async () => {
     fetch.mockImplementationOnce(() => new Promise(() => {}));
     renderComponent();
-    expect(screen.getByTestId("loading-indicator")).toBeInTheDocument();
+    expect(screen.getByTestId("spinner")).toBeInTheDocument();
   });
 
   test("displays error message when fetch fails", async () => {
