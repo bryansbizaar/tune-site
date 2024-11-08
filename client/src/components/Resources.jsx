@@ -1,38 +1,40 @@
 import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import Spinner from "./Spinner";
+import { useImageLoader } from "../hooks/useImageLoader";
 import instrumentsImage from "../assets/images/instruments.jpg";
 
 function Resources() {
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
+  const isLoading = useImageLoader(instrumentsImage);
 
-  useEffect(() => {
-    const image = new Image();
-    image.src = instrumentsImage;
+  // useEffect(() => {
+  //   const image = new Image();
+  //   image.src = instrumentsImage;
 
-    const handleLoad = () => {
-      setIsLoading(false);
-    };
+  //   const handleLoad = () => {
+  //     setIsLoading(false);
+  //   };
 
-    const handleError = () => {
-      console.error("Failed to load background image");
-      setIsLoading(false); // Still hide spinner even if image fails
-    };
+  //   const handleError = () => {
+  //     console.error("Failed to load background image");
+  //     setIsLoading(false); // Still hide spinner even if image fails
+  //   };
 
-    if (image.complete) {
-      // Image is already cached
-      setIsLoading(false);
-    } else {
-      image.addEventListener("load", handleLoad);
-      image.addEventListener("error", handleError);
-    }
+  //   if (image.complete) {
+  //     // Image is already cached
+  //     setIsLoading(false);
+  //   } else {
+  //     image.addEventListener("load", handleLoad);
+  //     image.addEventListener("error", handleError);
+  //   }
 
-    return () => {
-      // Cleanup listeners
-      image.removeEventListener("load", handleLoad);
-      image.removeEventListener("error", handleError);
-    };
-  }, []);
+  //   return () => {
+  //     // Cleanup listeners
+  //     image.removeEventListener("load", handleLoad);
+  //     image.removeEventListener("error", handleError);
+  //   };
+  // }, []);
 
   if (isLoading) {
     return <Spinner loading={true} />;

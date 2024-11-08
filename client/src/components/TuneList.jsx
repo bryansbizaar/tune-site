@@ -7,15 +7,18 @@ import { sortTunes } from "../utils/sorting";
 import { VITE_API_URL } from "../env.js";
 import { useAuth } from "../useAuth";
 import Spinner from "./Spinner";
+import { useImageLoader } from "../hooks/useImageLoader";
 import instrumentsImage from "../assets/images/instruments.jpg";
 
 const TuneList = () => {
   const [tunes, setTunes] = useState([]);
   const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isFetchLoading, setIsFetchLoading] = useState(true);
   const [clickedTuneId, setClickedTuneId] = useState(null);
   const { isLoggedIn } = useAuth();
   const navigate = useNavigate();
+
+  const isImageLoading = useImageLoader(instrumentsImage);
 
   useEffect(() => {
     const fetchTunes = async () => {
@@ -48,7 +51,7 @@ const TuneList = () => {
         });
         setError(err.message);
       } finally {
-        setIsLoading(false);
+        setIsFetchLoading(false);
       }
     };
 
@@ -65,12 +68,8 @@ const TuneList = () => {
     navigate(`/tune/${tuneId}`);
   };
 
-  if (isLoading) {
-    return (
-      <div data-testid="loading-indicator">
-        <Spinner loading={isLoading} />;
-      </div>
-    );
+  if (isImageLoading || isFetchLoading) {
+    return <Spinner loading={true} />;
   }
 
   if (error) {

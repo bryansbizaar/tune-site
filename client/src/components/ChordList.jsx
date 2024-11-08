@@ -93,18 +93,21 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Header from "./Header";
-import Spinner from "./Spinner";
 import { sortTunes } from "../utils/sorting";
 import { VITE_API_URL } from "../env";
 import { useAuth } from "../useAuth";
+import Spinner from "./Spinner";
+import { useImageLoader } from "../hooks/useImageLoader";
 import instrumentsImage from "../assets/images/instruments.jpg";
 
 const ChordList = () => {
   const [tunes, setTunes] = useState([]);
   const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isFetchLoading, setIsFetchLoading] = useState(true);
   const [clickedChordId, setClickedChordId] = useState(null);
   const { isLoggedIn } = useAuth();
+
+  const isImageLoading = useImageLoader(instrumentsImage);
 
   useEffect(() => {
     const fetchChords = async () => {
@@ -120,7 +123,7 @@ const ChordList = () => {
         console.error("Error fetching tunes:", err);
         setError(err.message);
       } finally {
-        setIsLoading(false);
+        setIsFetchLoading(false);
       }
     };
 
@@ -137,7 +140,7 @@ const ChordList = () => {
     window.location.href = `/chords/${tuneId}`;
   };
 
-  if (isLoading) {
+  if (isImageLoading || isFetchLoading) {
     return <Spinner loading={true} />;
   }
 
