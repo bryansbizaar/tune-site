@@ -6,16 +6,19 @@ import TuneDisplay from "./TuneDisplay";
 import { sortTunes } from "../utils/sorting";
 import { VITE_API_URL } from "../env.js";
 import { useAuth } from "../useAuth";
-
-const instruments = `${VITE_API_URL}/images/instruments.jpg`;
+import Spinner from "./Spinner";
+import { useImageLoader } from "../hooks/useImageLoader";
+import instrumentsImage from "../assets/images/instruments.jpg";
 
 const TuneList = () => {
   const [tunes, setTunes] = useState([]);
   const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isFetchLoading, setIsFetchLoading] = useState(true);
   const [clickedTuneId, setClickedTuneId] = useState(null);
   const { isLoggedIn } = useAuth();
   const navigate = useNavigate();
+
+  const isImageLoading = useImageLoader(instrumentsImage);
 
   useEffect(() => {
     const fetchTunes = async () => {
@@ -48,7 +51,7 @@ const TuneList = () => {
         });
         setError(err.message);
       } finally {
-        setIsLoading(false);
+        setIsFetchLoading(false);
       }
     };
 
@@ -65,8 +68,8 @@ const TuneList = () => {
     navigate(`/tune/${tuneId}`);
   };
 
-  if (isLoading) {
-    return <div data-testid="loading-indicator">Loading...</div>;
+  if (isImageLoading || isFetchLoading) {
+    return <Spinner loading={true} />;
   }
 
   if (error) {
@@ -86,7 +89,7 @@ const TuneList = () => {
       <Header isFixed={true} />
 
       <div>
-        <img className="img" src={instruments} alt="instruments" />
+        <img className="img" src={instrumentsImage} alt="instruments" />
       </div>
       <div>
         <h1 className="centered-content name">Session Class Tunes</h1>

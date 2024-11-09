@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./Header";
-import { VITE_API_URL } from "../env";
-
-const instruments = `${VITE_API_URL}/images/instruments.jpg`;
+import Spinner from "./Spinner";
+import { useImageLoader } from "../hooks/useImageLoader";
+import instrumentsImage from "../assets/images/instruments.jpg";
 
 const Home = () => {
+  const isLoading = useImageLoader(instrumentsImage);
+
+  if (isLoading) {
+    return <Spinner loading={true} />;
+  }
   return (
     <>
       <Header isFixed={true} />
-      <img className="img" src={instruments} alt="instruments" />
+      <img className="img" src={instrumentsImage} alt="instruments" />
       <div className="container">
         <div className="container-content cc-home">
           <p className="text">

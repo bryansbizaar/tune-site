@@ -7,6 +7,12 @@ import { useAuth } from "../useAuth";
 
 // Mock child components
 jest.mock("./Header", () => () => <div data-testid="header">Header</div>);
+jest.mock(
+  "./Spinner",
+  () =>
+    ({ loading }) =>
+      loading ? <div data-testid="loading-spinner">Loading...</div> : null
+);
 jest.mock("./TuneDisplay", () => ({ tunesOfTheWeek, upNextTunes }) => (
   <div data-testid="tune-display">
     <div>Tunes of the week: {tunesOfTheWeek.length}</div>
@@ -16,6 +22,11 @@ jest.mock("./TuneDisplay", () => ({ tunesOfTheWeek, upNextTunes }) => (
 jest.mock("./SpotifyMusicPlayer", () => ({ spotifyPlaylistId }) => (
   <div data-testid="spotify-player">Playlist: {spotifyPlaylistId}</div>
 ));
+
+// Mock the image loading hook
+jest.mock("../hooks/useImageLoader", () => ({
+  useImageLoader: jest.fn(() => false),
+}));
 
 // Mock the API_URL
 jest.mock("../env", () => ({
@@ -83,14 +94,22 @@ describe("TuneList Component", () => {
     );
   };
 
-  test("displays loading state initially", () => {
+  test("displays loading spinner while loading", () => {
+    jest
+      .requireMock("../hooks/useImageLoader")
+      .useImageLoader.mockReturnValue(true);
     fetch.mockImplementationOnce(() => new Promise(() => {}));
+
     renderComponent();
-    expect(screen.getByTestId("loading-indicator")).toBeInTheDocument();
+    expect(screen.getByTestId("loading-spinner")).toBeInTheDocument();
   });
 
   test("displays error message when fetch fails", async () => {
+    jest
+      .requireMock("../hooks/useImageLoader")
+      .useImageLoader.mockReturnValue(false);
     fetch.mockRejectedValueOnce(new Error("API Error"));
+
     renderComponent();
     await waitFor(() => {
       expect(screen.getByTestId("error-message")).toHaveTextContent(
@@ -100,17 +119,24 @@ describe("TuneList Component", () => {
   });
 
   test("displays message when no tunes are available", async () => {
+    jest
+      .requireMock("../hooks/useImageLoader")
+      .useImageLoader.mockReturnValue(false);
     fetch.mockResolvedValueOnce({
       ok: true,
       json: () => Promise.resolve([]),
     });
+
     renderComponent();
     await waitFor(() => {
       expect(screen.getByTestId("no-tunes-message")).toBeInTheDocument();
     });
   });
 
-  test("renders tune list correctly", async () => {
+  test("renders tune list correctly when both loading states are complete", async () => {
+    jest
+      .requireMock("../hooks/useImageLoader")
+      .useImageLoader.mockReturnValue(false);
     fetch.mockResolvedValueOnce({
       ok: true,
       json: () => Promise.resolve(mockTunes),
@@ -129,42 +155,25 @@ describe("TuneList Component", () => {
         expect(tuneElement).toBeInTheDocument();
         expect(screen.getByText(`: ${tune.description}`)).toBeInTheDocument();
       });
-    });
-  });
 
-  test("renders TuneDisplay with correct props", async () => {
-    fetch.mockResolvedValueOnce({
-      ok: true,
-      json: () => Promise.resolve(mockTunes),
-    });
-
-    renderComponent();
-
-    await waitFor(() => {
+      // Check TuneDisplay component
       const tuneDisplay = screen.getByTestId("tune-display");
       expect(tuneDisplay).toHaveTextContent("Tunes of the week: 1");
       expect(tuneDisplay).toHaveTextContent("Up next tunes: 1");
-    });
-  });
 
-  test("renders external links correctly", async () => {
-    fetch.mockResolvedValueOnce({
-      ok: true,
-      json: () => Promise.resolve(mockTunes),
-    });
-
-    renderComponent();
-
-    await waitFor(() => {
-      const externalLink = screen.getByText("Tune C");
-      expect(externalLink).toHaveAttribute("href", "https://example.com");
-      expect(externalLink).toHaveAttribute("target", "_blank");
-      expect(externalLink).toHaveAttribute("rel", "noopener noreferrer");
+      // Check Spotify player
+      const spotifyPlayer = screen.getByTestId("spotify-player");
+      expect(spotifyPlayer).toHaveTextContent(
+        "Playlist: 3PoOBseX7VUjZZXb4ij42D"
+      );
     });
   });
 
   describe("Authentication behavior", () => {
     beforeEach(() => {
+      jest
+        .requireMock("../hooks/useImageLoader")
+        .useImageLoader.mockReturnValue(false);
       fetch.mockResolvedValueOnce({
         ok: true,
         json: () => Promise.resolve(mockTunes),
@@ -173,7 +182,6 @@ describe("TuneList Component", () => {
 
     test("shows login required message when clicking internal tune link while logged out", async () => {
       useAuth.mockReturnValue({ isLoggedIn: false });
-
       renderComponent();
 
       await waitFor(() => {
@@ -181,7 +189,6 @@ describe("TuneList Component", () => {
       });
 
       fireEvent.click(screen.getByText("Tune A"));
-
       expect(screen.getByText("(login required)")).toBeInTheDocument();
 
       await waitFor(
@@ -196,7 +203,6 @@ describe("TuneList Component", () => {
 
     test("allows navigation to tune details when logged in", async () => {
       useAuth.mockReturnValue({ isLoggedIn: true });
-
       renderComponent();
 
       await waitFor(() => {
@@ -204,36 +210,19 @@ describe("TuneList Component", () => {
       });
 
       fireEvent.click(screen.getByText("Tune A"));
-
       expect(mockNavigate).toHaveBeenCalledWith("/tune/1");
     });
 
     test("external links work regardless of login status", async () => {
       useAuth.mockReturnValue({ isLoggedIn: false });
-
       renderComponent();
 
       await waitFor(() => {
         const externalLink = screen.getByText("Tune C");
         expect(externalLink).toHaveAttribute("href", "https://example.com");
         expect(externalLink).toHaveAttribute("target", "_blank");
+        expect(externalLink).toHaveAttribute("rel", "noopener noreferrer");
       });
-    });
-  });
-
-  test("renders Spotify player with correct playlist ID", async () => {
-    fetch.mockResolvedValueOnce({
-      ok: true,
-      json: () => Promise.resolve(mockTunes),
-    });
-
-    renderComponent();
-
-    await waitFor(() => {
-      const spotifyPlayer = screen.getByTestId("spotify-player");
-      expect(spotifyPlayer).toHaveTextContent(
-        "Playlist: 3PoOBseX7VUjZZXb4ij42D"
-      );
     });
   });
 });

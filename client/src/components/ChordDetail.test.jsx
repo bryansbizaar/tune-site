@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import ChordDetail from "./ChordDetail";
@@ -33,6 +33,13 @@ jest.mock("../env.js", () => ({
 // Mock fetch
 global.fetch = jest.fn();
 
+// Mock the Spinner component
+jest.mock("./Spinner", () => {
+  return function DummySpinner({ loading }) {
+    return loading ? <div data-testid="loading-spinner">Loading...</div> : null;
+  };
+});
+
 describe("ChordDetail Component", () => {
   const mockTune = {
     id: "1",
@@ -58,10 +65,16 @@ describe("ChordDetail Component", () => {
     );
   };
 
+  // test("displays loading state initially", () => {
+  //   fetch.mockImplementationOnce(() => new Promise(() => {}));
+  //   renderComponent();
+  //   expect(screen.getByText("Loading...")).toBeInTheDocument();
+  // });
+
   test("displays loading state initially", () => {
     fetch.mockImplementationOnce(() => new Promise(() => {}));
     renderComponent();
-    expect(screen.getByText("Loading...")).toBeInTheDocument();
+    expect(screen.getByTestId("loading-spinner")).toBeInTheDocument();
   });
 
   test("displays error message when fetch fails", async () => {
@@ -161,6 +174,50 @@ describe("ChordDetail Component", () => {
       expect(
         screen.queryByText("Back to Tune Details")
       ).not.toBeInTheDocument();
+    });
+  });
+
+  // test("removes loading state after data is loaded", async () => {
+  //   fetch.mockResolvedValueOnce({
+  //     ok: true,
+  //     json: () => Promise.resolve(mockTune),
+  //   });
+
+  //   renderComponent();
+
+  //   // Initially shows loading spinner
+  //   expect(screen.getByTestId("loading-spinner")).toBeInTheDocument();
+
+  //   // After data loads, spinner should disappear
+  //   await waitFor(() => {
+  //     expect(screen.queryByTestId("loading-spinner")).not.toBeInTheDocument();
+  //   });
+  // });
+  test("handles loading states correctly", async () => {
+    fetch.mockResolvedValueOnce({
+      ok: true,
+      json: () => Promise.resolve(mockTune),
+    });
+
+    renderComponent();
+
+    // Initially shows loading spinner
+    expect(screen.getByTestId("loading-spinner")).toBeInTheDocument();
+
+    // Wait for the image to appear in the DOM
+    await waitFor(() => {
+      expect(
+        screen.getByText("These are the chords for Test Tune")
+      ).toBeInTheDocument();
+    });
+
+    // Now we can find the image and simulate its load
+    const image = screen.getByAltText("Chord diagram for Test Tune");
+    fireEvent.load(image);
+
+    // After image loads, spinner should be gone
+    await waitFor(() => {
+      expect(screen.queryByTestId("loading-spinner")).not.toBeInTheDocument();
     });
   });
 });
