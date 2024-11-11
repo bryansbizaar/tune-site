@@ -7,12 +7,10 @@ import Spinner from "./Spinner";
 import { VITE_API_URL } from "../env";
 
 const TuneDetail = () => {
-  const [state, setState] = useState({
-    tune: null,
-    isLoading: true,
-    error: null,
-  });
-
+  const [tune, setTune] = useState(null);
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [imageError, setImageError] = useState(false);
   const { id } = useParams();
 
   useEffect(() => {
@@ -23,35 +21,59 @@ const TuneDetail = () => {
           throw new Error("Failed to fetch tune data");
         }
         const data = await response.json();
-        setState({
-          tune: data,
-          isLoading: false,
-          error: null,
-        });
+        setTune(data);
+
+        // If there's no sheet music file, we can stop loading immediately
+        if (!data.sheetMusicFile) {
+          setIsLoading(false);
+        }
       } catch (err) {
-        setState({
-          tune: null,
-          isLoading: false,
-          error: err.message,
-        });
+        console.error("Error fetching tune:", err);
+        setError(err.message);
+        setIsLoading(false);
       }
     };
 
     fetchTune();
   }, [id]);
 
-  const { tune, isLoading, error } = state;
+  const handleImageLoad = () => {
+    console.log("Sheet music loaded successfully");
+    setIsLoading(false);
+  };
 
-  if (isLoading) {
-    return <Spinner />;
-  }
+  const handleImageError = () => {
+    console.error("Sheet music failed to load");
+    setImageError(true);
+    setIsLoading(false);
+  };
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return (
+      <>
+        <Header isFixed={false} />
+        <div className="centered-content error-message">
+          <p>Error: {error}</p>
+          <Link to="/tunelist" className="button">
+            Back to Tune List
+          </Link>
+        </div>
+      </>
+    );
   }
 
   if (!tune) {
-    return <div>No tune found</div>;
+    return (
+      <>
+        <Header isFixed={false} />
+        <div className="centered-content error-message">
+          <p>No tune found</p>
+          <Link to="/tunelist" className="button">
+            Back to Tune List
+          </Link>
+        </div>
+      </>
+    );
   }
 
   return (
@@ -61,35 +83,49 @@ const TuneDetail = () => {
         {tune.chords && <Link to={`/chords/${id}`}>Click to show chords</Link>}
         {tune.description && <p className="text">{tune.description}</p>}
 
-        <div className="sheetMusicContainer">
-          <img
-            className="img-tune"
-            src={`${VITE_API_URL}${tune.sheetMusicFile}`}
-            alt={tune.title}
-          />
-        </div>
+        {tune.sheetMusicFile && (
+          <div className="sheetMusicContainer">
+            {imageError ? (
+              <div className="centered-content error-message">
+                <p>
+                  Failed to load sheet music. The image might be missing or in a
+                  different format.
+                </p>
+              </div>
+            ) : (
+              <>
+                <img
+                  className="img-tune"
+                  src={`${VITE_API_URL}${tune.sheetMusicFile}`}
+                  alt={tune.title}
+                  onLoad={handleImageLoad}
+                  onError={handleImageError}
+                />
+                {isLoading && <Spinner loading={true} />}
+              </>
+            )}
+          </div>
+        )}
 
-        {tune.v2 && (
+        {tune.v2 && !imageError && (
           <div className="sheetMusicContainer">
             <img
               className="img-tune"
               src={`${VITE_API_URL}${tune.v2}`}
               alt={`${tune.title} - Version 2`}
+              onError={(e) => console.error("Failed to load version 2 image")}
             />
           </div>
         )}
 
-        {tune.spotifyTrackId && (
-          <div className="musicPlayer">
+        <div className="musicPlayer">
+          {tune.spotifyTrackId && (
             <SpotifyMusicPlayer spotifyTrackId={tune.spotifyTrackId} />
-          </div>
-        )}
-
-        {tune.youtubeTrackId && (
-          <div className="musicPlayer">
+          )}
+          {tune.youtubeTrackId && (
             <YouTubePlayer youtubeTrackId={tune.youtubeTrackId} />
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </>
   );

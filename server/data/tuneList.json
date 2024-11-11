@@ -1,5 +1,14 @@
 [
   {
+    "id": "adje-jano",
+    "title": "Adje Jano",
+    "description": "7/8, Dm",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": false,
+    "requiresAuth": true
+  },
+  {
     "id": "adventspolska",
     "title": "Adventspolska",
     "description": "Polksa, G",
@@ -178,6 +187,15 @@
     "description": "Jig, Am",
     "hasChords": false,
     "tunesOfTheWeek": false,
+    "upNextTunes": false,
+    "requiresAuth": true
+  },
+  {
+    "id": "copsa-mica",
+    "title": "Copsa Mica",
+    "description": "Schottische, Dm",
+    "hasChords": true,
+    "tunesOfTheWeek": true,
     "upNextTunes": false,
     "requiresAuth": true
   },
@@ -473,7 +491,7 @@
     "title": "Little David Seats The Bride",
     "description": "2/4, D",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false,
     "requiresAuth": true
   },
@@ -481,6 +499,15 @@
     "id": "macarthur-road",
     "title": "MacArthur Road",
     "description": "Reel, D",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": false,
+    "requiresAuth": true
+  },
+  {
+    "id": "music-for-a-found-harmonium",
+    "title": "Music For A Found Harmonium",
+    "description": "",
     "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": true,
@@ -492,7 +519,7 @@
     "description": "Jig, Dmix",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTunes": true,
+    "upNextTunes": false,
     "requiresAuth": true
   }
 ]

@@ -10,10 +10,11 @@ const ChordDetail = () => {
   const [tune, setTune] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
   const { id } = useParams();
 
   useEffect(() => {
+    console.log("Fetching chord data...");
     const fetchChord = async () => {
       try {
         const response = await fetch(`${VITE_API_URL}/api/tune/${id}`);
@@ -21,14 +22,22 @@ const ChordDetail = () => {
           throw new Error("Failed to fetch tune data");
         }
         const data = await response.json();
+        console.log("Received tune data:", {
+          hasChords: !!data.chords,
+          chordPath: data.chords,
+        });
+
         setTune(data);
-      } catch (err) {
-        console.error("Error fetching tune:", err);
-        setError(err.message);
-      } finally {
-        if (!tune?.chords) {
+
+        // If there are no chords, we can stop loading immediately
+        if (!data.chords) {
+          console.log("No chords data, stopping loader");
           setIsLoading(false);
         }
+      } catch (err) {
+        console.error("Error in fetchChord:", err);
+        setError(err.message);
+        setIsLoading(false);
       }
     };
 
@@ -36,13 +45,43 @@ const ChordDetail = () => {
   }, [id]);
 
   const handleImageLoad = () => {
-    setImageLoaded(true);
+    console.log("Image loaded successfully");
     setIsLoading(false);
   };
 
-  if (error) return <div>Error: {error}</div>;
-  if (isLoading) return <Spinner loading={isLoading} />;
-  if (!tune) return <div>No tune found</div>;
+  const handleImageError = () => {
+    console.error("Image failed to load");
+    setImageError(true);
+    setIsLoading(false);
+  };
+
+  if (error) {
+    return (
+      <>
+        <Header isFixed={false} />
+        <div className="centered-content error-message">
+          <p>Error: {error}</p>
+          <Link to="/chords" className="button">
+            Back to Chord List
+          </Link>
+        </div>
+      </>
+    );
+  }
+
+  if (!tune) {
+    return (
+      <>
+        <Header isFixed={false} />
+        <div className="centered-content error-message">
+          <p>No tune found</p>
+          <Link to="/chords" className="button">
+            Back to Chord List
+          </Link>
+        </div>
+      </>
+    );
+  }
 
   return (
     <>
@@ -54,17 +93,30 @@ const ChordDetail = () => {
 
         {tune.chords ? (
           <div className="sheetMusicContainer">
-            <img
-              className="img-tune"
-              src={`${VITE_API_URL}${tune.chords}`}
-              alt={`Chord diagram for ${tune.title}`}
-              onLoad={handleImageLoad}
-              style={{ display: imageLoaded ? "block" : "none" }}
-            />
-            {!imageLoaded && <Spinner loading={!imageLoaded} />}
+            {imageError ? (
+              <div className="centered-content error-message">
+                <p>
+                  Failed to load chord diagram. The image might be missing or in
+                  a different format.
+                </p>
+              </div>
+            ) : (
+              <>
+                <img
+                  className="img-tune"
+                  src={`${VITE_API_URL}${tune.chords}`}
+                  alt={`Chord diagram for ${tune.title}`}
+                  onLoad={handleImageLoad}
+                  onError={handleImageError}
+                />
+                {isLoading && <Spinner loading={true} />}
+              </>
+            )}
           </div>
         ) : (
-          <p>No chord diagram available for this tune.</p>
+          <p className="centered-content">
+            No chord diagram available for this tune.
+          </p>
         )}
 
         <div className="link-container">
@@ -73,6 +125,7 @@ const ChordDetail = () => {
             <Link to={`/tune/${id}`}>Back to Tune Details</Link>
           )}
         </div>
+
         <div className="musicPlayer">
           {tune.spotifyTrackId && (
             <SpotifyMusicPlayer spotifyTrackId={tune.spotifyTrackId} />
