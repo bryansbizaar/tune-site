@@ -4,9 +4,10 @@ import "@testing-library/jest-dom";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import TuneDetail from "./TuneDetail";
 
-// Simplify mocks
+// Mock the Header component
 jest.mock("./Header", () => () => <div data-testid="header">Header</div>);
-jest.mock("./Spinner", () => () => <div data-testid="spinner">Loading...</div>);
+
+// Mocke the SpotifyMusicPlayer and YouTubePlayer components
 jest.mock("./SpotifyMusicPlayer", () => ({ spotifyTrackId }) => (
   <div data-testid="spotify-player">{spotifyTrackId}</div>
 ));
@@ -25,7 +26,7 @@ jest.mock("../env", () => ({
   VITE_API_URL: "http://localhost:5000",
 }));
 
-// Mock Spinner
+// Mock the Spinner
 jest.mock("./Spinner", () => {
   return function DummySpinner({ loading }) {
     if (!loading) return null;

@@ -5,8 +5,7 @@
     "description": "7/8, Dm",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTunes": false,
-    "requiresAuth": true
+    "upNextTunes": false
   },
   {
     "id": "adventspolska",
@@ -14,8 +13,7 @@
     "description": "Polksa, G",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTunes": false,
-    "requiresAuth": true
+    "upNextTunes": false
   },
   {
     "id": "30-year-jig",
@@ -23,8 +21,7 @@
     "description": "Jig, G",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTunes": false,
-    "requiresAuth": true
+    "upNextTunes": false
   },
   {
     "id": "angeline",
@@ -42,8 +39,7 @@
     "description": "Polska, A",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTunes": false,
-    "requiresAuth": true
+    "upNextTunes": false
   },
   {
     "id": "arran-boat-song",
@@ -61,8 +57,7 @@
     "description": "Jig, D",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTunes": false,
-    "requiresAuth": true
+    "upNextTunes": false
   },
   {
     "id": "ashokan-farewell",
@@ -80,8 +75,7 @@
     "description": "D",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTunes": false,
-    "requiresAuth": true
+    "upNextTunes": false
   },
   {
     "id": "ballydesmond",
@@ -129,8 +123,7 @@
     "description": "Waltz, Gm",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTunes": false,
-    "requiresAuth": true
+    "upNextTunes": false
   },
   {
     "id": "bjornlaten",
@@ -138,8 +131,7 @@
     "description": "Polska, G",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTunes": false,
-    "requiresAuth": true
+    "upNextTunes": false
   },
   {
     "id": "britches-full-of-stitches",
@@ -187,8 +179,7 @@
     "description": "Jig, Am",
     "hasChords": false,
     "tunesOfTheWeek": false,
-    "upNextTunes": false,
-    "requiresAuth": true
+    "upNextTunes": false
   },
   {
     "id": "copsa-mica",
@@ -196,8 +187,7 @@
     "description": "Schottische, Dm",
     "hasChords": true,
     "tunesOfTheWeek": true,
-    "upNextTunes": false,
-    "requiresAuth": true
+    "upNextTunes": false
   },
   {
     "id": "crested-hens",
@@ -215,8 +205,7 @@
     "description": "Hornpipe, D",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTunes": false,
-    "requiresAuth": true
+    "upNextTunes": false
   },
   {
     "id": "cup-of-tea",
@@ -234,8 +223,7 @@
     "description": "Ronde, Am",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTunes": false,
-    "requiresAuth": true
+    "upNextTunes": false
   },
   {
     "id": "derriere-chez-nous",
@@ -243,8 +231,7 @@
     "description": "Bouree, Am",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTunes": false,
-    "requiresAuth": true
+    "upNextTunes": false
   },
   {
     "id": "drowsy-maggie",
@@ -272,8 +259,7 @@
     "description": "Reel, Am",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTunes": false,
-    "requiresAuth": true
+    "upNextTunes": false
   },
   {
     "id": "farewell-to-whalley-range",
@@ -361,8 +347,7 @@
     "description": "Reel, D",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTunes": false,
-    "requiresAuth": true
+    "upNextTunes": false
   },
   {
     "id": "full-rigged-ship",
@@ -390,8 +375,7 @@
     "description": "Reel, D",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTunes": false,
-    "requiresAuth": true
+    "upNextTunes": false
   },
   {
     "id": "hag-at-the-churn",
@@ -399,8 +383,7 @@
     "description": "Jig, D mix",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTunes": false,
-    "requiresAuth": true
+    "upNextTunes": false
   },
   {
     "id": "hardiman-the-fiddler",
@@ -418,8 +401,7 @@
     "description": "Hora, D",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTunes": false,
-    "requiresAuth": true
+    "upNextTunes": false
   },
   {
     "id": "humours-of-ballyloughlin",
@@ -427,8 +409,7 @@
     "description": "Jig, D mix",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTunes": false,
-    "requiresAuth": true
+    "upNextTunes": false
   },
   {
     "id": "inion-ni-scanlan",
@@ -436,8 +417,7 @@
     "description": "D",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTunes": false,
-    "requiresAuth": true
+    "upNextTunes": false
   },
   {
     "id": "itzikel",
@@ -455,8 +435,7 @@
     "description": "Polska, Dm",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTunes": false,
-    "requiresAuth": true
+    "upNextTunes": false
   },
   {
     "id": "josefins-waltz",
@@ -474,8 +453,7 @@
     "description": "D Freygish",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTunes": false,
-    "requiresAuth": true
+    "upNextTunes": false
   },
   {
     "id": "julia-delanys",
@@ -483,8 +461,15 @@
     "description": "Reel, Dm",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTunes": false,
-    "requiresAuth": true
+    "upNextTunes": false
+  },
+  {
+    "id": "jump-at-the-sun",
+    "title": "Jump at the Sun",
+    "description": "Jig, Gm",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   },
   {
     "id": "little-david-seats-the-bride",
@@ -492,8 +477,7 @@
     "description": "2/4, D",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTunes": false,
-    "requiresAuth": true
+    "upNextTunes": false
   },
   {
     "id": "macarthur-road",
@@ -501,8 +485,7 @@
     "description": "Reel, D",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTunes": false,
-    "requiresAuth": true
+    "upNextTunes": false
   },
   {
     "id": "music-for-a-found-harmonium",
@@ -510,8 +493,7 @@
     "description": "",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTunes": true,
-    "requiresAuth": true
+    "upNextTunes": true
   },
   {
     "id": "old-hag-you-have-killed-me",
@@ -519,7 +501,6 @@
     "description": "Jig, Dmix",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTunes": false,
-    "requiresAuth": true
+    "upNextTunes": false
   }
 ]
