@@ -7,7 +7,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { MemoryRouter } from "react-router-dom";
 
 jest.mock("../../env", () => ({
-  VITE_API_URL: "http://localhost:5000",
+  VITE_API_URL: "http://localhost:3000",
 }));
 
 jest.mock("../../useAuth");
@@ -52,7 +52,7 @@ describe("Forgot Password Functionality - Integration Test", () => {
 
     await waitFor(() => {
       expect(global.fetch).toHaveBeenCalledWith(
-        "http://localhost:5000/api/auth/forgot-password",
+        "http://localhost:3000/api/auth/forgot-password",
         expect.objectContaining({
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -117,7 +117,7 @@ describe("Forgot Password Functionality - Integration Test", () => {
 
     await waitFor(() => {
       expect(global.fetch).toHaveBeenCalledWith(
-        "http://localhost:5000/api/auth/reset-password",
+        "http://localhost:3000/api/auth/reset-password",
         expect.objectContaining({
           method: "POST",
           headers: { "Content-Type": "application/json" },

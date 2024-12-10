@@ -7,7 +7,7 @@ import { AuthProvider } from "../useAuth";
 
 // Mock the environment utility
 jest.mock("../env", () => ({
-  VITE_API_URL: "http://localhost:5000",
+  VITE_API_URL: "http://localhost:3000",
 }));
 
 // Mock the AuthButton component
@@ -53,7 +53,7 @@ describe("Navigation Component", () => {
     const fbImage = screen.getByAltText("facebook logo");
     expect(fbImage).toHaveAttribute(
       "src",
-      "http://localhost:5000/images/facebook.png"
+      "http://localhost:3000/images/facebook.png"
     );
   });
 

@@ -27,7 +27,7 @@ jest.mock("./YouTubePlayer", () => {
 
 // Mock the API_URL
 jest.mock("../env.js", () => ({
-  VITE_API_URL: "http://localhost:5000",
+  VITE_API_URL: "http://localhost:3000",
 }));
 
 // Mock fetch
@@ -125,7 +125,7 @@ describe("ChordDetail Component", () => {
         screen.getByAltText("Chord diagram for Test Tune")
       ).toHaveAttribute(
         "src",
-        "http://localhost:5000/chord-diagrams/test-tune-chords.png"
+        "http://localhost:3000/chord-diagrams/test-tune-chords.png"
       );
       expect(screen.getByText("Back to Chord List")).toHaveAttribute(
         "href",

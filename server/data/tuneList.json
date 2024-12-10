@@ -496,6 +496,34 @@
     "upNextTune": false
   },
   {
+    "id": "killavil",
+    "title": "The Killavil",
+    "description": "Jig, Em",
+    "hasExternalLink": true,
+    "externalLinkUrl": "https://thesession.org/tunes/667",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
+  },
+  {
+    "id": "kolomeike",
+    "title": "Kolomeike",
+    "description": "4/4, D Hungarian minor",
+    "hasChords": true,
+    "tuneOfTheWeek": false,
+    "upNextTune": false
+  },
+  {
+    "id": "little-beggarman",
+    "title": "The Little Beggarman",
+    "description": "Hornpipe, A",
+    "hasExternalLink": true,
+    "externalLinkUrl": "https://thesession.org/tunes/566",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
+  },
+  {
     "id": "little-david-seats-the-bride",
     "title": "Little David Seats The Bride",
     "description": "2/4, D",
@@ -514,7 +542,7 @@
   {
     "id": "music-for-a-found-harmonium",
     "title": "Music For A Found Harmonium",
-    "description": "",
+    "description": "4/4, various keys",
     "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": true

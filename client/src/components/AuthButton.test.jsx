@@ -7,7 +7,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 // Mock the environment utility
 jest.mock("../env", () => ({
-  VITE_API_URL: "http://localhost:5000",
+  VITE_API_URL: "http://localhost:3000",
 }));
 
 // Mock the useAuth hook

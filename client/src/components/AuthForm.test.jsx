@@ -7,7 +7,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 // Mock the environment utility
 jest.mock("../env", () => ({
-  VITE_API_URL: "http://localhost:5000",
+  VITE_API_URL: "http://localhost:3000",
 }));
 
 // Mock the useAuth hook
@@ -61,7 +61,7 @@ describe("AuthForm", () => {
 
     await waitFor(() => {
       expect(global.fetch).toHaveBeenCalledWith(
-        "http://localhost:5000/api/auth/forgot-password",
+        "http://localhost:3000/api/auth/forgot-password",
         expect.objectContaining({
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -118,7 +118,7 @@ describe("AuthForm", () => {
 
     await waitFor(() => {
       expect(global.fetch).toHaveBeenCalledWith(
-        "http://localhost:5000/api/auth/reset-password",
+        "http://localhost:3000/api/auth/reset-password",
         expect.objectContaining({
           method: "POST",
           headers: { "Content-Type": "application/json" },

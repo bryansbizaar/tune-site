@@ -23,7 +23,7 @@ jest.mock("react-router-dom", () => ({
 
 // Mock env
 jest.mock("../env", () => ({
-  VITE_API_URL: "http://localhost:5000",
+  VITE_API_URL: "http://localhost:3000",
 }));
 
 // Mock the Spinner
