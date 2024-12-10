@@ -6,7 +6,7 @@ export const getEnv = () => {
 };
 
 export const VITE_API_URL = (() => {
-  const url = getEnv().VITE_API_URL || "http://localhost:5000";
+  const url = getEnv().VITE_API_URL || "http://localhost:3000";
   return url;
 })();
 

@@ -472,6 +472,30 @@
     "upNextTunes": false
   },
   {
+    "id": "kalamatianos",
+    "title": "The Kalamatianos",
+    "description": "7/8, D",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
+  },
+  {
+    "id": "kerry-polska",
+    "title": "The Kerry Polska",
+    "description": "Polska, D",
+    "hasChords": true,
+    "tuneOfTheWeek": false,
+    "upNextTune": false
+  },
+  {
+    "id": "khosid-wedding-dances",
+    "title": "Khosid Wedding Dances",
+    "description": "various",
+    "hasChords": true,
+    "tuneOfTheWeek": false,
+    "upNextTune": false
+  },
+  {
     "id": "little-david-seats-the-bride",
     "title": "Little David Seats The Bride",
     "description": "2/4, D",
