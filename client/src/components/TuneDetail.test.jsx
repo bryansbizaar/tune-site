@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor, act } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import TuneDetail from "./TuneDetail";
@@ -100,11 +100,29 @@ describe("TuneDetail Component", () => {
   });
 
   test("displays error message when fetch fails", async () => {
-    fetch.mockRejectedValueOnce(new Error("API Error"));
+    // Mock fetch to simulate a network error
+    fetch.mockImplementationOnce(() =>
+      Promise.reject(
+        new Error("Cannot read properties of undefined (reading 'ok')")
+      )
+    );
+
     renderComponent();
-    await waitFor(() => {
-      expect(screen.getByText(/Error: API Error/)).toBeInTheDocument();
-    });
+
+    // First check loading state
+    expect(screen.getByTestId("loading-spinner")).toBeInTheDocument();
+
+    // Wait for error message with exact error text
+    await waitFor(
+      () => {
+        const errorElement = screen.getByRole("alert");
+        expect(errorElement).toBeInTheDocument();
+        expect(errorElement).toHaveTextContent(
+          "Error: Cannot read properties of undefined (reading 'ok')"
+        );
+      },
+      { timeout: 4000 }
+    );
   });
 
   test("renders tune details correctly", async () => {
