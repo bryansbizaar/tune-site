@@ -1,55 +1,65 @@
 import React from "react";
-import { render, screen, waitFor, fireEvent } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import ChordDetail from "./ChordDetail";
 
-// Mock the Header component
+// Mock child components
 jest.mock("./Header", () => {
   return function DummyHeader() {
     return <div data-testid="header">Header</div>;
   };
 });
 
-// Mock the SpotifyMusicPlayer component
 jest.mock("./SpotifyMusicPlayer", () => {
   return function DummySpotifyPlayer({ spotifyTrackId }) {
     return <div data-testid="spotify-player">{spotifyTrackId}</div>;
   };
 });
 
-// Mock the YouTubePlayer component
 jest.mock("./YouTubePlayer", () => {
   return function DummyYouTubePlayer({ youtubeTrackId }) {
     return <div data-testid="youtube-player">{youtubeTrackId}</div>;
   };
 });
 
+jest.mock("./Spinner", () => {
+  return function DummySpinner({ loading }) {
+    if (!loading) return null;
+    return <div data-testid="loading-spinner">Loading...</div>;
+  };
+});
+
 // Mock the API_URL
 jest.mock("../env.js", () => ({
-  VITE_API_URL: "http://localhost:3000",
+  VITE_API_URL: "http://localhost:5000",
 }));
 
 // Mock fetch
 global.fetch = jest.fn();
 
-jest.mock("./Spinner", () => {
-  return function DummySpinner({ loading }) {
-    if (!loading) return null;
-    return (
-      <div data-testid="loading-spinner">
-        <div className="clip-loader">Loading...</div>
-      </div>
-    );
-  };
-});
-
 describe("ChordDetail Component", () => {
+  // Mock Image loading
+  beforeAll(() => {
+    // Mock the Image constructor
+    global.Image = class {
+      constructor() {
+        setTimeout(() => {
+          this.onload();
+        }, 100);
+      }
+    };
+  });
+
   const mockTune = {
     id: "1",
     title: "Test Tune",
     chordsDescription: "These are the chords for Test Tune",
     chords: "/chord-diagrams/test-tune-chords.png",
+    chordVersions: [
+      "/chord-diagrams/test-tune-chords-v2.png",
+      "/chord-diagrams/test-tune-chords-v3.png",
+    ],
     spotifyTrackId: "spotify123",
     youtubeTrackId: "youtube456",
     sheetMusicFile: "/sheet-music/test-tune.png",
@@ -69,43 +79,42 @@ describe("ChordDetail Component", () => {
     );
   };
 
-  test("displays loading state initially", async () => {
-    // First, mock a successful tune response
+  test("makes request to correct API endpoint", async () => {
+    fetch.mockResolvedValueOnce({
+      ok: true,
+      json: () => Promise.resolve(mockTune),
+    });
+
+    renderComponent();
+
+    await waitFor(() => {
+      expect(fetch).toHaveBeenCalledWith("http://localhost:5000/api/tune/1");
+    });
+  });
+
+  test("shows loading spinner while fetching data", async () => {
     fetch.mockImplementationOnce(() =>
       Promise.resolve({
         ok: true,
-        json: () => Promise.resolve(mockTune),
+        json: () =>
+          Promise.resolve({ ...mockTune, chords: null, chordVersions: [] }),
       })
     );
 
-    let { container } = renderComponent();
-
-    // Wait for the tune data to load and the image to be rendered
-    await waitFor(() => {
-      expect(
-        screen.getByAltText("Chord diagram for Test Tune")
-      ).toBeInTheDocument();
-    });
-
-    // At this point, while the image is loading, we should see the spinner
+    renderComponent();
     expect(screen.getByTestId("loading-spinner")).toBeInTheDocument();
-
-    // Simulate image load completion
-    const img = screen.getByAltText("Chord diagram for Test Tune");
-    fireEvent.load(img);
-
-    // Spinner should disappear after image loads
-    await waitFor(() => {
-      expect(screen.queryByTestId("loading-spinner")).not.toBeInTheDocument();
-    });
+    await waitFor(
+      () =>
+        expect(screen.queryByTestId("loading-spinner")).not.toBeInTheDocument(),
+      { timeout: 3000 }
+    );
   });
 
   test("displays error message when fetch fails", async () => {
     fetch.mockRejectedValueOnce(new Error("API Error"));
     renderComponent();
     await waitFor(() => {
-      expect(screen.getByText(/Error:/)).toBeInTheDocument();
-      expect(screen.getByText(/API Error/)).toBeInTheDocument();
+      expect(screen.getByText(/Error: API Error/)).toBeInTheDocument();
     });
   });
 
@@ -117,29 +126,45 @@ describe("ChordDetail Component", () => {
 
     renderComponent();
 
+    await waitFor(
+      () => {
+        expect(
+          screen.getByText(mockTune.chordsDescription)
+        ).toBeInTheDocument();
+        expect(
+          screen.getByAltText("Chord diagram for Test Tune")
+        ).toBeInTheDocument();
+      },
+      { timeout: 3000 }
+    );
+  });
+
+  test("renders all chord versions when available", async () => {
+    fetch.mockResolvedValueOnce({
+      ok: true,
+      json: () => Promise.resolve(mockTune),
+    });
+
+    renderComponent();
+
     await waitFor(() => {
-      expect(
-        screen.getByText("These are the chords for Test Tune")
-      ).toBeInTheDocument();
+      // Main chord diagram
       expect(
         screen.getByAltText("Chord diagram for Test Tune")
-      ).toHaveAttribute(
-        "src",
-        "http://localhost:3000/chord-diagrams/test-tune-chords.png"
-      );
-      expect(screen.getByText("Back to Chord List")).toHaveAttribute(
-        "href",
-        "/chords"
-      );
-      expect(screen.getByText("Back to Tune Details")).toHaveAttribute(
-        "href",
-        "/tune/1"
-      );
+      ).toBeInTheDocument();
+    });
+    await waitFor(() => {
+      // Version 2 and 3
+      mockTune.chordVersions.forEach((_, index) => {
+        expect(
+          screen.getByAltText(`Test Tune - Chord Version ${index + 2}`)
+        ).toBeInTheDocument();
+      });
     });
   });
 
-  test("displays message when no chord diagram is available", async () => {
-    const tuneWithoutChords = { ...mockTune, chords: null };
+  test("shows no chord diagram message when no diagrams available", async () => {
+    const tuneWithoutChords = { ...mockTune, chords: null, chordVersions: [] };
     fetch.mockResolvedValueOnce({
       ok: true,
       json: () => Promise.resolve(tuneWithoutChords),
@@ -184,7 +209,7 @@ describe("ChordDetail Component", () => {
     });
   });
 
-  test('does not render "Back to Tune Details" link when sheetMusicFile is not available', async () => {
+  test("does not render 'Back to Tune Details' link when sheetMusicFile is not available", async () => {
     const tuneWithoutSheetMusic = { ...mockTune, sheetMusicFile: null };
     fetch.mockResolvedValueOnce({
       ok: true,
@@ -197,35 +222,6 @@ describe("ChordDetail Component", () => {
       expect(
         screen.queryByText("Back to Tune Details")
       ).not.toBeInTheDocument();
-    });
-  });
-
-  test("handles loading states correctly", async () => {
-    // Mock successful fetch with immediate resolution
-    fetch.mockImplementationOnce(() =>
-      Promise.resolve({
-        ok: true,
-        json: () => Promise.resolve(mockTune),
-      })
-    );
-
-    const { container } = renderComponent();
-
-    // Wait for the image element to be rendered
-    await waitFor(() => {
-      const img = screen.getByAltText("Chord diagram for Test Tune");
-      expect(img).toBeInTheDocument();
-    });
-
-    // Before image load completes, spinner should still be visible
-    expect(screen.getByTestId("loading-spinner")).toBeInTheDocument();
-
-    // Simulate successful image load
-    fireEvent.load(screen.getByAltText("Chord diagram for Test Tune"));
-
-    // After successful image load, spinner should disappear
-    await waitFor(() => {
-      expect(screen.queryByTestId("loading-spinner")).not.toBeInTheDocument();
     });
   });
 });

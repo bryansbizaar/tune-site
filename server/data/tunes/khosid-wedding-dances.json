@@ -3,8 +3,13 @@
   "title": "Khosid Wedding Dances",
   "description": "",
   "sheetMusicFile": "/images/sheetmusic/khosid-wedding-dance.png",
-  "v2": "/images/sheetmusic/khosid-wedding-dances.jpg",
+  "versions": ["/images/sheetmusic/khosid-wedding-dances.jpg"],
+
   "chords": "/images/chords/khosid-wedding-dance-1-chords.png",
+  "chordVersions": [
+    "/images/chords/khosid-wedding-dance-2-chords.jpg",
+    "/images/chords/khosid-wedding-dance-3-chords.png"
+  ],
   "chordsDescription": "",
   "spotifyTrackId": "",
   "youtubeTrackId": "",

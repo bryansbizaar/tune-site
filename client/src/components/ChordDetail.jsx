@@ -6,137 +6,122 @@ import Header from "./Header";
 import Spinner from "./Spinner";
 import { VITE_API_URL } from "../env";
 
-const ChordDetail = () => {
+const TuneDetail = () => {
   const [tune, setTune] = useState(null);
-  const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [imageError, setImageError] = useState(false);
+  const [error, setError] = useState(null);
+  const [imagesLoaded, setImagesLoaded] = useState(new Set());
   const { id } = useParams();
 
   useEffect(() => {
-    console.log("Fetching chord data...");
-    const fetchChord = async () => {
+    const fetchTune = async () => {
       try {
         const response = await fetch(`${VITE_API_URL}/api/tune/${id}`);
         if (!response.ok) {
           throw new Error("Failed to fetch tune data");
         }
         const data = await response.json();
-        console.log("Received tune data:", {
-          hasChords: !!data.chords,
-          chordPath: data.chords,
-        });
-
         setTune(data);
-
-        // If there are no chords, we can stop loading immediately
-        if (!data.chords) {
-          console.log("No chords data, stopping loader");
-          setIsLoading(false);
-        }
+        setError(null);
       } catch (err) {
-        console.error("Error in fetchChord:", err);
         setError(err.message);
-        setIsLoading(false);
+        setTune(null);
       }
     };
 
-    fetchChord();
+    fetchTune();
   }, [id]);
 
-  const handleImageLoad = () => {
-    console.log("Image loaded successfully");
-    setIsLoading(false);
-  };
+  useEffect(() => {
+    if (!tune) return;
 
-  const handleImageError = () => {
-    console.error("Image failed to load");
-    setImageError(true);
-    setIsLoading(false);
-  };
+    const imageSources = [
+      `${VITE_API_URL}${tune.sheetMusicFile}`,
+      ...(tune.versions || []).map((version) => `${VITE_API_URL}${version}`),
+    ];
 
-  if (error) {
-    return (
-      <>
-        <Header isFixed={false} />
-        <div className="centered-content error-message">
-          <p>Error: {error}</p>
-          <Link to="/chords" className="button">
-            Back to Chord List
-          </Link>
-        </div>
-      </>
-    );
-  }
+    setIsLoading(true);
 
-  if (!tune) {
-    return (
-      <>
-        <Header isFixed={false} />
-        <div className="centered-content error-message">
-          <p>No tune found</p>
-          <Link to="/chords" className="button">
-            Back to Chord List
-          </Link>
-        </div>
-      </>
-    );
-  }
+    const loadImage = (src) => {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.src = src;
+        img.onload = () => resolve(src);
+        img.onerror = () => reject(`Failed to load image: ${src}`);
+      });
+    };
+
+    Promise.all(imageSources.map((src) => loadImage(src)))
+      .then((loadedSrcs) => {
+        setImagesLoaded(new Set(loadedSrcs));
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        setError("Failed to load one or more images");
+        setIsLoading(false);
+      });
+  }, [tune]);
+
+  if (error) return <div>Error: {error}</div>;
+  if (isLoading) return <Spinner loading={true} />;
+  if (!tune) return <div>No tune found</div>;
+
+  const isImageLoaded = (src) => imagesLoaded.has(`${VITE_API_URL}${src}`);
 
   return (
     <>
       <Header isFixed={false} />
-      <div>
-        <p className={tune.chordsDescription ? "centered-content text" : ""}>
-          {tune.chordsDescription}
-        </p>
+      <div className="centered-content chord-nav">
+        {tune.chords && <Link to={`/chords/${id}`}>Click to show chords</Link>}
+        {tune.description && <p className="text">{tune.description}</p>}
 
-        {tune.chords ? (
-          <div className="sheetMusicContainer">
-            {imageError ? (
-              <div className="centered-content error-message">
-                <p>
-                  Failed to load chord diagram. The image might be missing or in
-                  a different format.
-                </p>
-              </div>
-            ) : (
-              <>
-                <img
-                  className="img-tune"
-                  src={`${VITE_API_URL}${tune.chords}`}
-                  alt={`Chord diagram for ${tune.title}`}
-                  onLoad={handleImageLoad}
-                  onError={handleImageError}
-                />
-                {isLoading && <Spinner loading={true} />}
-              </>
-            )}
-          </div>
-        ) : (
-          <p className="centered-content">
-            No chord diagram available for this tune.
-          </p>
+        <div className="sheetMusicContainer">
+          <img
+            className="img-tune"
+            src={`${VITE_API_URL}${tune.sheetMusicFile}`}
+            alt={tune.title}
+            style={{
+              display: isImageLoaded(tune.sheetMusicFile) ? "block" : "none",
+            }}
+          />
+          {!isImageLoaded(tune.sheetMusicFile) && <Spinner loading={true} />}
+        </div>
+
+        {tune.versionDescription && (
+          <p className="text">{tune.versionDescription}</p>
         )}
 
-        <div className="link-container">
-          <Link to="/chords">Back to Chord List</Link>
-          {tune.sheetMusicFile && (
-            <Link to={`/tune/${id}`}>Back to Tune Details</Link>
-          )}
-        </div>
+        {tune.versions && tune.versions.length > 0 && (
+          <>
+            {tune.versions.map((version, index) => (
+              <div key={`version-${index + 2}`} className="sheetMusicContainer">
+                <img
+                  className="img-tune"
+                  src={`${VITE_API_URL}${version}`}
+                  alt={`${tune.title} - Version ${index + 2}`}
+                  style={{ display: isImageLoaded(version) ? "block" : "none" }}
+                />
+                {!isImageLoaded(version) && <Spinner loading={true} />}
+              </div>
+            ))}
+          </>
+        )}
 
-        <div className="musicPlayer">
-          {tune.spotifyTrackId && (
+        {tune.spotifyTrackId && (
+          <div className="musicPlayer">
             <SpotifyMusicPlayer spotifyTrackId={tune.spotifyTrackId} />
-          )}
-          {tune.youtubeTrackId && (
+          </div>
+        )}
+
+        {tune.youtubeTrackId && (
+          <div className="musicPlayer">
             <YouTubePlayer youtubeTrackId={tune.youtubeTrackId} />
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </>
   );
 };
 
-export default ChordDetail;
+export default TuneDetail;
