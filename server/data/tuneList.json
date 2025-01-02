@@ -146,7 +146,7 @@
   {
     "id": "butterfly",
     "title": "The Butterfly",
-    "description": "Slip-jig, Em",
+    "description": "Slip jig, Em",
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/10",
     "hasChords": true,
@@ -164,11 +164,37 @@
     "upNextTunes": false
   },
   {
+    "id": "calliope-house",
+    "title": "Calliope House",
+    "description": "Jig, E",
+    "hasExternalLink": true,
+    "externalLinkUrl": "https://thesession.org/tunes/15",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
+  },
+  {
     "id": "catharsis",
     "title": "Catharsis",
     "description": "Reel, Gm",
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/703",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
+  },
+  {
+    "id": "chinquapin-hunting",
+    "title": "Chinquapin Hunting",
+    "description": "Reel, A",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
+  },
+  {
+    "id": "clochard-de-paris",
+    "title": "Le Clochard de Paris",
+    "description": "Waltz, Dm",
     "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": false
@@ -183,7 +209,7 @@
   },
   {
     "id": "copsa-mica",
-    "title": "Copsa Mica",
+    "title": "Copșa Mică",
     "description": "Schottische, Dm",
     "hasChords": true,
     "tunesOfTheWeek": true,
@@ -221,6 +247,14 @@
     "id": "dans-loudieg",
     "title": "Dans Loudieg",
     "description": "Ronde, Am",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
+  },
+  {
+    "id": "danse-du-barbier",
+    "title": "Le Danse du Barbier",
+    "description": "3/4, D",
     "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": false

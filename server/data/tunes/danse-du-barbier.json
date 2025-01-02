@@ -1,0 +1,13 @@
+{
+  "id": "danse-du-barbier",
+  "title": "La Danse du Barbier",
+  "description": "",
+  "sheetMusicFile": "/images/sheetmusic/danse-du-barbier.png",
+  "versions": ["/images/sheetmusic/danse-du-barbier-2.png"],
+  "chords": "/images/chords/danse-du-barbier-chords.png",
+  "chordsDescription": "",
+  "spotifyTrackId": "",
+  "youtubeTrackId": "",
+  "tuneOfTheWeek": false,
+  "upNextTune": false
+}

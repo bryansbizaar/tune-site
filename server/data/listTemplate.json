@@ -16,5 +16,20 @@
     "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": false
+  },
+  {
+    "id": "",
+    "title": "",
+    "description": "",
+    "sheetMusicFile": "/images/sheetmusic/",
+    "versions": ["/images/sheetmusic/"],
+
+    "chords": "/images/chords/",
+    "chordVersions": ["/images/chords/", "/images/chords/"],
+    "chordsDescription": "",
+    "spotifyTrackId": "",
+    "youtubeTrackId": "",
+    "tuneOfTheWeek": false,
+    "upNextTune": false
   }
 ]
