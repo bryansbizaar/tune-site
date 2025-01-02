@@ -6,52 +6,62 @@ import Header from "./Header";
 import Spinner from "./Spinner";
 import { VITE_API_URL } from "../env";
 
-const TuneDetail = () => {
+const ChordDetail = () => {
   const [tune, setTune] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [imagesLoaded, setImagesLoaded] = useState(new Set());
   const { id } = useParams();
 
+  // Fetch tune data
   useEffect(() => {
-    const fetchTune = async () => {
+    const fetchChord = async () => {
       try {
-        const response = await fetch(`${VITE_API_URL}/api/tune/${id}`);
+        const response = await fetch(`${VITE_API_URL}/api/chords/${id}`);
         if (!response.ok) {
-          throw new Error("Failed to fetch tune data");
+          throw new Error("Failed to fetch chord data");
         }
         const data = await response.json();
         setTune(data);
-        setError(null);
+
+        // If no images to load, we can stop loading immediately
+        if (
+          !data.chords &&
+          (!data.chordVersions || data.chordVersions.length === 0)
+        ) {
+          setIsLoading(false);
+        }
       } catch (err) {
+        console.error("Error fetching chord:", err);
         setError(err.message);
-        setTune(null);
+        setIsLoading(false);
       }
     };
 
-    fetchTune();
+    fetchChord();
+    setImagesLoaded(new Set());
   }, [id]);
 
+  // Handle image loading
   useEffect(() => {
     if (!tune) return;
 
-    const imageSources = [
-      `${VITE_API_URL}${tune.sheetMusicFile}`,
-      ...(tune.versions || []).map((version) => `${VITE_API_URL}${version}`),
-    ];
+    const imagesToLoad = [tune.chords, ...(tune.chordVersions || [])].filter(
+      Boolean
+    );
 
-    setIsLoading(true);
+    if (imagesToLoad.length === 0) return;
 
     const loadImage = (src) => {
       return new Promise((resolve, reject) => {
         const img = new Image();
-        img.src = src;
         img.onload = () => resolve(src);
-        img.onerror = () => reject(`Failed to load image: ${src}`);
+        img.onerror = () => reject(new Error(`Failed to load image: ${src}`));
+        img.src = `${VITE_API_URL}${src}`;
       });
     };
 
-    Promise.all(imageSources.map((src) => loadImage(src)))
+    Promise.all(imagesToLoad.map(loadImage))
       .then((loadedSrcs) => {
         setImagesLoaded(new Set(loadedSrcs));
         setIsLoading(false);
@@ -64,64 +74,73 @@ const TuneDetail = () => {
   }, [tune]);
 
   if (error) return <div>Error: {error}</div>;
-  if (isLoading) return <Spinner loading={true} />;
   if (!tune) return <div>No tune found</div>;
 
-  const isImageLoaded = (src) => imagesLoaded.has(`${VITE_API_URL}${src}`);
+  // Check if all required images are loaded
+  const allImagesLoaded = tune
+    ? [tune.chords, ...(tune.chordVersions || [])]
+        .filter(Boolean)
+        .every((src) => imagesLoaded.has(src))
+    : false;
+
+  // Show spinner until everything is loaded
+  if (isLoading || !allImagesLoaded) {
+    return <Spinner loading={true} />;
+  }
 
   return (
     <>
       <Header isFixed={false} />
-      <div className="centered-content chord-nav">
-        {tune.chords && <Link to={`/chords/${id}`}>Click to show chords</Link>}
-        {tune.description && <p className="text">{tune.description}</p>}
+      <div>
+        <p className={tune.chordsDescription ? "centered-content text" : ""}>
+          {tune.chordsDescription}
+        </p>
 
-        <div className="sheetMusicContainer">
-          <img
-            className="img-tune"
-            src={`${VITE_API_URL}${tune.sheetMusicFile}`}
-            alt={tune.title}
-            style={{
-              display: isImageLoaded(tune.sheetMusicFile) ? "block" : "none",
-            }}
-          />
-          {!isImageLoaded(tune.sheetMusicFile) && <Spinner loading={true} />}
+        {tune.chords && (
+          <div className="sheetMusicContainer">
+            <img
+              className="img-tune"
+              src={`${VITE_API_URL}${tune.chords}`}
+              alt={`Chord diagram for ${tune.title}`}
+            />
+          </div>
+        )}
+
+        {tune.chordVersions?.map((version, index) => (
+          <div
+            key={`chord-version-${index + 2}`}
+            className="sheetMusicContainer"
+          >
+            <img
+              className="img-tune"
+              src={`${VITE_API_URL}${version}`}
+              alt={`${tune.title} - Chord Version ${index + 2}`}
+            />
+          </div>
+        ))}
+
+        {!tune.chords && !tune.chordVersions?.length && (
+          <p>No chord diagram available for this tune.</p>
+        )}
+
+        <div className="link-container">
+          <Link to="/chords">Back to Chord List</Link>
+          {tune.sheetMusicFile && (
+            <Link to={`/tune/${id}`}>Back to Tune Details</Link>
+          )}
         </div>
 
-        {tune.versionDescription && (
-          <p className="text">{tune.versionDescription}</p>
-        )}
-
-        {tune.versions && tune.versions.length > 0 && (
-          <>
-            {tune.versions.map((version, index) => (
-              <div key={`version-${index + 2}`} className="sheetMusicContainer">
-                <img
-                  className="img-tune"
-                  src={`${VITE_API_URL}${version}`}
-                  alt={`${tune.title} - Version ${index + 2}`}
-                  style={{ display: isImageLoaded(version) ? "block" : "none" }}
-                />
-                {!isImageLoaded(version) && <Spinner loading={true} />}
-              </div>
-            ))}
-          </>
-        )}
-
-        {tune.spotifyTrackId && (
-          <div className="musicPlayer">
+        <div className="musicPlayer">
+          {tune.spotifyTrackId && (
             <SpotifyMusicPlayer spotifyTrackId={tune.spotifyTrackId} />
-          </div>
-        )}
-
-        {tune.youtubeTrackId && (
-          <div className="musicPlayer">
+          )}
+          {tune.youtubeTrackId && (
             <YouTubePlayer youtubeTrackId={tune.youtubeTrackId} />
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </>
   );
 };
 
-export default TuneDetail;
+export default ChordDetail;

@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor, act } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import ChordDetail from "./ChordDetail";
@@ -39,18 +39,6 @@ jest.mock("../env.js", () => ({
 global.fetch = jest.fn();
 
 describe("ChordDetail Component", () => {
-  // Mock Image loading
-  beforeAll(() => {
-    // Mock the Image constructor
-    global.Image = class {
-      constructor() {
-        setTimeout(() => {
-          this.onload();
-        }, 100);
-      }
-    };
-  });
-
   const mockTune = {
     id: "1",
     title: "Test Tune",
@@ -67,6 +55,14 @@ describe("ChordDetail Component", () => {
 
   beforeEach(() => {
     fetch.mockClear();
+    // Reset Image mock before each test
+    global.Image = class {
+      constructor() {
+        setTimeout(() => {
+          this.onload && this.onload();
+        }, 0);
+      }
+    };
   });
 
   const renderComponent = () => {
@@ -85,34 +81,40 @@ describe("ChordDetail Component", () => {
       json: () => Promise.resolve(mockTune),
     });
 
-    renderComponent();
+    await act(async () => {
+      renderComponent();
+    });
 
     await waitFor(() => {
-      expect(fetch).toHaveBeenCalledWith("http://localhost:5000/api/tune/1");
+      expect(fetch).toHaveBeenCalledWith("http://localhost:5000/api/chords/1");
     });
   });
 
   test("shows loading spinner while fetching data", async () => {
-    fetch.mockImplementationOnce(() =>
-      Promise.resolve({
-        ok: true,
-        json: () =>
-          Promise.resolve({ ...mockTune, chords: null, chordVersions: [] }),
-      })
-    );
+    fetch.mockResolvedValueOnce({
+      ok: true,
+      json: () => Promise.resolve(mockTune),
+    });
 
-    renderComponent();
+    await act(async () => {
+      renderComponent();
+    });
+
     expect(screen.getByTestId("loading-spinner")).toBeInTheDocument();
-    await waitFor(
-      () =>
-        expect(screen.queryByTestId("loading-spinner")).not.toBeInTheDocument(),
-      { timeout: 3000 }
-    );
+
+    // Wait for images to "load"
+    await waitFor(() => {
+      expect(screen.queryByTestId("loading-spinner")).not.toBeInTheDocument();
+    });
   });
 
   test("displays error message when fetch fails", async () => {
     fetch.mockRejectedValueOnce(new Error("API Error"));
-    renderComponent();
+
+    await act(async () => {
+      renderComponent();
+    });
+
     await waitFor(() => {
       expect(screen.getByText(/Error: API Error/)).toBeInTheDocument();
     });
@@ -124,19 +126,16 @@ describe("ChordDetail Component", () => {
       json: () => Promise.resolve(mockTune),
     });
 
-    renderComponent();
+    await act(async () => {
+      renderComponent();
+    });
 
-    await waitFor(
-      () => {
-        expect(
-          screen.getByText(mockTune.chordsDescription)
-        ).toBeInTheDocument();
-        expect(
-          screen.getByAltText("Chord diagram for Test Tune")
-        ).toBeInTheDocument();
-      },
-      { timeout: 3000 }
-    );
+    await waitFor(() => {
+      expect(screen.getByText(mockTune.chordsDescription)).toBeInTheDocument();
+      expect(
+        screen.getByAltText("Chord diagram for Test Tune")
+      ).toHaveAttribute("src", `http://localhost:5000${mockTune.chords}`);
+    });
   });
 
   test("renders all chord versions when available", async () => {
@@ -145,16 +144,14 @@ describe("ChordDetail Component", () => {
       json: () => Promise.resolve(mockTune),
     });
 
-    renderComponent();
+    await act(async () => {
+      renderComponent();
+    });
 
     await waitFor(() => {
-      // Main chord diagram
       expect(
         screen.getByAltText("Chord diagram for Test Tune")
       ).toBeInTheDocument();
-    });
-    await waitFor(() => {
-      // Version 2 and 3
       mockTune.chordVersions.forEach((_, index) => {
         expect(
           screen.getByAltText(`Test Tune - Chord Version ${index + 2}`)
@@ -170,7 +167,9 @@ describe("ChordDetail Component", () => {
       json: () => Promise.resolve(tuneWithoutChords),
     });
 
-    renderComponent();
+    await act(async () => {
+      renderComponent();
+    });
 
     await waitFor(() => {
       expect(
@@ -185,7 +184,9 @@ describe("ChordDetail Component", () => {
       json: () => Promise.resolve(mockTune),
     });
 
-    renderComponent();
+    await act(async () => {
+      renderComponent();
+    });
 
     await waitFor(() => {
       expect(screen.getByTestId("spotify-player")).toHaveTextContent(
@@ -200,7 +201,9 @@ describe("ChordDetail Component", () => {
       json: () => Promise.resolve(mockTune),
     });
 
-    renderComponent();
+    await act(async () => {
+      renderComponent();
+    });
 
     await waitFor(() => {
       expect(screen.getByTestId("youtube-player")).toHaveTextContent(
@@ -216,7 +219,9 @@ describe("ChordDetail Component", () => {
       json: () => Promise.resolve(tuneWithoutSheetMusic),
     });
 
-    renderComponent();
+    await act(async () => {
+      renderComponent();
+    });
 
     await waitFor(() => {
       expect(
