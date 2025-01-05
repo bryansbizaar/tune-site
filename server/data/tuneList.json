@@ -212,7 +212,7 @@
     "title": "Copșa Mică",
     "description": "Schottische, Dm",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -542,7 +542,7 @@
     "title": "The Kerry Polska",
     "description": "Polska, D",
     "hasChords": true,
-    "tuneOfTheWeek": false,
+    "tunesOfTheWeek": false,
     "upNextTune": false
   },
   {
@@ -550,7 +550,7 @@
     "title": "Khosid Wedding Dances",
     "description": "various",
     "hasChords": true,
-    "tuneOfTheWeek": false,
+    "tunesOfTheWeek": false,
     "upNextTune": false
   },
   {
@@ -568,7 +568,7 @@
     "title": "Kolomeike",
     "description": "4/4, D Hungarian minor",
     "hasChords": true,
-    "tuneOfTheWeek": false,
+    "tunesOfTheWeek": false,
     "upNextTune": false
   },
   {
@@ -788,7 +788,7 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/86",
     "hasChords": true,
-    "tuneOfTheWeek": false,
+    "tunesOfTheWeek": false,
     "upNextTune": false
   },
   {
@@ -796,7 +796,7 @@
     "title": "Ratevka",
     "description": "7/8, A freygish",
     "hasChords": true,
-    "tuneOfTheWeek": false,
+    "tunesOfTheWeek": false,
     "upNextTune": false
   },
   {
@@ -804,7 +804,7 @@
     "title": "Red Jacket",
     "description": "Polska, A",
     "hasChords": true,
-    "tuneOfTheWeek": false,
+    "tunesOfTheWeek": false,
     "upNextTune": false
   },
   {
@@ -822,7 +822,7 @@
     "title": "Rosbif",
     "description": "Waltz, Em",
     "hasChords": true,
-    "tuneOfTheWeek": false,
+    "tunesOfTheWeek": false,
     "upNextTune": false
   },
   {
@@ -830,7 +830,7 @@
     "title": "Roslyn Castle",
     "description": "March/Air, Em",
     "hasChords": true,
-    "tuneOfTheWeek": false,
+    "tunesOfTheWeek": false,
     "upNextTune": false
   },
   {
@@ -838,7 +838,7 @@
     "title": "Sailor's Wife",
     "description": "Jig, Dm",
     "hasChords": true,
-    "tuneOfTheWeek": false,
+    "tunesOfTheWeek": false,
     "upNextTune": false
   },
   {
@@ -846,7 +846,7 @@
     "title": "Säkkijärven Polkka",
     "description": "Polka, Cm",
     "hasChords": true,
-    "tuneOfTheWeek": false,
+    "tunesOfTheWeek": false,
     "upNextTune": false
   },
   {
@@ -854,7 +854,7 @@
     "title": "Salt-Spring",
     "description": "Reel, A",
     "hasChords": true,
-    "tuneOfTheWeek": false,
+    "tunesOfTheWeek": false,
     "upNextTune": false
   },
   {
@@ -862,7 +862,7 @@
     "title": "Seanamhac Tube Station",
     "description": "Jig, Gm",
     "hasChords": true,
-    "tuneOfTheWeek": false,
+    "tunesOfTheWeek": false,
     "upNextTune": false
   },
   {
@@ -870,7 +870,7 @@
     "title": "Shalom Aleichem",
     "description": "4/4, Am",
     "hasChords": true,
-    "tuneOfTheWeek": false,
+    "tunesOfTheWeek": false,
     "upNextTune": false
   },
   {
@@ -878,7 +878,7 @@
     "title": "Širto",
     "description": "7/8, D",
     "hasChords": true,
-    "tuneOfTheWeek": false,
+    "tunesOfTheWeek": false,
     "upNextTune": false
   },
   {
@@ -886,7 +886,7 @@
     "title": "Slängpolska efter Byss-Calle",
     "description": "Polska, G",
     "hasChords": true,
-    "tuneOfTheWeek": false,
+    "tunesOfTheWeek": false,
     "upNextTune": false
   },
   {
@@ -894,7 +894,7 @@
     "title": "A Slip Of A Thing",
     "description": "Slip jig, G",
     "hasChords": true,
-    "tuneOfTheWeek": false,
+    "tunesOfTheWeek": false,
     "upNextTune": false
   },
   {
@@ -932,7 +932,7 @@
     "title": "Speil Klezmer",
     "description": "Freilach, Dm",
     "hasChords": true,
-    "tuneOfTheWeek": false,
+    "tunesOfTheWeek": false,
     "upNextTune": false
   },
   {
@@ -960,7 +960,7 @@
     "title": "Sto Me E Milo",
     "description": "7/8, A",
     "hasChords": true,
-    "tuneOfTheWeek": false,
+    "tunesOfTheWeek": false,
     "upNextTune": false
   },
   {
@@ -988,7 +988,7 @@
     "title": "Tolka Polka",
     "description": "Polka, Am",
     "hasChords": true,
-    "tuneOfTheWeek": false,
+    "tunesOfTheWeek": false,
     "upNextTune": false
   },
   {
@@ -1004,7 +1004,7 @@
     "title": "Trip To Herve's",
     "description": "Reel, D",
     "hasChords": true,
-    "tuneOfTheWeek": false,
+    "tunesOfTheWeek": false,
     "upNextTune": false
   },
   {
@@ -1022,7 +1022,7 @@
     "title": "Les Trois Canards",
     "description": "Bourrée, Gm",
     "hasChords": true,
-    "tuneOfTheWeek": false,
+    "tunesOfTheWeek": false,
     "upNextTune": false
   },
   {
@@ -1030,7 +1030,7 @@
     "title": "Tsikpolkka",
     "description": "Polka, Bm, G",
     "hasChords": true,
-    "tuneOfTheWeek": false,
+    "tunesOfTheWeek": false,
     "upNextTune": false
   },
   {
@@ -1038,7 +1038,7 @@
     "title": "Up da Stroods",
     "description": "Reel, Bm",
     "hasChords": true,
-    "tuneOfTheWeek": false,
+    "tunesOfTheWeek": false,
     "upNextTune": false
   },
   {
@@ -1048,7 +1048,7 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/14425",
     "hasChords": true,
-    "tuneOfTheWeek": false,
+    "tunesOfTheWeek": false,
     "upNextTune": false
   },
   {
@@ -1056,8 +1056,8 @@
     "title": "The Walls Of Liscaroll",
     "description": "Jig, Dm",
     "hasChords": true,
-    "tuneOfTheWeek": false,
-    "upNextTune": false
+    "tunesOfTheWeek": true,
+    "upNextTune": true
   },
   {
     "id": "whelans",
@@ -1066,7 +1066,7 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/1447",
     "hasChords": true,
-    "tuneOfTheWeek": false,
+    "tunesOfTheWeek": false,
     "upNextTune": false
   },
   {
@@ -1074,7 +1074,7 @@
     "title": "The White Petticoat",
     "description": "Jig, Em",
     "hasChords": true,
-    "tuneOfTheWeek": false,
+    "tunesOfTheWeek": false,
     "upNextTune": false
   },
   {
@@ -1082,7 +1082,7 @@
     "title": "Winder Slide",
     "description": "Reel, D",
     "hasChords": true,
-    "tuneOfTheWeek": false,
+    "tunesOfTheWeek": false,
     "upNextTune": false
   }
 ]

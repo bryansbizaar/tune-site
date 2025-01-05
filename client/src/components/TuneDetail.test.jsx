@@ -4,6 +4,7 @@ import "@testing-library/jest-dom";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import TuneDetail from "./TuneDetail";
 
+// Mock child components
 jest.mock("./Header", () => () => <div data-testid="header">Header</div>);
 jest.mock("./SpotifyMusicPlayer", () => ({ spotifyTrackId }) => (
   <div data-testid="spotify-player">{spotifyTrackId}</div>
@@ -11,7 +12,6 @@ jest.mock("./SpotifyMusicPlayer", () => ({ spotifyTrackId }) => (
 jest.mock("./YouTubePlayer", () => ({ youtubeTrackId }) => (
   <div data-testid="youtube-player">{youtubeTrackId}</div>
 ));
-
 jest.mock("./Spinner", () => {
   return function DummySpinner({ loading }) {
     if (!loading) return null;
@@ -19,30 +19,19 @@ jest.mock("./Spinner", () => {
   };
 });
 
+// Mock router hook
 jest.mock("react-router-dom", () => ({
   ...jest.requireActual("react-router-dom"),
   useParams: () => ({ id: "1" }),
 }));
 
+// Mock environment variable
 jest.mock("../env", () => ({
   VITE_API_URL: "http://localhost:5000",
 }));
 
-// Mock fetch
-global.fetch = jest.fn();
-
 describe("TuneDetail Component", () => {
-  // Mock Image loading
-  beforeAll(() => {
-    global.Image = class {
-      constructor() {
-        setTimeout(() => {
-          this.onload();
-        }, 100);
-      }
-    };
-  });
-
+  // Sample tune data for testing
   const mockTune = {
     id: "1",
     title: "Test Tune",
@@ -55,8 +44,23 @@ describe("TuneDetail Component", () => {
     youtubeTrackId: "youtube456",
   };
 
+  // Mock the Image constructor
+  beforeAll(() => {
+    global.Image = class {
+      constructor() {
+        setTimeout(() => {
+          this.onload && this.onload();
+        }, 0);
+      }
+    };
+  });
+
   beforeEach(() => {
-    fetch.mockClear();
+    global.fetch = jest.fn();
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   const renderComponent = () => {
@@ -69,8 +73,14 @@ describe("TuneDetail Component", () => {
     );
   };
 
+  test("shows loading spinner initially", () => {
+    global.fetch.mockImplementationOnce(() => new Promise(() => {}));
+    renderComponent();
+    expect(screen.getByTestId("loading-spinner")).toBeInTheDocument();
+  });
+
   test("makes request to correct API endpoint", async () => {
-    fetch.mockResolvedValueOnce({
+    global.fetch.mockResolvedValueOnce({
       ok: true,
       json: () => Promise.resolve(mockTune),
     });
@@ -78,121 +88,130 @@ describe("TuneDetail Component", () => {
     renderComponent();
 
     await waitFor(() => {
-      expect(fetch).toHaveBeenCalledWith("http://localhost:5000/api/tune/1");
+      expect(global.fetch).toHaveBeenCalledWith(
+        "http://localhost:5000/api/tune/1"
+      );
     });
-  });
-
-  test("shows loading spinner while fetching data", async () => {
-    fetch.mockImplementationOnce(() =>
-      Promise.resolve({
-        ok: true,
-        json: () => Promise.resolve(mockTune),
-      })
-    );
-
-    renderComponent();
-    expect(screen.getByTestId("loading-spinner")).toBeInTheDocument();
-    await waitFor(
-      () =>
-        expect(screen.queryByTestId("loading-spinner")).not.toBeInTheDocument(),
-      { timeout: 3000 }
-    );
   });
 
   test("displays error message when fetch fails", async () => {
-    // Mock fetch to simulate a network error
-    fetch.mockImplementationOnce(() =>
-      Promise.reject(
-        new Error("Cannot read properties of undefined (reading 'ok')")
-      )
-    );
+    const errorMessage = "Failed to fetch tune data";
+    global.fetch.mockRejectedValueOnce(new Error(errorMessage));
 
     renderComponent();
 
-    // First check loading state
+    await waitFor(() => {
+      const errorElement = screen.getByTestId("error-message");
+      expect(errorElement).toBeInTheDocument();
+      expect(errorElement).toHaveTextContent(`Error: ${errorMessage}`);
+    });
+  });
+
+  test("shows 'No tune found' when no tune data is returned", async () => {
+    global.fetch.mockResolvedValueOnce({
+      ok: true,
+      json: () => Promise.resolve(null),
+    });
+
+    renderComponent();
+
+    await waitFor(() => {
+      expect(screen.getByTestId("no-tune-message")).toHaveTextContent(
+        "No tune found"
+      );
+    });
+  });
+
+  test("renders tune details correctly after loading", async () => {
+    global.fetch.mockResolvedValueOnce({
+      ok: true,
+      json: () => Promise.resolve(mockTune),
+    });
+
+    renderComponent();
+
+    await waitFor(() => {
+      // Check header
+      expect(screen.getByTestId("header")).toBeInTheDocument();
+
+      // Check description
+      expect(screen.getByTestId("tune-description")).toHaveTextContent(
+        mockTune.description
+      );
+
+      // Check chords link
+      expect(screen.getByTestId("chords-link")).toHaveTextContent(
+        "Click to show chords"
+      );
+
+      // Check main sheet music
+      const mainImage = screen.getByTestId("main-sheet-music");
+      expect(mainImage).toBeInTheDocument();
+      expect(mainImage).toHaveAttribute(
+        "src",
+        `http://localhost:5000${mockTune.sheetMusicFile}`
+      );
+
+      // Check version description
+      expect(screen.getByTestId("version-description")).toHaveTextContent(
+        mockTune.versionDescription
+      );
+
+      // Check additional versions
+      mockTune.versions.forEach((_, index) => {
+        expect(screen.getByTestId(`version-${index + 2}`)).toBeInTheDocument();
+      });
+
+      // Check music players
+      expect(screen.getByTestId("spotify-container")).toBeInTheDocument();
+      expect(screen.getByTestId("youtube-container")).toBeInTheDocument();
+    });
+  });
+
+  test("handles missing optional fields gracefully", async () => {
+    const minimalTune = {
+      id: "1",
+      title: "Minimal Tune",
+      sheetMusicFile: "/sheet-music/minimal.png",
+    };
+
+    global.fetch.mockResolvedValueOnce({
+      ok: true,
+      json: () => Promise.resolve(minimalTune),
+    });
+
+    renderComponent();
+
+    await waitFor(() => {
+      // These should exist
+      expect(screen.getByTestId("main-sheet-music")).toBeInTheDocument();
+
+      // These should not exist
+      expect(screen.queryByTestId("chords-link")).not.toBeInTheDocument();
+      expect(screen.queryByTestId("tune-description")).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId("version-description")
+      ).not.toBeInTheDocument();
+      expect(screen.queryByTestId("spotify-container")).not.toBeInTheDocument();
+      expect(screen.queryByTestId("youtube-container")).not.toBeInTheDocument();
+    });
+  });
+
+  test("waits for all images to load before displaying", async () => {
+    global.fetch.mockResolvedValueOnce({
+      ok: true,
+      json: () => Promise.resolve(mockTune),
+    });
+
+    renderComponent();
+
+    // Should show loading initially
     expect(screen.getByTestId("loading-spinner")).toBeInTheDocument();
 
-    // Wait for error message with exact error text
-    await waitFor(
-      () => {
-        const errorElement = screen.getByRole("alert");
-        expect(errorElement).toBeInTheDocument();
-        expect(errorElement).toHaveTextContent(
-          "Error: Cannot read properties of undefined (reading 'ok')"
-        );
-      },
-      { timeout: 4000 }
-    );
-  });
-
-  test("renders tune details correctly", async () => {
-    fetch.mockResolvedValueOnce({
-      ok: true,
-      json: () => Promise.resolve(mockTune),
-    });
-
-    renderComponent();
-
-    await waitFor(
-      () => {
-        expect(screen.getByText(mockTune.description)).toBeInTheDocument();
-        expect(screen.getByAltText(mockTune.title)).toBeInTheDocument();
-        expect(screen.getByText("Click to show chords")).toBeInTheDocument();
-      },
-      { timeout: 3000 }
-    );
-  });
-
-  test("renders all versions when available", async () => {
-    fetch.mockResolvedValueOnce({
-      ok: true,
-      json: () => Promise.resolve(mockTune),
-    });
-
-    renderComponent();
-
+    // After images load, should show content
     await waitFor(() => {
-      // Main image
-      expect(screen.getByAltText(mockTune.title)).toBeInTheDocument();
-      // Version images
-      mockTune.versions.forEach((_, index) => {
-        expect(
-          screen.getByAltText(`${mockTune.title} - Version ${index + 2}`)
-        ).toBeInTheDocument();
-      });
-    });
-  });
-
-  test("renders music players when track IDs are provided", async () => {
-    fetch.mockResolvedValueOnce({
-      ok: true,
-      json: () => Promise.resolve(mockTune),
-    });
-
-    renderComponent();
-
-    await waitFor(() => {
-      expect(screen.getByTestId("spotify-player")).toHaveTextContent(
-        "spotify123"
-      );
-      expect(screen.getByTestId("youtube-player")).toHaveTextContent(
-        "youtube456"
-      );
-    });
-  });
-
-  test("handles missing versions gracefully", async () => {
-    const tuneWithoutVersions = { ...mockTune, versions: [] };
-    fetch.mockResolvedValueOnce({
-      ok: true,
-      json: () => Promise.resolve(tuneWithoutVersions),
-    });
-
-    renderComponent();
-
-    await waitFor(() => {
-      expect(screen.getByAltText(mockTune.title)).toBeInTheDocument();
-      expect(screen.queryByAltText(/Version/)).not.toBeInTheDocument();
+      expect(screen.queryByTestId("loading-spinner")).not.toBeInTheDocument();
+      expect(screen.getByTestId("main-sheet-music")).toBeInTheDocument();
     });
   });
 });
