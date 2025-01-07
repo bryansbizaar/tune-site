@@ -6,7 +6,7 @@ import SignupForm from "./SignupForm";
 
 // Mock the environment utility
 jest.mock("../env", () => ({
-  VITE_API_URL: "http://localhost:5000",
+  VITE_API_URL: "http://localhost:3000",
 }));
 
 // Mock fetch

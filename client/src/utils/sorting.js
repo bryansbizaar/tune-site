@@ -1,5 +1,7 @@
 export const removeCommonWords = (title) => {
-  return title.toLowerCase().replace(/^(the|a|an|la|da)\s+/i, "");
+  return title
+    .toLowerCase()
+    .replace(/^(the|a|an|la|le|da|el|los|las|les|de|das|l')\s+/i, "");
 };
 
 export const startsWithNumber = (title) => {

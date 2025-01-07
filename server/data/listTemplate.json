@@ -3,9 +3,18 @@
     "id": "",
     "title": "",
     "description": "",
-    "hasSheetMusic": ,
-    "hasChords": ,
-    "tuneOfTheWeek": ,
-    "upNextTune": 
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTune": false
+  },
+  {
+    "id": "",
+    "title": "",
+    "description": "",
+    "hasExternalLink": true,
+    "externalLinkUrl": "https://thesession.org/tunes/",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
   }
 ]

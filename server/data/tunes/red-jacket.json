@@ -1,0 +1,14 @@
+{
+  "id": "red-jacket",
+  "title": "Red Jacket",
+  "description": "",
+  "sheetMusicFile": "/images/sheetmusic/red-jacket.png",
+  "versions": ["/images/sheetmusic/red-jacket-2.png"],
+  "versionDescription": "... the same version, with chords",
+  "chords": "/images/chords/red-jacket-chords.png",
+  "chordsDescription": "",
+  "spotifyTrackId": "26O04oZfUG54EPYVbbJ0Vi",
+  "youtubeTrackId": "",
+  "tuneOfTheWeek": false,
+  "upNextTune": false
+}

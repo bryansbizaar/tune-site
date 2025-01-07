@@ -258,13 +258,14 @@ iframe {
 }
 
 .button {
-  padding: 4px 8px;
-  margin-top: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  /* margin-top: 0.25rem; */
   background-color: #bbb16e;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  font-size: 0.65rem;
 }
 
 .button:hover {
@@ -373,19 +374,6 @@ iframe {
   margin-top: 10px;
 }
 
-/* .spinner-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(255, 255, 255, 0.8);
-  z-index: 1000;
-} */
-
 @media screen and (min-width: 48rem) {
   .container-content {
     box-shadow: 0.8rem 0.8rem 0.8rem rgba(0, 0, 0, 0.15);
@@ -413,6 +401,10 @@ iframe {
 
   .link-container {
     gap: 5rem;
+  }
+
+  .button {
+    margin-top: 0.25rem;
   }
 }
 

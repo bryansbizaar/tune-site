@@ -1,0 +1,14 @@
+{
+  "id": "salt-spring",
+  "title": "Salt Spring",
+  "description": "",
+  "sheetMusicFile": "/images/sheetmusic/salt-spring.png",
+  "versions": ["/images/sheetmusic/salt-spring-2.png"],
+  "versionDescription": "... and the same, with chords",
+  "chords": "/images/chords/salt-spring-chords.png",
+  "chordsDescription": "",
+  "spotifyTrackId": "1JRzVmj7xDXUFfPxgA0qZp",
+  "youtubeTrackId": "",
+  "tuneOfTheWeek": false,
+  "upNextTune": false
+}

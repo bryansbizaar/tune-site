@@ -7,14 +7,13 @@ import Spinner from "./Spinner";
 import { VITE_API_URL } from "../env";
 
 const TuneDetail = () => {
-  const [state, setState] = useState({
-    tune: null,
-    isLoading: true,
-    error: null,
-  });
-
+  const [tune, setTune] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
   const { id } = useParams();
 
+  // Fetch tune data
   useEffect(() => {
     const fetchTune = async () => {
       try {
@@ -23,75 +22,139 @@ const TuneDetail = () => {
           throw new Error("Failed to fetch tune data");
         }
         const data = await response.json();
-        setState({
-          tune: data,
-          isLoading: false,
-          error: null,
-        });
+        setTune(data);
       } catch (err) {
-        setState({
-          tune: null,
-          isLoading: false,
-          error: err.message,
-        });
+        console.error("Error fetching tune:", err);
+        setError(err.message);
+      } finally {
+        // Only set loading false if there are no images to load
+        if (!tune?.sheetMusicFile && !tune?.versions?.length) {
+          setIsLoading(false);
+        }
       }
     };
 
     fetchTune();
   }, [id]);
 
-  const { tune, isLoading, error } = state;
+  // Handle image loading
+  useEffect(() => {
+    if (!tune) return;
+
+    const imageSources = [tune.sheetMusicFile, ...(tune.versions || [])].filter(
+      Boolean
+    );
+
+    if (imageSources.length === 0) {
+      setIsLoading(false);
+      setImagesLoaded(true);
+      return;
+    }
+
+    let loadedCount = 0;
+    const totalImages = imageSources.length;
+
+    imageSources.forEach((src) => {
+      const img = new Image();
+      img.src = `${VITE_API_URL}${src}`;
+
+      img.onload = () => {
+        loadedCount++;
+        if (loadedCount === totalImages) {
+          setImagesLoaded(true);
+          setIsLoading(false);
+        }
+      };
+
+      img.onerror = () => {
+        console.error(`Failed to load image: ${src}`);
+        loadedCount++;
+        if (loadedCount === totalImages) {
+          setImagesLoaded(true);
+          setIsLoading(false);
+        }
+      };
+    });
+  }, [tune]);
 
   if (isLoading) {
-    return <Spinner />;
+    return <Spinner loading={true} data-testid="loading-spinner" />;
   }
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return (
+      <div role="alert" data-testid="error-message">
+        Error: {error}
+      </div>
+    );
   }
 
   if (!tune) {
-    return <div>No tune found</div>;
+    return <div data-testid="no-tune-message">No tune found</div>;
   }
 
   return (
-    <>
+    <div data-testid="tune-detail-container">
       <Header isFixed={false} />
       <div className="centered-content chord-nav">
-        {tune.chords && <Link to={`/chords/${id}`}>Click to show chords</Link>}
-        {tune.description && <p className="text">{tune.description}</p>}
+        {tune.chords && (
+          <Link to={`/chords/${id}`} data-testid="chords-link">
+            Click to show chords
+          </Link>
+        )}
 
-        <div className="sheetMusicContainer">
-          <img
-            className="img-tune"
-            src={`${VITE_API_URL}${tune.sheetMusicFile}`}
-            alt={tune.title}
-          />
-        </div>
+        {tune.description && (
+          <p className="text" data-testid="tune-description">
+            {tune.description}
+          </p>
+        )}
 
-        {tune.v2 && (
-          <div className="sheetMusicContainer">
-            <img
-              className="img-tune"
-              src={`${VITE_API_URL}${tune.v2}`}
-              alt={`${tune.title} - Version 2`}
-            />
-          </div>
+        {imagesLoaded && (
+          <>
+            <div className="sheetMusicContainer">
+              <img
+                className="img-tune"
+                src={`${VITE_API_URL}${tune.sheetMusicFile}`}
+                alt={tune.title}
+                data-testid="main-sheet-music"
+              />
+            </div>
+
+            {tune.versionDescription && (
+              <p className="text" data-testid="version-description">
+                {tune.versionDescription}
+              </p>
+            )}
+
+            {tune.versions?.map((version, index) => (
+              <div
+                key={`version-${index + 2}`}
+                className="sheetMusicContainer"
+                data-testid={`version-${index + 2}`}
+              >
+                <img
+                  className="img-tune"
+                  src={`${VITE_API_URL}${version}`}
+                  alt={`${tune.title} - Version ${index + 2}`}
+                />
+              </div>
+            ))}
+          </>
         )}
 
         {tune.spotifyTrackId && (
-          <div className="musicPlayer">
+          <div className="musicPlayer" data-testid="spotify-container">
             <SpotifyMusicPlayer spotifyTrackId={tune.spotifyTrackId} />
           </div>
         )}
 
         {tune.youtubeTrackId && (
-          <div className="musicPlayer">
+          <div className="musicPlayer" data-testid="youtube-container">
             <YouTubePlayer youtubeTrackId={tune.youtubeTrackId} />
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 };
 

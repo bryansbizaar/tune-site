@@ -30,7 +30,7 @@ jest.mock("../hooks/useImageLoader", () => ({
 
 // Mock the API_URL
 jest.mock("../env", () => ({
-  VITE_API_URL: "http://localhost:5000",
+  VITE_API_URL: "http://localhost:3000",
 }));
 
 // Mock the sorting utility

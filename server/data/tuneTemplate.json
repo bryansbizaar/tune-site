@@ -1,0 +1,15 @@
+{
+  "id": "",
+  "title": "",
+  "description": "",
+  "sheetMusicFile": "/images/sheetmusic/",
+  "versions": ["/images/sheetmusic/"],
+  "versionDescription": "",
+  "chords": "/images/chords/",
+  "chordVersions": ["/images/chords/"],
+  "chordsDescription": "",
+  "spotifyTrackId": "",
+  "youtubeTrackId": "",
+  "tuneOfTheWeek": false,
+  "upNextTune": false
+}

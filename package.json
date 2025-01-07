@@ -7,13 +7,9 @@
     "concurrently": "^8.2.2"
   },
   "scripts": {
-    "test": "concurrently \"cd client && npm test\" \"cd server && npm test\"",
-    "start": "node server/index.js",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "server": "cd server && npm start",
-    "client": "cd client && npm run dev",
-    "install": "cd server && npm install && cd ../client && npm install",
-    "build": "cd client && npm install && npm run build"
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd server && npm run dev",
+    "client": "cd client && npm run dev"
   },
   "keywords": [],
   "author": "",
