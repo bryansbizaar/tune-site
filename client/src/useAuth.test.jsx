@@ -27,7 +27,9 @@ const TestComponent = () => {
         {isLoggedIn ? "Logged In" : "Logged Out"}
       </div>
       <button onClick={() => login("test-token")}>Login Default</button>
-      <button onClick={() => login("test-token", "30d")}>Login Extended</button>
+      <button onClick={() => login("test-token", "365d")}>
+        Login Extended
+      </button>
       <button onClick={logout}>Logout</button>
     </div>
   );
@@ -102,11 +104,11 @@ describe("useAuth", () => {
     });
   });
 
-  it("should set correct expiry time for extended login (30 days)", async () => {
+  it("should set correct expiry time for extended login (365 days)", async () => {
     renderWithAuth();
     fireEvent.click(screen.getByText("Login Extended"));
 
-    const expectedExpiry = new Date().getTime() + 30 * 24 * 60 * 60 * 1000;
+    const expectedExpiry = new Date().getTime() + 365 * 24 * 60 * 60 * 1000;
 
     await waitFor(() => {
       expect(localStorageMock.setItem).toHaveBeenCalledWith(
