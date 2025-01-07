@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }) => {
 
     // Calculate expiry time
     const expiryMs =
-      expiresIn === "30d" ? 30 * 24 * 60 * 60 * 1000 : 24 * 60 * 60 * 1000;
+      expiresIn === "365d" ? 365 * 24 * 60 * 60 * 1000 : 24 * 60 * 60 * 1000;
     const expiryTime = new Date().getTime() + expiryMs;
 
     localStorage.setItem("tokenExpiry", expiryTime.toString());

@@ -149,7 +149,7 @@ const AuthForm = ({ onClose }) => {
                 className="checkbox"
                 data-testid="stay-logged-in"
               />
-              <label htmlFor="stayLoggedIn">Stay logged in for 30 days</label>
+              <label htmlFor="stayLoggedIn">Stay logged in</label>
             </div>
             <button type="submit" className="button" data-testid="login-submit">
               Log In

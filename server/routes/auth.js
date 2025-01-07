@@ -56,7 +56,7 @@ router.post("/login", async (req, res) => {
       return res.status(401).json({ error: "Invalid email or password" });
     }
 
-    const expiresIn = stayLoggedIn ? "30d" : "1d";
+    const expiresIn = stayLoggedIn ? "365d" : "1d";
 
     const token = jwt.sign(
       { id: user._id, role: user.role },
