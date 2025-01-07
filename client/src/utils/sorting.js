@@ -1,3 +1,4 @@
+// allows for alphabetical sorting, ignoring the common words at the beginning of titles
 export const removeCommonWords = (title) => {
   return title
     .toLowerCase()
