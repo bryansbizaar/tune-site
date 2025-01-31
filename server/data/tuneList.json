@@ -1056,7 +1056,7 @@
     "title": "The Walls Of Liscaroll",
     "description": "Jig, Dm",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTune": true
   },
   {
@@ -1083,6 +1083,14 @@
     "description": "Reel, D",
     "hasChords": true,
     "tunesOfTheWeek": false,
+    "upNextTune": false
+  },
+  {
+    "id": "ramnee-ceilidh",
+    "title": "Ramnee Ceilidh",
+    "description": "Reel, D",
+    "hasChords": true,
+    "tunesOfTheWeek": true,
     "upNextTune": false
   }
 ]
