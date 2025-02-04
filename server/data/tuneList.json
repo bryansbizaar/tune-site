@@ -543,7 +543,7 @@
     "description": "Polska, D",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTune": false
+    "upNextTunes": false
   },
   {
     "id": "khosid-wedding-dances",
@@ -551,7 +551,7 @@
     "description": "various",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTune": false
+    "upNextTunes": false
   },
   {
     "id": "killavil",
@@ -569,7 +569,7 @@
     "description": "4/4, D Hungarian minor",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTune": false
+    "upNextTunes": false
   },
   {
     "id": "little-beggarman",
@@ -664,6 +664,16 @@
     "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": false
+  },
+  {
+    "id": "millers-maggot",
+    "title": "The Miller's Maggot",
+    "description": "Jig, G",
+    "hasExternalLink": true,
+    "externalLinkUrl": "https://thesession.org/tunes/333",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
   },
   {
     "id": "misirlou",
@@ -789,7 +799,7 @@
     "externalLinkUrl": "https://thesession.org/tunes/86",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTune": false
+    "upNextTunes": false
   },
   {
     "id": "ratevka",
@@ -797,7 +807,7 @@
     "description": "7/8, A freygish",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTune": false
+    "upNextTunes": false
   },
   {
     "id": "red-jacket",
@@ -805,7 +815,7 @@
     "description": "Polska, A",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTune": false
+    "upNextTunes": false
   },
   {
     "id": "road-to-lisdoonvarna",
@@ -823,7 +833,7 @@
     "description": "Waltz, Em",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTune": false
+    "upNextTunes": false
   },
   {
     "id": "roslyn-castle",
@@ -831,7 +841,7 @@
     "description": "March/Air, Em",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTune": false
+    "upNextTunes": false
   },
   {
     "id": "sailors-wife",
@@ -839,7 +849,7 @@
     "description": "Jig, Dm",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTune": false
+    "upNextTunes": false
   },
   {
     "id": "sakkijarven-polka",
@@ -847,7 +857,7 @@
     "description": "Polka, Cm",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTune": false
+    "upNextTunes": false
   },
   {
     "id": "salt-spring",
@@ -855,7 +865,7 @@
     "description": "Reel, A",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTune": false
+    "upNextTunes": false
   },
   {
     "id": "seanamhac-tube-station",
@@ -863,7 +873,7 @@
     "description": "Jig, Gm",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTune": false
+    "upNextTunes": false
   },
   {
     "id": "shalom-aleichem",
@@ -871,7 +881,7 @@
     "description": "4/4, Am",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTune": false
+    "upNextTunes": false
   },
   {
     "id": "sirto",
@@ -879,7 +889,7 @@
     "description": "7/8, D",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTune": false
+    "upNextTunes": false
   },
   {
     "id": "slangpolska-efter-byss-calle",
@@ -887,7 +897,7 @@
     "description": "Polska, G",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTune": false
+    "upNextTunes": false
   },
   {
     "id": "slip-of-a-thing",
@@ -895,7 +905,7 @@
     "description": "Slip jig, G",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTune": false
+    "upNextTunes": false
   },
   {
     "id": "slockit-light",
@@ -933,7 +943,7 @@
     "description": "Freilach, Dm",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTune": false
+    "upNextTunes": false
   },
   {
     "id": "spootiskerry",
@@ -961,7 +971,7 @@
     "description": "7/8, A",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTune": false
+    "upNextTunes": false
   },
   {
     "id": "swallowtail",
@@ -989,7 +999,7 @@
     "description": "Polka, Am",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTune": false
+    "upNextTunes": false
   },
   {
     "id": "tom-billys",
@@ -1005,7 +1015,7 @@
     "description": "Reel, D",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTune": false
+    "upNextTunes": false
   },
   {
     "id": "tripping-up-the-stairs",
@@ -1023,7 +1033,7 @@
     "description": "Bourrée, Gm",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTune": false
+    "upNextTunes": false
   },
   {
     "id": "tsizikpolkka",
@@ -1031,7 +1041,7 @@
     "description": "Polka, Bm, G",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTune": false
+    "upNextTunes": false
   },
   {
     "id": "up-da-stroods",
@@ -1039,7 +1049,7 @@
     "description": "Reel, Bm",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTune": false
+    "upNextTunes": false
   },
   {
     "id": "vals-efter-lasse-i-lyby",
@@ -1049,7 +1059,7 @@
     "externalLinkUrl": "https://thesession.org/tunes/14425",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTune": false
+    "upNextTunes": false
   },
   {
     "id": "walls-of-liscaroll",
@@ -1057,7 +1067,7 @@
     "description": "Jig, Dm",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTune": true
+    "upNextTunes": true
   },
   {
     "id": "whelans",
@@ -1067,7 +1077,7 @@
     "externalLinkUrl": "https://thesession.org/tunes/1447",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTune": false
+    "upNextTunes": false
   },
   {
     "id": "white-petticoat",
@@ -1083,7 +1093,7 @@
     "description": "Reel, D",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTune": false
+    "upNextTunes": false
   },
   {
     "id": "ramnee-ceilidh",
@@ -1091,6 +1101,6 @@
     "description": "Reel, D",
     "hasChords": true,
     "tunesOfTheWeek": true,
-    "upNextTune": false
+    "upNextTunes": false
   }
 ]
