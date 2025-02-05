@@ -1067,7 +1067,7 @@
     "description": "Jig, Dm",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "upNextTunes": false
   },
   {
     "id": "whelans",
