@@ -9,5 +9,5 @@
   "spotifyTrackId": "",
   "youtubeTrackId": "",
   "tuneOfTheWeek": false,
-  "upNextTunes": true
+  "upNextTunes": false
 }

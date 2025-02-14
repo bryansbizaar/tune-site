@@ -16,6 +16,14 @@
     "upNextTunes": false
   },
   {
+    "id": "ako-umram",
+    "title": "Ako Umram",
+    "description": "7/8, Dm",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "30-year-jig",
     "title": "30 Year Jig",
     "description": "Jig, G",
@@ -557,8 +565,6 @@
     "id": "killavil",
     "title": "The Killavil",
     "description": "Jig, Em",
-    "hasExternalLink": true,
-    "externalLinkUrl": "https://thesession.org/tunes/667",
     "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": false
@@ -672,8 +678,8 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/333",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "misirlou",
@@ -797,6 +803,14 @@
     "description": "Reel, D mix",
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/86",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
+  },
+  {
+    "id": "ramnee-ceilidh",
+    "title": "Ramnee Ceilidh",
+    "description": "Reel, D",
     "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": false
@@ -1093,14 +1107,6 @@
     "description": "Reel, D",
     "hasChords": true,
     "tunesOfTheWeek": false,
-    "upNextTunes": false
-  },
-  {
-    "id": "ramnee-ceilidh",
-    "title": "Ramnee Ceilidh",
-    "description": "Reel, D",
-    "hasChords": true,
-    "tunesOfTheWeek": true,
     "upNextTunes": false
   }
 ]
