@@ -27,6 +27,7 @@ app.use(
       "https://whangareitunes.com",
       "https://www.whangareitunes.com",
       "http://localhost:5173",
+      "https://tune-site-backend.onrender.com",
     ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
