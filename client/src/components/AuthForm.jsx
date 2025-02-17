@@ -104,7 +104,7 @@ const AuthForm = ({ onClose }) => {
       } else {
         setMessage(data.message || "Operation successful");
         if (data.token) {
-          login(data.token, stayLoggedIn ? "30d" : "1d");
+          login(data.token, stayLoggedIn ? "365d" : "1d");
         }
         setTimeout(onClose, 2000);
       }
