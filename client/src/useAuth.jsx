@@ -33,7 +33,20 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
+  // const login = (token, expiresIn = "1d") => {
+  //   localStorage.setItem("token", token);
+
+  //   // Calculate expiry time
+  //   const expiryMs =
+  //     expiresIn === "365d" ? 365 * 24 * 60 * 60 * 1000 : 24 * 60 * 60 * 1000;
+  //   const expiryTime = new Date().getTime() + expiryMs;
+
+  //   localStorage.setItem("tokenExpiry", expiryTime.toString());
+  //   setIsLoggedIn(true);
+  // };
+
   const login = (token, expiresIn = "1d") => {
+    console.log("Login called with:", { token, expiresIn });
     localStorage.setItem("token", token);
 
     // Calculate expiry time
@@ -41,6 +54,7 @@ export const AuthProvider = ({ children }) => {
       expiresIn === "365d" ? 365 * 24 * 60 * 60 * 1000 : 24 * 60 * 60 * 1000;
     const expiryTime = new Date().getTime() + expiryMs;
 
+    console.log("Setting expiry:", { expiryTime, expiryMs });
     localStorage.setItem("tokenExpiry", expiryTime.toString());
     setIsLoggedIn(true);
   };
