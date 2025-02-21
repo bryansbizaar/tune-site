@@ -20,8 +20,8 @@
     "title": "Ako Umram",
     "description": "7/8, Dm",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "30-year-jig",
@@ -462,6 +462,14 @@
     "upNextTunes": false
   },
   {
+    "id": "hulls-reel",
+    "title": "Hull's Reel",
+    "description": "Reel, E",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "humours-of-ballyloughlin",
     "title": "Humours of Ballyloughlin",
     "description": "Jig, D mix",
@@ -678,7 +686,7 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/333",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {

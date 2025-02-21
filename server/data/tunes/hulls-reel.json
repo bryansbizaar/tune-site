@@ -1,0 +1,15 @@
+{
+  "id": "hulls-reel",
+  "title": "Hull's Reel",
+  "description": "",
+  "sheetMusicFile": "/images/sheetmusic/hulls-reel.png",
+  "versions": ["/images/sheetmusic/hulls-reel-2.png"],
+  "versionDescription": "And a version with chords...",
+  "chords": "/images/chords/hulls-reel-chords.png",
+
+  "chordsDescription": "",
+  "spotifyTrackId": "6lWUT9UTq8EPMhpNvxCXcE",
+  "youtubeTrackId": "",
+  "tuneOfTheWeek": false,
+  "upNextTunes": false
+}
