@@ -20,7 +20,7 @@
     "title": "Ako Umram",
     "description": "7/8, Dm",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -466,8 +466,8 @@
     "title": "Hull's Reel",
     "description": "Reel, E",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "humours-of-ballyloughlin",
@@ -510,6 +510,14 @@
     "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": false
+  },
+  {
+    "id": "james-browns-march",
+    "title": "James Brown's March",
+    "description": "March, G",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
   },
   {
     "id": "josefins-waltz",
