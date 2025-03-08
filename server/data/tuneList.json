@@ -142,6 +142,14 @@
     "upNextTunes": false
   },
   {
+    "id": "blackberry-blossom",
+    "title": "Blackberry Blossom",
+    "description": "Reel, G",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "britches-full-of-stitches",
     "title": "Britches Full Of Stitches",
     "description": "Polka, A",
@@ -466,7 +474,7 @@
     "title": "Hull's Reel",
     "description": "Reel, E",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -516,8 +524,8 @@
     "title": "James Brown's March",
     "description": "March, G",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "josefins-waltz",

@@ -1,0 +1,15 @@
+{
+  "id": "blackberry-blossom",
+  "title": "Blackberry Blossom",
+  "description": "",
+  "sheetMusicFile": "/images/sheetmusic/blackberry-blossom.png",
+  "versions": ["/images/sheetmusic/blackberry-blossom2.png"],
+  "versionDescription": "A slightly different version, with chordVersions",
+  "chords": "/images/chords/blackberry-blossom-chords.png",
+
+  "chordsDescription": "",
+  "spotifyTrackId": "",
+  "youtubeTrackId": "RFcTSfe2Jjo",
+  "tuneOfTheWeek": false,
+  "upNextTunes": false
+}
