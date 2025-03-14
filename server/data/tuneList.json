@@ -146,8 +146,8 @@
     "title": "Blackberry Blossom",
     "description": "Reel, G",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "britches-full-of-stitches",
@@ -410,6 +410,14 @@
     "upNextTunes": false
   },
   {
+    "id": "girl-from-the-big-house",
+    "title": "The Girl From The Big House",
+    "description": "Jig, Dmix",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "green-cake",
     "title": "The Green Cake",
     "description": "Reel, F#m",
@@ -524,7 +532,7 @@
     "title": "James Brown's March",
     "description": "March, G",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
