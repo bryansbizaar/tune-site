@@ -146,7 +146,7 @@
     "title": "Blackberry Blossom",
     "description": "Reel, G",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -414,8 +414,8 @@
     "title": "The Girl From The Big House",
     "description": "Jig, Dmix",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "green-cake",
@@ -492,6 +492,14 @@
     "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": false
+  },
+  {
+    "id": "hut-on-staffin-island",
+    "title": "The Hut On Staffin Island",
+    "description": "Reel, D",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
   },
   {
     "id": "inion-ni-scanlan",
