@@ -234,7 +234,7 @@ iframe {
 .article-content a {
   font-size: 1.2rem;
   line-height: 1.6rem;
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: "Times New Roman", Georgia, Times, serif;
 }
 
 .tune-name {

@@ -414,7 +414,7 @@
     "title": "The Girl From The Big House",
     "description": "Jig, Dmix",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -498,8 +498,8 @@
     "title": "The Hut On Staffin Island",
     "description": "Reel, D",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "inion-ni-scanlan",

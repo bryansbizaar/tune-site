@@ -113,9 +113,9 @@ const TuneList = () => {
               example, The NZ Irish Session allows you to slow a tune down while
               keeping the pitch constant. On The Session, there are usually
               multiple versions, who has recorded the tune, tune name
-              variations, discussion and more. All other tunes have been
-              transcribed by Bryan Owens. Keep an eye on below as the list will
-              grow with time.
+              variations, discussion and more. All other tunes (which require
+              login) have been transcribed by Bryan Owens. Keep an eye on below
+              as the list will grow with time.
             </p>
           </div>
         </div>
