@@ -1038,6 +1038,14 @@
     "upNextTunes": false
   },
   {
+    "id": "swedish-waltz",
+    "title": "Swedish Waltz",
+    "description": "Waltz, Bm",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "sweenys",
     "title": "Sweeny's",
     "description": "Polka, A",
@@ -1091,7 +1099,7 @@
   },
   {
     "id": "tsizikpolkka",
-    "title": "Tsikpolkka",
+    "title": "Tsizikpolkka",
     "description": "Polka, Bm, G",
     "hasChords": true,
     "tunesOfTheWeek": false,
