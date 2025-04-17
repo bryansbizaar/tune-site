@@ -289,7 +289,7 @@
     "description": "Reel, Em",
     "hasExternalLink": true,
     "externalLinkUrl": "https://irish.session.nz/tunes-archive/drowsy-maggie-cm/",
-    "hasChords": false,
+    "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": false
   },
@@ -347,7 +347,7 @@
     "description": "Highland, D",
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/654",
-    "hasChords": false,
+    "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": false
   },
@@ -377,7 +377,7 @@
     "description": "March, Em",
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/2516",
-    "hasChords": true,
+    "hasChords": false,
     "tunesOfTheWeek": false,
     "upNextTunes": false
   },
@@ -498,7 +498,7 @@
     "title": "The Hut On Staffin Island",
     "description": "Reel, D",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -922,6 +922,14 @@
     "upNextTunes": false
   },
   {
+    "id": "sangshyttevalsen",
+    "title": "Sångshyttevalsen",
+    "description": "Waltz, Bm",
+    "hasChords": true,
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
+  },
+  {
     "id": "seanamhac-tube-station",
     "title": "Seanamhac Tube Station",
     "description": "Jig, Gm",
@@ -1036,14 +1044,6 @@
     "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": false
-  },
-  {
-    "id": "sangshyttevalsen",
-    "title": "Sångshyttevalsen",
-    "description": "Waltz, Bm",
-    "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
   },
   {
     "id": "sweenys",
