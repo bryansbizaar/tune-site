@@ -322,6 +322,14 @@
     "upNextTunes": false
   },
   {
+    "id": "fastan",
+    "title": "Fastän",
+    "description": "Polska, F",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "father-o-flynn",
     "title": "Father O'Flynn",
     "description": "Jig, D",
