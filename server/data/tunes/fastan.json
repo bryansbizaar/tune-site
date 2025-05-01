@@ -1,14 +1,13 @@
 {
   "id": "fastan",
   "title": "Fastän",
-  "description": "",
+  "description": "This first version features a simple chord progression for the B part",
   "sheetMusicFile": "/images/sheetmusic/fastan.png",
   "versions": ["/images/sheetmusic/fastan-2.png"],
-  "versionDescription": "And a version with chords ...",
+  "versionDescription": "These chords follow the melody a bit more closely in the B part ...",
   "chords": "/images/chords/fastan-chords.png",
-  "chordsDescription": "",
+  "chordVersions": ["/images/chords/fastan-chords-2.png"],
+  "chordsDescription": "The first version features a simple chord progression for the B part, and the second follows the melody a bit more closely.",
   "spotifyTrackId": "5dLwBczQF1wFP8XsdEx5sK",
-  "youtubeTrackId": "",
-  "tuneOfTheWeek": false,
-  "upNextTunes": false
+  "youtubeTrackId": ""
 }

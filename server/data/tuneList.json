@@ -326,8 +326,8 @@
     "title": "Fastän",
     "description": "Polska, F",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "father-o-flynn",
@@ -466,6 +466,14 @@
     "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": false
+  },
+  {
+    "id": "hanter-dro",
+    "title": "Hanter Dro",
+    "description": "3/4, Am",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
   },
   {
     "id": "hardiman-the-fiddler",
@@ -934,7 +942,7 @@
     "title": "Sångshyttevalsen",
     "description": "Waltz, Bm",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
