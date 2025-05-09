@@ -326,7 +326,7 @@
     "title": "Fastän",
     "description": "Polska, F",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -472,8 +472,8 @@
     "title": "Hanter Dro",
     "description": "3/4, Am",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "hardiman-the-fiddler",
@@ -632,6 +632,14 @@
     "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": false
+  },
+  {
+    "id": "l'air-mignonne",
+    "title": "L'air Mignonne",
+    "description": "Polka, A",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
   },
   {
     "id": "little-beggarman",
