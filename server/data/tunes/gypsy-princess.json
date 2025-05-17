@@ -1,0 +1,12 @@
+{
+  "id": "gypsy-princess",
+  "title": "Gypsy Princess",
+  "description": "Barn dance, G",
+  "sheetMusicFile": "/images/sheetmusic/gypsy-princess.png",
+  "versions": ["/images/sheetmusic/gypsy-princess-2.png"],
+  "versionDescription": "And a version with chords ...",
+  "chords": "/images/chords/gypsy-princess-chords.png",
+  "chordsDescription": "",
+  "spotifyTrackId": "7ah7Mfs1megQZ0qDEQZLsq",
+  "youtubeTrackId": ""
+}

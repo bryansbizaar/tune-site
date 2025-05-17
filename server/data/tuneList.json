@@ -460,6 +460,14 @@
     "upNextTunes": false
   },
   {
+    "id": "gypsy-princess",
+    "title": "Gypsy Princess",
+    "description": "Barn dance, G",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "hag-at-the-churn",
     "title": "The Hag At The Churn",
     "description": "Jig, D mix",
@@ -472,7 +480,7 @@
     "title": "Hanter Dro",
     "description": "3/4, Am",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -638,8 +646,8 @@
     "title": "L'air Mignonne",
     "description": "Polka, A",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "little-beggarman",
