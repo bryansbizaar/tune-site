@@ -464,8 +464,8 @@
     "title": "Gypsy Princess",
     "description": "Barn dance, G",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "hag-at-the-churn",
@@ -532,6 +532,14 @@
     "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": false
+  },
+  {
+    "id": "island-of-woods",
+    "title": "The Island of Woods",
+    "description": "Air, D",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
   },
   {
     "id": "itzikel",
@@ -646,7 +654,7 @@
     "title": "L'air Mignonne",
     "description": "Polka, A",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
