@@ -922,6 +922,16 @@
     "upNextTunes": false
   },
   {
+    "id": "rolling-waves",
+    "title": "The Rolling Waves",
+    "description": "Jig, D",
+    "hasExternalLink": true,
+    "externalLinkUrl": "https://thesession.org/tunes/88",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
+  },
+  {
     "id": "rosbif",
     "title": "Rosbif",
     "description": "Waltz, Em",
