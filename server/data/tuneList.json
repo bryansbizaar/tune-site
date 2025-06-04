@@ -360,6 +360,14 @@
     "upNextTunes": false
   },
   {
+    "id": "filberts",
+    "title": "Filberts",
+    "description": "March, Am",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "finnish",
     "title": "The Finnish",
     "description": "Polka, Bm",
@@ -464,7 +472,7 @@
     "title": "Gypsy Princess",
     "description": "Barn dance, G",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -536,10 +544,10 @@
   {
     "id": "island-of-woods",
     "title": "The Island of Woods",
-    "description": "Air, D",
+    "description": "4/4, D",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "itzikel",
