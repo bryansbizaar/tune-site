@@ -364,8 +364,8 @@
     "title": "Filberts",
     "description": "March, Am",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "finnish",
@@ -484,6 +484,14 @@
     "upNextTunes": false
   },
   {
+    "id": "happy-polka",
+    "title": "The Happy Polka",
+    "description": "Polka, D",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "hanter-dro",
     "title": "Hanter Dro",
     "description": "3/4, Am",
@@ -546,7 +554,7 @@
     "title": "The Island of Woods",
     "description": "4/4, D",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -1170,6 +1178,14 @@
     "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": false
+  },
+  {
+    "id": "upperchurch-no2",
+    "title": "The Upperchurch No. 2",
+    "description": "Polka, A",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
   },
   {
     "id": "vals-efter-lasse-i-lyby",
