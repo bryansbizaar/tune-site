@@ -2,12 +2,12 @@
   "id": "rakish-paddy",
   "title": "Rakish Paddy",
   "description": "",
-  "sheetMusicFile": "",
+  "sheetMusicFile": "/images/sheetmusic/rakish-paddy.png",
   "versionDescription": "",
   "chords": "/images/chords/rakish-paddy-chords.png",
   "chordsDescription": "",
   "spotifyTrackId": "",
-  "youtubeTrackId": "",
+  "youtubeTrackId": "https://youtu.be/xRdflKFTtxc?si=lx_4KgrMinJOqmIP",
   "tuneOfTheWeek": false,
   "upNextTune": false
 }
