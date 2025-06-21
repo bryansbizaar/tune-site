@@ -312,6 +312,14 @@
     "upNextTunes": false
   },
   {
+    "id": "farewell-trion",
+    "title": "Farewell Trion",
+    "description": "Reel, C",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "farewell-to-whalley-range",
     "title": "Farewell to Whalley Range",
     "description": "Slip Jig, F#m",
@@ -364,7 +372,7 @@
     "title": "Filberts",
     "description": "March, Am",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -488,8 +496,8 @@
     "title": "The Happy Polka",
     "description": "Polka, D",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "hanter-dro",
@@ -1180,8 +1188,8 @@
     "title": "The Upperchurch No. 2",
     "description": "Polka, A",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "vals-efter-lasse-i-lyby",
