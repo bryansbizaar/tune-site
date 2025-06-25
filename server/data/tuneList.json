@@ -316,8 +316,8 @@
     "title": "Farewell Trion",
     "description": "Reel, C",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "farewell-to-whalley-range",
@@ -496,7 +496,7 @@
     "title": "The Happy Polka",
     "description": "Polka, D",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -1090,7 +1090,7 @@
   {
     "id": "star-of-munster",
     "title": "The Star of Munster",
-    "description": "",
+    "description": "Reel, Am",
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/197",
     "hasChords": false,
@@ -1104,6 +1104,14 @@
     "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": false
+  },
+  {
+    "id": "suite-de-ridees",
+    "title": "Suite de ridées",
+    "description": "Ridés, 3/4",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
   },
   {
     "id": "swallowtail",
@@ -1188,7 +1196,7 @@
     "title": "The Upperchurch No. 2",
     "description": "Polka, A",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
