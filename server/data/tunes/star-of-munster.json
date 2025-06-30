@@ -1,13 +1,11 @@
 {
-  "id": "",
-  "title": "",
-  "description": "",
+  "id": "star-of-munster",
+  "title": "The Star of Munster",
+  "description": "Reel, Am",
   "sheetMusicFile": "",
   "versionDescription": "",
-  "chords": "",
+  "chords": "/images/chords/star-of-munster-chords.png",
   "chordsDescription": "",
   "spotifyTrackId": "",
-  "youtubeTrackId": "",
-  "tuneOfTheWeek": false,
-  "upNextTune": false
+  "youtubeTrackId": ""
 }

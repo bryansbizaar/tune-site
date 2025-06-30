@@ -1093,7 +1093,7 @@
     "description": "Reel, Am",
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/197",
-    "hasChords": false,
+    "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": false
   },
