@@ -316,7 +316,7 @@
     "title": "Farewell Trion",
     "description": "Reel, C",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -1110,8 +1110,8 @@
     "title": "Suite de ridées",
     "description": "Ridés, 3/4",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "swallowtail",
@@ -1242,5 +1242,13 @@
     "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": false
+  },
+  {
+    "id": "yekermo-sew",
+    "title": "Yèkèrmo Sèw",
+    "description": "4/4",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
   }
 ]
