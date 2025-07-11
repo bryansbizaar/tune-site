@@ -518,6 +518,14 @@
     "upNextTunes": false
   },
   {
+    "id": "holly-bush",
+    "title": "The Holly Bush",
+    "description": "Reel, D mix",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "hora-de-kaval",
     "title": "Hora de Kaval",
     "description": "Hora, D",
@@ -1110,7 +1118,7 @@
     "title": "Suite de ridées",
     "description": "Ridés, 3/4",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -1248,7 +1256,7 @@
     "title": "Yèkèrmo Sèw",
     "description": "4/4",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   }
 ]
