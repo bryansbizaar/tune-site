@@ -522,8 +522,8 @@
     "title": "The Holly Bush",
     "description": "Reel, D mix",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "hora-de-kaval",
@@ -800,6 +800,14 @@
     "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": false
+  },
+  {
+    "id": "mouth-of-the-tobique",
+    "title": "The Mouth of the Tobique",
+    "description": "Reel, G",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
   },
   {
     "id": "music-for-a-found-harmonium",
@@ -1256,7 +1264,7 @@
     "title": "Yèkèrmo Sèw",
     "description": "4/4",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   }
 ]
