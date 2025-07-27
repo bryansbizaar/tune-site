@@ -522,7 +522,7 @@
     "title": "The Holly Bush",
     "description": "Reel, D mix",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -806,8 +806,8 @@
     "title": "The Mouth of the Tobique",
     "description": "Reel, G",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "music-for-a-found-harmonium",
