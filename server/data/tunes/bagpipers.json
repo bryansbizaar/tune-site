@@ -1,0 +1,12 @@
+{
+  "id": "bagpipers",
+  "title": "Bagpipers",
+  "description": "",
+  "sheetMusicFile": "/images/sheetmusic/bagpipers.png",
+  "versions": ["/images/sheetmusic/bagpipers-2.png"],
+  "versionDescription": "And a version with chords ...",
+  "chords": "/images/chords/bagpipers-chords.png",
+  "chordsDescription": "",
+  "spotifyTrackId": "0sj8WyJQiwONVch4BZBjOY",
+  "youtubeTrackId": ""
+}

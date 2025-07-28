@@ -78,6 +78,14 @@
     "upNextTunes": false
   },
   {
+    "id": "bagpipers",
+    "title": "Bagpipers",
+    "description": "2/2,G",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "baym-rebn-in-palesteena",
     "title": "Baym Rebn In Palesteena",
     "description": "D",
@@ -808,6 +816,14 @@
     "hasChords": true,
     "tunesOfTheWeek": true,
     "upNextTunes": false
+  },
+  {
+    "id": "mouth-of-the-tobique2",
+    "title": "The Mouth of the Tobique v2",
+    "description": "Reel, G",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
   },
   {
     "id": "music-for-a-found-harmonium",
