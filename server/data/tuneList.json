@@ -82,8 +82,8 @@
     "title": "Bagpipers",
     "description": "2/2,G",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "baym-rebn-in-palesteena",
@@ -690,6 +690,14 @@
     "upNextTunes": false
   },
   {
+    "id": "krivo-polska",
+    "title": "Krivo Polska",
+    "description": "Polska, Gm",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "l'air-mignonne",
     "title": "L'air Mignonne",
     "description": "Polka, A",
@@ -814,7 +822,7 @@
     "title": "The Mouth of the Tobique",
     "description": "Reel, G",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -822,8 +830,8 @@
     "title": "The Mouth of the Tobique v2",
     "description": "Reel, G",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "music-for-a-found-harmonium",
