@@ -5,8 +5,9 @@
   "sheetMusicFile": "/images/sheetmusic/krivo-polska.png",
   "versions": ["/images/sheetmusic/krivo-polska-2.png"],
   "versionDescription": "And a version with chords...",
-  "chords": "/images/chords/krivo-polska-chords.png",
-  "chordsDescription": "",
+  "chords": "/images/chords/krivo-polska-chords-2.png",
+  "chordVersions": ["/images/chords/krivo-polska-chords.png"],
+  "chordsDescription": "This is in Gm, but you can put a capo on the 3rd fret and play in the Em position for the first version.",
   "spotifyTrackId": "6LiApWJBx80M8hCU0D0LtC",
   "youtubeTrackId": ""
 }
