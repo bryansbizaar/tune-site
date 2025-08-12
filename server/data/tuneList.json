@@ -82,7 +82,7 @@
     "title": "Bagpipers",
     "description": "2/2,G",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -484,6 +484,14 @@
     "upNextTunes": false
   },
   {
+    "id": "gudda",
+    "title": "Gudda",
+    "description": "7/8, G",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "gypsy-princess",
     "title": "Gypsy Princess",
     "description": "Barn dance, G",
@@ -694,8 +702,8 @@
     "title": "Krivo Polska",
     "description": "Polska, Gm",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "l'air-mignonne",
@@ -830,7 +838,7 @@
     "title": "The Mouth of the Tobique v2",
     "description": "Reel, G",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
