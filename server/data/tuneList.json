@@ -320,6 +320,14 @@
     "upNextTunes": false
   },
   {
+    "id": "esperanza",
+    "title": "Esperanza",
+    "description": "4/4, Am",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "farewell-trion",
     "title": "Farewell Trion",
     "description": "Reel, C",
@@ -488,8 +496,8 @@
     "title": "Gudda",
     "description": "7/8, G",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "gypsy-princess",
@@ -702,7 +710,7 @@
     "title": "Krivo Polska",
     "description": "Polska, Gm",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -947,6 +955,16 @@
     "externalLinkUrl": "https://thesession.org/tunes/7905",
     "hasChords": true,
     "tunesOfTheWeek": false,
+    "upNextTunes": false
+  },
+  {
+    "id": "rain-on-the-woodpile",
+    "title": "Rain On The Woodpile",
+    "description": "Reel, Am",
+    "hasExternalLink": true,
+    "externalLinkUrl": "https://thesession.org/tunes/22616",
+    "hasChords": true,
+    "tunesOfTheWeek": true,
     "upNextTunes": false
   },
   {

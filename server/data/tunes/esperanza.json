@@ -1,0 +1,12 @@
+{
+  "id": "esperanza",
+  "title": "Esperanza",
+  "description": "4/4, Am",
+  "sheetMusicFile": "/images/sheetmusic/esperanza.png",
+  "versions": ["/images/sheetmusic/esperanza-2.png"],
+  "versionDescription": "And a version with chords ...",
+  "chords": "/images/chords/esperanza-chords.png",
+  "chordsDescription": "",
+  "spotifyTrackId": "1MZSlN1SkgrD1JcgU4tg0r",
+  "youtubeTrackId": ""
+}
