@@ -312,6 +312,14 @@
     "upNextTunes": false
   },
   {
+    "id": "ej-istenem-add-meg-ugy",
+    "title": "Ej, Istenem, Add Meg Úgy",
+    "description": "7/8, A",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "elzics-farewell",
     "title": "Elzic's Farewell",
     "description": "Reel, Am",
@@ -324,8 +332,8 @@
     "title": "Esperanza",
     "description": "4/4, Am",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "farewell-trion",
@@ -496,7 +504,7 @@
     "title": "Gudda",
     "description": "7/8, G",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -843,7 +851,7 @@
   },
   {
     "id": "mouth-of-the-tobique2",
-    "title": "The Mouth of the Tobique v2",
+    "title": "The Mouth of the Tobique v2/v3",
     "description": "Reel, G",
     "hasChords": true,
     "tunesOfTheWeek": false,
@@ -964,7 +972,7 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/22616",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
