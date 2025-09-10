@@ -316,8 +316,16 @@
     "title": "Ej, Istenem, Add Meg Úgy",
     "description": "7/8, A",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
+  },
+  {
+    "id": "eleno-mome",
+    "title": "Eleno Mome",
+    "description": "7/8, A",
+    "hasChords": true,
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "elzics-farewell",
@@ -332,7 +340,7 @@
     "title": "Esperanza",
     "description": "4/4, Am",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -786,6 +794,14 @@
     "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": false
+  },
+  {
+    "id": "maggies-pancakes",
+    "title": "Maggie's Pancakes",
+    "description": "Reel, Bm",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
   },
   {
     "id": "maid-behind-the-bar",
