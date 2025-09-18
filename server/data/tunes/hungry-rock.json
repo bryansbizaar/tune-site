@@ -1,0 +1,13 @@
+{
+  "id": "hungry-rock",
+  "title": "The Hungry Rock",
+  "description": "The chords in the first version are simplified and follow the melody rather than what is used by the author of the tune.",
+  "sheetMusicFile": "/images/sheetmusic/hungry-rock-1.png",
+  "versions": ["/images/sheetmusic/hungry-rock-2.png"],
+  "versionDescription": "The chords in the second version are closer to what is used by the author of the tune, performed on a bouzouki and mandola.",
+  "chords": "/images/chords/hungry-rock-chords.png",
+  "chordVersions": ["/images/chords/hungry-rock-chords-2.png"],
+  "chordsDescription": "The chords in the first version are simplified and follow the melody rather than what is used by the author of the tune. The chords in the second version are closer to what is used by the author of the tune, performed on a bouzouki and mandola.",
+  "spotifyTrackId": "5rOjK60DTrq6RpNUv2ugvD",
+  "youtubeTrackId": ""
+}

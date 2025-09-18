@@ -316,7 +316,7 @@
     "title": "Ej, Istenem, Add Meg Úgy",
     "description": "7/8, A",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -324,7 +324,7 @@
     "title": "Eleno Mome",
     "description": "7/8, A",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -590,6 +590,14 @@
     "upNextTunes": false
   },
   {
+    "id": "hungry-rock",
+    "title": "The Hungry Rock",
+    "description": "Jig, Em",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "hut-on-staffin-island",
     "title": "The Hut On Staffin Island",
     "description": "Reel, D",
@@ -800,8 +808,8 @@
     "title": "Maggie's Pancakes",
     "description": "Reel, Bm",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "maid-behind-the-bar",
