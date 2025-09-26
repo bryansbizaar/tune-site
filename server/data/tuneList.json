@@ -158,6 +158,14 @@
     "upNextTunes": false
   },
   {
+    "id": "bonapartes-retreat",
+    "title": "Bonaparte's Retreat",
+    "description": "March, D",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "britches-full-of-stitches",
     "title": "Britches Full Of Stitches",
     "description": "Polka, A",
@@ -594,8 +602,8 @@
     "title": "The Hungry Rock",
     "description": "Jig, Em",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "hut-on-staffin-island",
@@ -808,7 +816,7 @@
     "title": "Maggie's Pancakes",
     "description": "Reel, Bm",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
