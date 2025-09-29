@@ -1,12 +1,13 @@
 {
   "id": "bonapartes-retreat",
   "title": "Bonaparte's Retreat",
-  "description": "March, D",
+  "description": "The first version is from The Watson Family, released in 1963.",
   "sheetMusicFile": "/images/sheetmusic/bonapartes-retreat.png",
   "versions": ["/images/sheetmusic/bonapartes-retreat-2.png"],
-  "versionDescription": "And a version with chords...",
+  "versionDescription": "The second version is from William H. Stepp, recorded in 1937.",
   "chords": "/images/chords/bonapartes-retreat-chords.png",
-  "chordsDescription": "",
+  "chordVersions": ["/images/chords/bonapartes-retreat-chords-2.png"],
+  "chordsDescription": "Here are two slightly different versions - the first follows the Watson Family and the second follows William H. Stepp.",
   "spotifyTrackId": "39FhytMVlhIaXww1fqlA0l",
   "youtubeTrackId": ""
 }
