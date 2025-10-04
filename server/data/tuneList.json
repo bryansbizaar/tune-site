@@ -162,8 +162,8 @@
     "title": "Bonaparte's Retreat",
     "description": "March, D",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "britches-full-of-stitches",
@@ -222,6 +222,14 @@
     "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": false
+  },
+  {
+    "id": "chosn-kale-mazel-tov",
+    "title": "Chosn Kale Mazel Tov",
+    "description": "Hora, Gm",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
   },
   {
     "id": "clochard-de-paris",
@@ -602,7 +610,7 @@
     "title": "The Hungry Rock",
     "description": "Jig, Em",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
