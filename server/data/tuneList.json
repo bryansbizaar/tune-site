@@ -574,6 +574,14 @@
     "upNextTunes": false
   },
   {
+    "id": "hava-nagila",
+    "title": "Hava Nagila",
+    "description": "Hora, D freygish",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "holly-bush",
     "title": "The Holly Bush",
     "description": "Reel, D mix",
