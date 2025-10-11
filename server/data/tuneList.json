@@ -162,7 +162,7 @@
     "title": "Bonaparte's Retreat",
     "description": "March, D",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -228,8 +228,8 @@
     "title": "Chosn Kale Mazel Tov",
     "description": "Hora, Gm",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "clochard-de-paris",
@@ -358,6 +358,14 @@
     "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": false
+  },
+  {
+    "id": "farewell-to-tchernobyl",
+    "title": "Farewell To Tchernobyl",
+    "description": "Reel, Dm",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
   },
   {
     "id": "farewell-trion",
@@ -578,8 +586,8 @@
     "title": "Hava Nagila",
     "description": "Hora, D freygish",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "holly-bush",
