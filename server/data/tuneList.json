@@ -228,7 +228,7 @@
     "title": "Chosn Kale Mazel Tov",
     "description": "Hora, Gm",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -364,8 +364,8 @@
     "title": "Farewell To Tchernobyl",
     "description": "Reel, Dm",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "farewell-trion",
@@ -586,7 +586,7 @@
     "title": "Hava Nagila",
     "description": "Hora, D freygish",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -1372,6 +1372,14 @@
     "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": false
+  },
+  {
+    "id": "wrong-foot-forward",
+    "title": "Wrong Foot Forward",
+    "description": "7/8, Bm",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
   },
   {
     "id": "yekermo-sew",
