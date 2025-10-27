@@ -328,6 +328,14 @@
     "upNextTunes": false
   },
   {
+    "id": "eel-in-the-sink",
+    "title": "The Eel In The Sink",
+    "description": "Reel, A mix",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "ej-istenem-add-meg-ugy",
     "title": "Ej, Istenem, Add Meg Úgy",
     "description": "7/8, A",
@@ -1068,8 +1076,8 @@
     "title": "The Road To Errogie",
     "description": "Reel, A",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "road-to-lisdoonvarna",
@@ -1386,7 +1394,7 @@
     "title": "Wrong Foot Forward",
     "description": "7/8, Bm",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
