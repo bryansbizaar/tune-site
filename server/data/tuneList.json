@@ -332,8 +332,8 @@
     "title": "The Eel In The Sink",
     "description": "Reel, A mix",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "ej-istenem-add-meg-ugy",
@@ -722,6 +722,14 @@
     "upNextTunes": false
   },
   {
+    "id": "julianne-johnson",
+    "title": "Julianne Johnson",
+    "description": "Reel, A",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "jump-at-the-sun",
     "title": "Jump at the Sun",
     "description": "Jig, Gm",
@@ -1076,7 +1084,7 @@
     "title": "The Road To Errogie",
     "description": "Reel, A",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
