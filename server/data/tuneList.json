@@ -332,7 +332,7 @@
     "title": "The Eel In The Sink",
     "description": "Reel, A mix",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -726,8 +726,8 @@
     "title": "Julianne Johnson",
     "description": "Reel, A",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "jump-at-the-sun",
@@ -834,6 +834,16 @@
     "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": false
+  },
+  {
+    "id": "luke-skywalker-walks-on-sunshine",
+    "title": "Luke Skywalker Walks On Sunshine (v3)",
+    "description": "7/8, A",
+    "hasExternalLink": true,
+    "externalLinkUrl": "https://thesession.org/tunes/15398",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
   },
   {
     "id": "macarthur-road",
