@@ -726,7 +726,7 @@
     "title": "Julianne Johnson",
     "description": "Reel, A",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -842,8 +842,8 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/15398",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "macarthur-road",
@@ -1372,6 +1372,14 @@
     "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": false
+  },
+  {
+    "id": "valse-des-pastouriaux",
+    "title": "Le Valse des Pastouriaux",
+    "description": "Waltz, G",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
   },
   {
     "id": "walls-of-liscaroll",

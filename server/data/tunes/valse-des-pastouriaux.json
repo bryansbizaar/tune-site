@@ -1,0 +1,13 @@
+{
+  "id": "valse-des-pastouriaux",
+  "title": "La Valse des Pastouriaux",
+  "description": "",
+  "sheetMusicFile": "/images/sheetmusic/valse-des-pastouriaux.png",
+  "versions": ["/images/sheetmusic/valse-des-pastouriaux-2.png"],
+  "versionDescription": "And a version with chords...",
+  "chords": "/images/chords/valse-des-pastouriaux-chords.png",
+  "chordVersions": ["/images/chords/valse-des-pastouriaux-chords-2.png"],
+  "chordsDescription": "Here is a basic version followed by one with some options for substitutions.",
+  "spotifyTrackId": "0nRKDIb4u1RgGqpxBtz83n",
+  "youtubeTrackId": ""
+}
