@@ -798,8 +798,8 @@
     "title": "A l'envers",
     "description": "3/4, Em",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "little-beggarman",
@@ -1128,8 +1128,8 @@
     "title": "Rond de St Vincent",
     "description": "4/4, Am",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "rosbif",
@@ -1210,6 +1210,14 @@
     "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": false
+  },
+  {
+    "id": "slangpolska-fran-barseback",
+    "title": "Slängpolska från Barsebäck",
+    "description": "Polksa, Am",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
   },
   {
     "id": "slip-of-a-thing",
@@ -1394,7 +1402,7 @@
     "title": "Le Valse des Pastouriaux",
     "description": "Waltz, G",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
