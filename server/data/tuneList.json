@@ -798,7 +798,7 @@
     "title": "A l'envers",
     "description": "3/4, Em",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -1128,7 +1128,7 @@
     "title": "Rond de St Vincent",
     "description": "4/4, Am",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -1188,6 +1188,14 @@
     "upNextTunes": false
   },
   {
+    "id": "shakin-down-the-acorns",
+    "title": "Shakin' Down The Acorns",
+    "description": "Reel, A mix",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "shalom-aleichem",
     "title": "Shalom Aleichem",
     "description": "4/4, Am",
@@ -1216,8 +1224,8 @@
     "title": "Slängpolska från Barsebäck",
     "description": "Polksa, Am",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "slip-of-a-thing",
