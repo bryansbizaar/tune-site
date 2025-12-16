@@ -134,6 +134,16 @@
     "upNextTunes": false
   },
   {
+    "id": "bill-the-weaver",
+    "title": "Bill The Weaver",
+    "description": "Jig, G",
+    "hasExternalLink": true,
+    "externalLinkUrl": "https://thesession.org/tunes/1693",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "biserka",
     "title": "Biserka",
     "description": "Waltz, Gm",
