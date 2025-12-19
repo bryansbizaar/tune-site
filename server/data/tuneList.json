@@ -140,8 +140,8 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/1693",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "biserka",
@@ -214,6 +214,14 @@
     "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": false
+  },
+  {
+    "id": "canyon-moonrise",
+    "title": "Canyon Moonrise",
+    "description": "Waltz, E/Em",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
   },
   {
     "id": "catharsis",
@@ -1202,8 +1210,8 @@
     "title": "Shakin' Down The Acorns",
     "description": "Reel, A mix",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "shalom-aleichem",
@@ -1234,7 +1242,7 @@
     "title": "Slängpolska från Barsebäck",
     "description": "Polksa, Am",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
