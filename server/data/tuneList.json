@@ -1440,6 +1440,14 @@
     "upNextTunes": false
   },
   {
+    "id": "vladimirs-steamboat",
+    "title": "Vladimir's Steamboat",
+    "description": "Reel, Dmix",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "walls-of-liscaroll",
     "title": "The Walls Of Liscaroll",
     "description": "Jig, Dm",
