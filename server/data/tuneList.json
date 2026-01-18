@@ -1202,7 +1202,7 @@
     "title": "Schottische du Stockfish",
     "description": "Schottische, Am",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -1228,6 +1228,14 @@
     "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": false
+  },
+  {
+    "id": "sherele",
+    "title": "Sherele",
+    "description": "Freylach, D freygish",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
   },
   {
     "id": "sirto",
@@ -1444,8 +1452,8 @@
     "title": "Vladimir's Steamboat",
     "description": "Reel, Dmix",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "walls-of-liscaroll",
