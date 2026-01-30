@@ -378,6 +378,14 @@
     "upNextTunes": false
   },
   {
+    "id": "engleska-de-scanie",
+    "title": "Engleska de Scanie",
+    "description": "4/4, A",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "esperanza",
     "title": "Esperanza",
     "description": "4/4, Am",
@@ -1234,8 +1242,8 @@
     "title": "Sherele",
     "description": "Freylach, D freygish",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "sirto",
@@ -1452,7 +1460,7 @@
     "title": "Vladimir's Steamboat",
     "description": "Reel, Dmix",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
