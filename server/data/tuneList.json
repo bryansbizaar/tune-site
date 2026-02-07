@@ -382,8 +382,8 @@
     "title": "Engleska de Scanie",
     "description": "4/4, A",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "esperanza",
@@ -678,6 +678,14 @@
     "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": false
+  },
+  {
+    "id": "iron-bell",
+    "title": "The Iron Bell",
+    "description": "2/4, Bm",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
   },
   {
     "id": "island-of-woods",
@@ -1242,7 +1250,7 @@
     "title": "Sherele",
     "description": "Freylach, D freygish",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
