@@ -168,6 +168,14 @@
     "upNextTunes": false
   },
   {
+    "id": "blue-eyed-stranger",
+    "title": "The Blue Eyed Stranger",
+    "description": "2/4, D",
+    "hasChords": true,
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
+  },
+  {
     "id": "bonapartes-retreat",
     "title": "Bonaparte's Retreat",
     "description": "March, D",
@@ -382,7 +390,7 @@
     "title": "Engleska de Scanie",
     "description": "4/4, A",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -684,8 +692,8 @@
     "title": "The Iron Bell",
     "description": "2/4, Bm",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "island-of-woods",
@@ -1504,6 +1512,16 @@
     "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": false
+  },
+  {
+    "id": "wise-maid",
+    "title": "The Wise Maid (V2)",
+    "description": "Reel, D",
+    "hasExternalLink": true,
+    "externalLinkUrl": "https://thesession.org/tunes/118",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
   },
   {
     "id": "wrong-foot-forward",
