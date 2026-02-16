@@ -1,15 +1,13 @@
 const path = require("path");
 const dotenv = require("dotenv");
 
-// Load the correct env file based on environment
-const envFile =
-  process.env.NODE_ENV === "production"
-    ? ".env.production"
-    : ".env.development";
-
-dotenv.config({
-  path: path.resolve(__dirname, envFile),
-});
+// Load env file only in non-production (Render provides env vars directly in production)
+if (process.env.NODE_ENV !== "production") {
+  const envFile = ".env.development";
+  dotenv.config({
+    path: path.resolve(__dirname, envFile),
+  });
+}
 
 const express = require("express");
 const connectDB = require("./config/db");

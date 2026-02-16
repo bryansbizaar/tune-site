@@ -101,9 +101,15 @@ router.post("/forgot-password", async (req, res) => {
       user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
       await user.save();
 
+      console.log("Attempting to send reset email to:", user.email);
+      console.log("RESEND_API_KEY exists:", !!process.env.RESEND_API_KEY);
+      console.log("FROM_EMAIL:", process.env.FROM_EMAIL);
+
       const resetUrl = `${process.env.FRONTEND_URL}?reset_token=${token}`;
       await emailUtils.sendResetEmail(user.email, resetUrl);
+      console.log("Email sent successfully");
     } catch (emailError) {
+      console.error("Email error:", emailError);
       user.resetPasswordToken = undefined;
       user.resetPasswordExpires = undefined;
       await user.save();
