@@ -12,6 +12,7 @@ jest.mock("../env", () => ({
 jest.mock("../useAuth", () => ({
   useAuth: () => ({
     isLoggedIn: false,
+    login: jest.fn(),
     logout: jest.fn(),
   }),
 }));
