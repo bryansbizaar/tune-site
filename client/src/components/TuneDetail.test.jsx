@@ -38,7 +38,7 @@ describe("TuneDetail Component", () => {
     description: "Test tune description",
     sheetMusicFile: "/sheet-music/test-tune.png",
     versions: ["/sheet-music/version2.png", "/sheet-music/version3.png"],
-    versionDescription: "Version description",
+    versionDescriptions: ["Version 2 description", "Version 3 description"],
     chords: true,
     spotifyTrackId: "spotify123",
     youtubeTrackId: "youtube456",
@@ -152,9 +152,12 @@ describe("TuneDetail Component", () => {
         `http://localhost:5000${mockTune.sheetMusicFile}`
       );
 
-      // Check version description
-      expect(screen.getByTestId("version-description")).toHaveTextContent(
-        mockTune.versionDescription
+      // Check version descriptions
+      expect(screen.getByTestId("version-description-2")).toHaveTextContent(
+        mockTune.versionDescriptions[0]
+      );
+      expect(screen.getByTestId("version-description-3")).toHaveTextContent(
+        mockTune.versionDescriptions[1]
       );
 
       // Check additional versions
@@ -190,7 +193,7 @@ describe("TuneDetail Component", () => {
       expect(screen.queryByTestId("chords-link")).not.toBeInTheDocument();
       expect(screen.queryByTestId("tune-description")).not.toBeInTheDocument();
       expect(
-        screen.queryByTestId("version-description")
+        screen.queryByTestId("version-description-2")
       ).not.toBeInTheDocument();
       expect(screen.queryByTestId("spotify-container")).not.toBeInTheDocument();
       expect(screen.queryByTestId("youtube-container")).not.toBeInTheDocument();
