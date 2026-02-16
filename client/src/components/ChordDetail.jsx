@@ -97,36 +97,46 @@ const ChordDetail = () => {
     <div data-testid="chord-detail-container">
       <Header isFixed={false} />
       <div>
-        {tune.chordsDescription && (
-          <p className="centered-content text" data-testid="chords-description">
-            {tune.chordsDescription}
-          </p>
-        )}
-
         {imagesLoaded && (
           <>
             {tune.chords && (
-              <div className="sheetMusicContainer">
-                <img
-                  className="img-tune"
-                  src={`${VITE_API_URL}${tune.chords}`}
-                  alt={`Chord diagram for ${tune.title}`}
-                  data-testid="main-chord-diagram"
-                />
-              </div>
+              <>
+                {tune.chordsDescription && (
+                  <p className="centered-content text" data-testid="chords-description">
+                    {tune.chordsDescription}
+                  </p>
+                )}
+                <div className="sheetMusicContainer">
+                  <img
+                    className="img-tune"
+                    src={`${VITE_API_URL}${tune.chords}`}
+                    alt={`Chord diagram for ${tune.title}`}
+                    data-testid="main-chord-diagram"
+                  />
+                </div>
+              </>
             )}
 
             {tune.chordVersions?.map((version, index) => (
               <div
                 key={`chord-version-${index + 2}`}
-                className="sheetMusicContainer"
                 data-testid={`version-${index + 2}`}
               >
-                <img
-                  className="img-tune"
-                  src={`${VITE_API_URL}${version}`}
-                  alt={`${tune.title} - Chord Version ${index + 2}`}
-                />
+                {tune.chordVersionDescriptions?.[index] && (
+                  <p
+                    className="centered-content text"
+                    data-testid={`chord-version-description-${index + 2}`}
+                  >
+                    {tune.chordVersionDescriptions[index]}
+                  </p>
+                )}
+                <div className="sheetMusicContainer">
+                  <img
+                    className="img-tune"
+                    src={`${VITE_API_URL}${version}`}
+                    alt={`${tune.title} - Chord Version ${index + 2}`}
+                  />
+                </div>
               </div>
             ))}
           </>

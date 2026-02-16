@@ -4,10 +4,11 @@
   "description": "",
   "sheetMusicFile": "/images/sheetmusic/",
   "versions": ["/images/sheetmusic/"],
-  "versionDescription": "",
+  "versionDescriptions": [""],
   "chords": "/images/chords/",
   "chordVersions": ["/images/chords/"],
   "chordsDescription": "",
+  "chordVersionDescriptions": [""],
   "spotifyTrackId": "",
   "youtubeTrackId": ""
 }

@@ -35,7 +35,7 @@ Whangarei Tunes is a modern web application designed to support the traditional 
 
 ### External Services
 
-- **SendGrid** - Email services for password reset
+- **Resend** - Email services for password reset
 - **Spotify API** - Music streaming integration
 - **YouTube API** - Video content embedding
 
@@ -59,7 +59,7 @@ Whangarei Tunes is a modern web application designed to support the traditional 
 
 - **Secure Registration/Login**: JWT-based authentication system
 - **Extended Sessions**: Optional 30-day login persistence
-- **Password Reset**: Email-based password recovery with SendGrid
+- **Password Reset**: Email-based password recovery with Resend
 - **Role-based Access**: User and admin role management
 
 ### 🎵 Interactive Features
@@ -81,7 +81,7 @@ Whangarei Tunes is a modern web application designed to support the traditional 
 
 - Node.js (v18 or higher)
 - MongoDB (local or Atlas)
-- SendGrid account (for email services)
+- Resend account (for email services)
 
 ### Installation
 
@@ -113,7 +113,7 @@ Whangarei Tunes is a modern web application designed to support the traditional 
    PORT=5000
    MONGODB_URI=mongodb://localhost:27017/react-tunes
    JWT_SECRET=your-super-secret-jwt-key
-   SENDGRID_API_KEY=your-sendgrid-api-key
+   RESEND_API_KEY=your-resend-api-key
    FROM_EMAIL=noreply@yourdomain.com
    FRONTEND_URL=http://localhost:5173
    ```

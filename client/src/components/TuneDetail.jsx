@@ -120,23 +120,26 @@ const TuneDetail = () => {
               />
             </div>
 
-            {tune.versionDescription && (
-              <p className="text" data-testid="version-description">
-                {tune.versionDescription}
-              </p>
-            )}
-
             {tune.versions?.map((version, index) => (
               <div
                 key={`version-${index + 2}`}
-                className="sheetMusicContainer"
                 data-testid={`version-${index + 2}`}
               >
-                <img
-                  className="img-tune"
-                  src={`${VITE_API_URL}${version}`}
-                  alt={`${tune.title} - Version ${index + 2}`}
-                />
+                {(tune.versionDescriptions?.[index] || (index === 0 && tune.versionDescription)) && (
+                  <p
+                    className="text"
+                    data-testid={`version-description-${index + 2}`}
+                  >
+                    {tune.versionDescriptions?.[index] || tune.versionDescription}
+                  </p>
+                )}
+                <div className="sheetMusicContainer">
+                  <img
+                    className="img-tune"
+                    src={`${VITE_API_URL}${version}`}
+                    alt={`${tune.title} - Version ${index + 2}`}
+                  />
+                </div>
               </div>
             ))}
           </>
