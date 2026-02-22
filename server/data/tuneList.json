@@ -172,7 +172,7 @@
     "title": "The Blue Eyed Stranger",
     "description": "2/4, D",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -522,6 +522,14 @@
     "upNextTunes": false
   },
   {
+    "id": "frissons",
+    "title": "Frissons",
+    "description": "2/4, E freygish",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "full-rigged-ship",
     "title": "Da Full Rigged Ship",
     "description": "Jig, Am",
@@ -692,7 +700,7 @@
     "title": "The Iron Bell",
     "description": "2/4, Bm",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -1520,8 +1528,8 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/118",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "wrong-foot-forward",
