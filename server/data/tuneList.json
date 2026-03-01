@@ -526,8 +526,8 @@
     "title": "Frissons",
     "description": "2/4, E freygish",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "full-rigged-ship",
@@ -1052,6 +1052,14 @@
     "upNextTunes": false
   },
   {
+    "id": "o-vals",
+    "title": "O-Vals",
+    "description": "3/4, Dm",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "over-the-moor-to-maggie",
     "title": "Over the Moor to Maggie",
     "description": "Reel, G",
@@ -1528,7 +1536,7 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/118",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
