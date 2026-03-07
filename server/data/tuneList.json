@@ -526,7 +526,7 @@
     "title": "Frissons",
     "description": "2/4, E freygish",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -998,6 +998,14 @@
     "upNextTunes": false
   },
   {
+    "id": "muineira-do-morrazo",
+    "title": "Muiñeira Do Morrazo",
+    "description": "6/8, D",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "music-for-a-found-harmonium",
     "title": "Music For A Found Harmonium",
     "description": "4/4, various keys",
@@ -1056,8 +1064,8 @@
     "title": "O-Vals",
     "description": "3/4, Dm",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "over-the-moor-to-maggie",
