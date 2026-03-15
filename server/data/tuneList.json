@@ -168,6 +168,16 @@
     "upNextTunes": false
   },
   {
+    "id": "blarney-pilgrim",
+    "title": "The Blarney Pilgrim (v6)",
+    "description": "Jig, G",
+    "hasExternalLink": true,
+    "externalLinkUrl": "https://thesession.org/tunes/5",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "blue-eyed-stranger",
     "title": "The Blue Eyed Stranger",
     "description": "2/4, D",
@@ -1002,8 +1012,8 @@
     "title": "Muiñeira Do Morrazo",
     "description": "6/8, D",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "music-for-a-found-harmonium",
@@ -1064,7 +1074,7 @@
     "title": "O-Vals",
     "description": "3/4, Dm",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -1364,6 +1374,16 @@
     "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": false
+  },
+  {
+    "id": "stan-chapmans",
+    "title": "Stan Chapmans (v3)",
+    "description": "Jig, A",
+    "hasExternalLink": true,
+    "externalLinkUrl": "https://thesession.org/tunes/324",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
   },
   {
     "id": "star-of-munster",
