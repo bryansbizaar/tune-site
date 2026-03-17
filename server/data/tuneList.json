@@ -174,8 +174,8 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/5",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "blue-eyed-stranger",
@@ -1012,7 +1012,7 @@
     "title": "Muiñeira Do Morrazo",
     "description": "6/8, D",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -1092,6 +1092,14 @@
     "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": false
+  },
+  {
+    "id": "le-petit-manteau-rouge",
+    "title": "Le Petit Manteau Rouge",
+    "description": "Polka, Am",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
   },
   {
     "id": "plains-of-boyle",
@@ -1382,8 +1390,8 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/324",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "star-of-munster",
