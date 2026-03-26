@@ -16,6 +16,14 @@
     "upNextTunes": false
   },
   {
+    "id": "ajde-razbole-se",
+    "title": "Ajde razbole, se",
+    "description": "7/8, D Freygish",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "ako-umram",
     "title": "Ako Umram",
     "description": "7/8, Dm",
@@ -174,7 +182,7 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/5",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -1098,8 +1106,8 @@
     "title": "Le Petit Manteau Rouge",
     "description": "Polka, Am",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "plains-of-boyle",
@@ -1390,7 +1398,7 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/324",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
