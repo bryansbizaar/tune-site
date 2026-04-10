@@ -20,8 +20,8 @@
     "title": "Ajde razbole, se",
     "description": "7/8, D Freygish",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "ako-umram",
@@ -674,6 +674,16 @@
     "upNextTunes": false
   },
   {
+    "id": "horses-bransle",
+    "title": "Horse's Bransle",
+    "description": "2/4, G",
+    "hasExternalLink": true,
+    "externalLinkUrl": "https://thesession.org/tunes/3593",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "hulls-reel",
     "title": "Hull's Reel",
     "description": "Reel, E",
@@ -1106,7 +1116,7 @@
     "title": "Le Petit Manteau Rouge",
     "description": "Polka, Am",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
