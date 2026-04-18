@@ -20,7 +20,7 @@
     "title": "Ajde razbole, se",
     "description": "7/8, D Freygish",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -412,6 +412,16 @@
     "upNextTunes": false
   },
   {
+    "id": "epic",
+    "title": "The Epic",
+    "description": "Reel, F#m",
+    "hasExternalLink": true,
+    "externalLinkUrl": "https://thesession.org/tunes/18815",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "esperanza",
     "title": "Esperanza",
     "description": "4/4, Am",
@@ -680,8 +690,8 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/3593",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "hulls-reel",

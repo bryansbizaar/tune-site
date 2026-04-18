@@ -1,0 +1,12 @@
+{
+  "id": "epic",
+  "title": "The Epic",
+  "description": "",
+  "sheetMusicFile": "/images/sheetmusic/",
+  "chords": "/images/chords/epic-chords-2.png",
+  "chordVersions": ["/images/chords/epic-chords.png"],
+  "chordsDescription": "Here's a version for the guitar with a capo on the 2nd fret.",
+  "chordVersionDescriptions": ["This is the original key"],
+  "spotifyTrackId": "4yLmbbK5de4E7I1JJwes92",
+  "youtubeTrackId": ""
+}
