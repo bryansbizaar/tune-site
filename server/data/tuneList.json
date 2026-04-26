@@ -418,8 +418,8 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/18815",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "esperanza",
@@ -690,7 +690,7 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/3593",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -890,6 +890,14 @@
     "upNextTunes": false
   },
   {
+    "id": "leslies-march",
+    "title": "Leslie's March",
+    "description": "6/8, D",
+    "hasChords": true,
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
+  },
+  {
     "id": "little-beggarman",
     "title": "The Little Beggarman",
     "description": "Hornpipe, A",
@@ -992,6 +1000,14 @@
     "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": false
+  },
+  {
+    "id": "menuet-fra-aero",
+    "title": "Menuet fra Ærø",
+    "description": "3/4, Am",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
   },
   {
     "id": "metsakukkia",
