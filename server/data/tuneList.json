@@ -362,6 +362,16 @@
     "upNextTunes": false
   },
   {
+    "id": "drummond-castle",
+    "title": "Drummond Castle v6",
+    "description": "Jig, Am",
+    "hasExternalLink": true,
+    "externalLinkUrl": "https://thesession.org/tunes/2540",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "earls-chair",
     "title": "The Earl's Chair",
     "description": "Reel, D",
@@ -418,7 +428,7 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/18815",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -710,6 +720,16 @@
     "upNextTunes": false
   },
   {
+    "id": "humours-of-whiskey",
+    "title": "The Humours of Whiskey v8",
+    "description": "Slip jig, Am",
+    "hasExternalLink": true,
+    "externalLinkUrl": "https://thesession.org/tunes/46",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "hungry-rock",
     "title": "The Hungry Rock",
     "description": "Jig, Em",
@@ -894,7 +914,7 @@
     "title": "Leslie's March",
     "description": "6/8, D",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -1006,8 +1026,8 @@
     "title": "Menuet fra Ærø",
     "description": "3/4, Am",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "metsakukkia",
