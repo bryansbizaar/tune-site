@@ -1,0 +1,11 @@
+{
+  "id": "big-scioty",
+  "title": "Big Scioty",
+  "description": "",
+  "sheetMusicFile": "/images/sheetmusic/big-scioty.png",
+  "versions": ["/images/sheetmusic/big-scioty-2.png"],
+  "versionDescriptions": ["And a version with chords..."],
+  "chords": "/images/chords/big-scioty-chords.png",
+  "chordsDescription": "",
+  "spotifyTrackId": "5szBloAGkzSb6MQy9MDhqs"
+}

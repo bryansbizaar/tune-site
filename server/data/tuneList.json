@@ -132,6 +132,14 @@
     "upNextTunes": false
   },
   {
+    "id": "big-scioty",
+    "title": "Big Scioty",
+    "description": "Reel, G",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "bill-sullivans",
     "title": "Bill Sullivan's",
     "description": "Polka, D (or A)",
@@ -368,8 +376,8 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/2540",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "earls-chair",
@@ -726,8 +734,8 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/46",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "hungry-rock",
@@ -1026,7 +1034,7 @@
     "title": "Menuet fra Ærø",
     "description": "3/4, Am",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
