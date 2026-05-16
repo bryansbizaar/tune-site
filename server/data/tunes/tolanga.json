@@ -1,0 +1,14 @@
+{
+  "id": "tolanga",
+  "title": "Tolånga",
+  "description": "",
+  "sheetMusicFile": "/images/sheetmusic/tolanga.png",
+  "versions": ["/images/sheetmusic/tolanga-2.png"],
+  "versionDescriptions": [
+    "And a version with chords and a slight variation in measures 4 and 5."
+  ],
+  "chords": "/images/chords/tolanga-chords.png",
+  "chordsDescription": "",
+  "spotifyTrackId": "4Hh2HpbGiXJI5qFD6hWF6u",
+  "youtubeTrackId": ""
+}

@@ -126,7 +126,7 @@
     "title": "The Bell Table",
     "description": "Waltz, D",
     "hasExternalLink": true,
-    "externalLinkUrl": "https://irish.session.nz/tunes-archive/belltable-waltz/",
+    "externalLinkUrl": "https://session.lpnz.org/tunes-archive/belltable-waltz/",
     "hasChords": false,
     "tunesOfTheWeek": false,
     "upNextTunes": false
@@ -136,8 +136,8 @@
     "title": "Big Scioty",
     "description": "Reel, G",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "bill-sullivans",
@@ -214,7 +214,7 @@
     "title": "Britches Full Of Stitches",
     "description": "Polka, A",
     "hasExternalLink": true,
-    "externalLinkUrl": "https://irish.session.nz/tunes-archive/britches-full-of-stitches/",
+    "externalLinkUrl": "https://session.lpnz.org/tune-archive/britches-full-of-stitches/",
     "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": false
@@ -364,7 +364,7 @@
     "title": "Drowsy Maggie",
     "description": "Reel, Em",
     "hasExternalLink": true,
-    "externalLinkUrl": "https://irish.session.nz/tunes-archive/drowsy-maggie-cm/",
+    "externalLinkUrl": "https://session.lpnz.org/tune-archive/drowsy-maggie-cm/",
     "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": false
@@ -376,7 +376,7 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/2540",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -524,7 +524,7 @@
     "title": "The Finnish",
     "description": "Polka, Bm",
     "hasExternalLink": true,
-    "externalLinkUrl": "https://irish.session.nz/tunes-archive/finnish-polka/",
+    "externalLinkUrl": "https://session.lpnz.org/tunes-archive/finnish-polka/",
     "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": false
@@ -598,7 +598,7 @@
     "title": "The Green Cake",
     "description": "Reel, F#m",
     "hasExternalLink": true,
-    "externalLinkUrl": "https://irish.session.nz/tunes-archive/green-cake/",
+    "externalLinkUrl": "https://session.lpnz.org/tunes-archive/green-cake/",
     "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": false
@@ -734,7 +734,7 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/46",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -816,7 +816,7 @@
     "title": "Josefin's Waltz",
     "description": "Waltz, G",
     "hasExternalLink": true,
-    "externalLinkUrl": "https://irish.session.nz/tunes-archive/josefins-waltz/",
+    "externalLinkUrl": "https://session.lpnz.org/tunes-archive/josefins-waltz/",
     "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": false
@@ -1006,7 +1006,7 @@
     "title": "The Maid Behind The Bar",
     "description": "Reel, D",
     "hasExternalLink": true,
-    "externalLinkUrl": "https://irish.session.nz/tunes-archive/maid-behind-the-bar/",
+    "externalLinkUrl": "https://session.lpnz.org/tunes-archive/maid-behind-the-bar/",
     "hasChords": false,
     "tunesOfTheWeek": false,
     "upNextTunes": false
@@ -1512,6 +1512,14 @@
     "upNextTunes": false
   },
   {
+    "id": "tolanga",
+    "title": "Tolånga",
+    "description": "Slangpolska, Em",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "tolka-polka",
     "title": "Tolka Polka",
     "description": "Polka, Am",
@@ -1540,7 +1548,7 @@
     "title": "Tripping Up The Stairs",
     "description": "Jig, D",
     "hasExternalLink": true,
-    "externalLinkUrl": "https://irish.session.nz/tunes-archive/tripping-up-the-stairs/",
+    "externalLinkUrl": "https://session.lpnz.org/tunes-archive/tripping-up-the-stairs/",
     "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": false
