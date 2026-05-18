@@ -968,6 +968,16 @@
     "upNextTunes": false
   },
   {
+    "id": "lucy-farrs",
+    "title": "Lucy Farr's v2",
+    "description": "Barndance, G",
+    "hasExternalLink": true,
+    "externalLinkUrl": "https://thesession.org/tunes/1307",
+    "hasChords": true,
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
+  },
+  {
     "id": "luke-skywalker-walks-on-sunshine",
     "title": "Luke Skywalker Walks On Sunshine",
     "description": "7/8, A",
