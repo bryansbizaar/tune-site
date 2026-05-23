@@ -1,0 +1,12 @@
+{
+  "id": "tarantella",
+  "title": "Tarantella",
+  "description": "",
+  "sheetMusicFile": "/images/sheetmusic/tarantella.png",
+  "versions": ["/images/sheetmusic/tarantella-2.png"],
+  "versionDescriptions": ["And a version with chords..."],
+  "chords": "/images/chords/tarantella-chords.png",
+  "chordsDescription": "",
+  "spotifyTrackId": "15qvzc1GGMD143KbXeYbvx",
+  "youtubeTrackId": ""
+}
