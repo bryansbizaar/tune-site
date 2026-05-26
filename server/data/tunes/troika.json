@@ -1,0 +1,12 @@
+{
+  "id": "troika",
+  "title": "Troika",
+  "description": "",
+  "sheetMusicFile": "/images/sheetmusic/troika.png",
+  "versions": ["/images/sheetmusic/troika-2.png"],
+  "versionDescriptions": ["And a version with chords ..."],
+  "chords": "/images/chords/troika-chords.png",
+  "chordsDescription": "",
+  "spotifyTrackId": "5BmD5hmC1cBsMggO1OsEob",
+  "youtubeTrackId": ""
+}
