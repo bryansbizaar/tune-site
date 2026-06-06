@@ -336,6 +336,14 @@
     "upNextTunes": false
   },
   {
+    "id": "d'aurore-sand",
+    "title": "D'Aurore Sand",
+    "description": "Bourrée, Dm",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "dans-loudieg",
     "title": "Dans Loudieg",
     "description": "Ronde, Am",
@@ -1060,8 +1068,8 @@
     "title": "Midnight in Moscow",
     "description": "2/4, Cm",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "millers-maggot",
@@ -1534,15 +1542,15 @@
     "title": "Tarantella",
     "description": "6/8, Gm",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "tolanga",
     "title": "Tolånga",
     "description": "Slangpolska, Em",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -1584,8 +1592,8 @@
     "title": "Troika",
     "description": "2/4, Am",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "trois-canards",
