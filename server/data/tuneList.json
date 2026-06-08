@@ -762,6 +762,14 @@
     "upNextTunes": false
   },
   {
+    "id": "icelandic-tune",
+    "title": "Icelandic Tune",
+    "description": "2/4, Dm",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "inion-ni-scanlan",
     "title": "Iníon Ní Scannláin",
     "description": "D",
