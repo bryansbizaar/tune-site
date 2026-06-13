@@ -340,8 +340,8 @@
     "title": "D'Aurore Sand",
     "description": "Bourrée, Dm",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "dans-loudieg",
@@ -766,8 +766,8 @@
     "title": "Icelandic Tune",
     "description": "2/4, Dm",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "inion-ni-scanlan",
@@ -1076,7 +1076,7 @@
     "title": "Midnight in Moscow",
     "description": "2/4, Cm",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -1362,6 +1362,14 @@
     "upNextTunes": false
   },
   {
+    "id": "sally-in-the-garden",
+    "title": "Sally In The Garden",
+    "description": "Reel, Dm",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "sangshyttevalsen",
     "title": "Sångshyttevalsen",
     "description": "Waltz, Bm",
@@ -1550,7 +1558,7 @@
     "title": "Tarantella",
     "description": "6/8, Gm",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -1600,7 +1608,7 @@
     "title": "Troika",
     "description": "2/4, Am",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
