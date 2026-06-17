@@ -770,6 +770,14 @@
     "upNextTunes": false
   },
   {
+    "id": "icelandic-waltz",
+    "title": "Icelandic Waltz",
+    "description": "Waltz, Dm",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "inion-ni-scanlan",
     "title": "Iníon Ní Scannláin",
     "description": "D",
