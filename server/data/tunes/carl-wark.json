@@ -1,0 +1,14 @@
+{
+  "id": "carl-wark",
+  "title": "Carl Wark",
+  "description": "",
+  "sheetMusicFile": "/images/sheetmusic/carl-wark.png",
+  "versions": ["/images/sheetmusic/carl-wark-2.png"],
+  "versionDescriptions": ["And a version with chords"],
+  "chords": "/images/chords/carl-wark-chords.png",
+  "chordVersions": ["/images/chords/carl-wark-chords-2.png"],
+  "chordsDescription": "These chords are from the Blowzabella album Bobbityshooty",
+  "chordVersionDescriptions": ["Here's an alternative version of the chords"],
+  "spotifyTrackId": "0NwBewSV6W6UVoWuK06rsG",
+  "youtubeTrackId": ""
+}

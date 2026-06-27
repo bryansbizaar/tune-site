@@ -258,6 +258,14 @@
     "upNextTunes": false
   },
   {
+    "id": "carl-wark",
+    "title": "Carl Wark",
+    "description": "4/4, Em",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "catharsis",
     "title": "Catharsis",
     "description": "Reel, Gm",
@@ -524,8 +532,8 @@
     "title": "Fiddle Fever",
     "description": "Waltz, A",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "filberts",
@@ -782,7 +790,7 @@
     "title": "Icelandic Waltz",
     "description": "Waltz, Dm",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -1382,7 +1390,7 @@
     "title": "Sally In The Garden",
     "description": "Reel, Dm",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -1710,6 +1718,16 @@
     "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTune": false
+  },
+  {
+    "id": "willafjord",
+    "title": "Willafjord",
+    "description": "Reel, D",
+    "hasExternalLink": true,
+    "externalLinkUrl": "https://thesession.org/tunes/292",
+    "hasChords": true,
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "winder-slide",
