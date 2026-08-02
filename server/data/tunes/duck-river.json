@@ -1,0 +1,21 @@
+{
+  "id": "duck-river",
+  "title": "Duck River",
+  "description": "The first version is loosely based on the playing of Sheesham and Lotus.",
+  "sheetMusicFile": "/images/sheetmusic/duck-river.png",
+  "versions": [
+    "/images/sheetmusic/duck-river-2.png",
+    "/images/sheetmusic/duck-river-3.png"
+  ],
+  "versionDescriptions": [
+    "v1 with chords...",
+    "The second version is based on the playing of Art Stamper, with some chord variations."
+  ],
+  "chords": "/images/chords/duck-river-chords.png",
+  "chordsDescription": "",
+  "chordVersionDescriptions": [
+    "The first version will fit most situations. The second version occasionally substitutes a Bm for the D, plus it has an E chord in the second section in case the melody plays a G# instead of G natural."
+  ],
+  "spotifyTrackId": "6LlAihL0IoJEwcN2xrWghd",
+  "youtubeTrackId": ""
+}
