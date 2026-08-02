@@ -1016,6 +1016,14 @@
     "upNextTunes": false
   },
   {
+    "id": "liza-jane",
+    "title": "Liza Jane",
+    "description": "Reel, D",
+    "hasChords": true,
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
+  },
+  {
     "id": "lucy-farrs",
     "title": "Lucy Farr's v1 or 29",
     "description": "Barndance, G",

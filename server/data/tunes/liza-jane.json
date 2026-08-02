@@ -1,0 +1,12 @@
+{
+  "id": "liza-jane",
+  "title": "Liza Jane",
+  "description": "",
+  "sheetMusicFile": "/images/sheetmusic/liza-jane.png",
+  "versions": ["/images/sheetmusic/liza-jane-2.png"],
+  "versionDescriptions": ["And a version with chords..."],
+  "chords": "/images/chords/liza-jane-chords.png",
+  "chordsDescription": "",
+  "spotifyTrackId": "5EWyz7D0E4KaE1Cv2HAtAu",
+  "youtubeTrackId": ""
+}
