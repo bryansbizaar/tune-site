@@ -262,7 +262,7 @@
     "title": "Carl Wark",
     "description": "4/4, Em",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -368,6 +368,14 @@
     "upNextTunes": false
   },
   {
+    "id": "dark-eyes",
+    "title": "Dark Eyes",
+    "description": "Waltz, Dm",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "derriere-chez-nous",
     "title": "Derrière Chez Nous",
     "description": "Bouree, Am",
@@ -400,8 +408,8 @@
     "title": "Duck River",
     "description": "Reel, D",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "earls-chair",
@@ -1020,7 +1028,7 @@
     "title": "Liza Jane",
     "description": "Reel, D",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {

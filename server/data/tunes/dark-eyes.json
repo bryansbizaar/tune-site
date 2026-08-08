@@ -1,0 +1,23 @@
+{
+  "id": "dark-eyes",
+  "title": "Dark Eyes",
+  "description": "The first example is based on the earliest versions, inspired by Valse hommage, Op. 21 for piano",
+  "sheetMusicFile": "/images/sheetmusic/dark-eyes.png",
+  "versions": [
+    "/images/sheetmusic/dark-eyes-2.png",
+    "/images/sheetmusic/dark-eyes-3.png",
+    "/images/sheetmusic/dark-eyes-4.png"
+  ],
+
+  "versionDescriptions": [
+    "3/4, with chords:",
+    "A version in 4/4, popularized by Django Reinhardt's Les Yeux Noirs:",
+    "4/4 with chords:"
+  ],
+  "chords": "/images/chords/dark-eyes-chords.png",
+  "chordVersions": ["/images/chords/dark-eyes-chords-2.png"],
+  "chordsDescription": "The first example is based on the earliest versions in 3/4.",
+  "chordVersionDescriptions": ["4/4 version with chords:"],
+  "spotifyTrackId": "",
+  "youtubeTrackId": "T-qff6m1yvw"
+}
