@@ -372,8 +372,8 @@
     "title": "Dark Eyes",
     "description": "Waltz, Dm",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "derriere-chez-nous",
@@ -408,7 +408,7 @@
     "title": "Duck River",
     "description": "Reel, D",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -420,6 +420,14 @@
     "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": false
+  },
+  {
+    "id": "ederlezi",
+    "title": "Ederlezi",
+    "description": "4/4, Em",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
   },
   {
     "id": "eel-in-the-sink",
