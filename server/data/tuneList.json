@@ -372,7 +372,7 @@
     "title": "Dark Eyes",
     "description": "Waltz, Dm",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -426,8 +426,8 @@
     "title": "Ederlezi",
     "description": "4/4, Em",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "eel-in-the-sink",
@@ -1152,6 +1152,14 @@
     "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": false
+  },
+  {
+    "id": "moliendo-cafe",
+    "title": "Moliendo Cafe",
+    "description": "4/4, Dm",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
   },
   {
     "id": "mouth-of-the-tobique",
