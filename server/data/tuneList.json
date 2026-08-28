@@ -426,7 +426,7 @@
     "title": "Ederlezi",
     "description": "4/4, Em",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -1024,6 +1024,14 @@
     "upNextTunes": false
   },
   {
+    "id": "lonesome-moonlight-waltz",
+    "title": "Lonesome Moonlight Waltz",
+    "description": "Waltz, F",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "lounge-bar",
     "title": "Da Lounge Bar",
     "description": "Jig, D",
@@ -1158,8 +1166,8 @@
     "title": "Moliendo Cafe",
     "description": "4/4, Dm",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "mouth-of-the-tobique",

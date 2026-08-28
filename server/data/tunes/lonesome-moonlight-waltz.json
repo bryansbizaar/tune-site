@@ -1,0 +1,20 @@
+{
+  "id": "lonesome-moonlight-waltz",
+  "title": "Lonesome Moonlight Waltz",
+  "description": "As played by Bill Monroe, the author",
+  "sheetMusicFile": "/images/sheetmusic/lonesome-moonlight-waltz.png",
+  "versions": [
+    "/images/sheetmusic/lonesome-moonlight-waltz-2.png",
+    "/images/sheetmusic/lonesome-moonlight-waltz-3.png",
+    "/images/sheetmusic/lonesome-moonlight-waltz-4.png"
+  ],
+  "versionDescriptions": [
+    "Mandolin version with chords...",
+    "Violin version as played by Kenny Baker",
+    "Violin version with chords"
+  ],
+  "chords": "/images/chords/lonesome-moonlight-waltz-chords.png",
+  "chordsDescription": "",
+  "spotifyTrackId": "0p4zskpwbhHX8CL126NeTU",
+  "youtubeTrackId": ""
+}
