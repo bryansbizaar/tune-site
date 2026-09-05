@@ -1024,12 +1024,20 @@
     "upNextTunes": false
   },
   {
+    "id": "lonesome-jig",
+    "title": "The Lonesome Jig",
+    "description": "Jig, D",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
+  },
+  {
     "id": "lonesome-moonlight-waltz",
     "title": "Lonesome Moonlight Waltz",
     "description": "Waltz, F",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "lounge-bar",
@@ -1166,7 +1174,7 @@
     "title": "Moliendo Cafe",
     "description": "4/4, Dm",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -1210,6 +1218,14 @@
     "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": false
+  },
+  {
+    "id": "neer-shall-i-wean-her",
+    "title": "Ne'er Shall I Wean Her",
+    "description": "Jig, C",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
   },
   {
     "id": "new-rigged-ship",
