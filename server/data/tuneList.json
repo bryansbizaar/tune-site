@@ -634,6 +634,14 @@
     "upNextTunes": false
   },
   {
+    "id": "gari-gari",
+    "title": "Gari Gari",
+    "description": "2/4, Am",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "girl-from-the-big-house",
     "title": "The Girl From The Big House",
     "description": "Jig, Dmix",
@@ -1036,7 +1044,7 @@
     "title": "Lonesome Moonlight Waltz",
     "description": "Waltz, F",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -1224,8 +1232,8 @@
     "title": "Ne'er Shall I Wean Her",
     "description": "Jig, C",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "new-rigged-ship",
@@ -1243,6 +1251,16 @@
     "description": "4/4, E freygish",
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/12963",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": false
+  },
+  {
+    "id": "old-favourite",
+    "title": "The Old Favourite",
+    "description": "Jig, G",
+    "hasExternalLink": true,
+    "externalLinkUrl": "https://thesession.org/tunes/56",
     "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": false
