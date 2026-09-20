@@ -638,8 +638,8 @@
     "title": "Gari Gari",
     "description": "2/4, Am",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "girl-from-the-big-house",
@@ -1232,7 +1232,7 @@
     "title": "Ne'er Shall I Wean Her",
     "description": "Jig, C",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -1658,6 +1658,16 @@
     "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": false
+  },
+  {
+    "id": "sweeneys-buttermilk",
+    "title": "Sweeney's Buttermilk",
+    "description": "Reel, Bm",
+    "hasExternalLink": true,
+    "externalLinkUrl": "https://thesession.org/tunes/556",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
   },
   {
     "id": "tarantella",
