@@ -638,7 +638,7 @@
     "title": "Gari Gari",
     "description": "2/4, Am",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -1500,6 +1500,16 @@
     "upNextTunes": false
   },
   {
+    "id": "seven-of-eight",
+    "title": "Seven of Eight",
+    "description": "7/8, Am",
+    "hasExternalLink": true,
+    "externalLinkUrl": "https://thesession.org/tunes/7987",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "shakin-down-the-acorns",
     "title": "Shakin' Down The Acorns",
     "description": "Reel, A mix",
@@ -1666,8 +1676,8 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/556",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "tarantella",
