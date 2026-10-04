@@ -1,0 +1,20 @@
+{
+  "id": "roaring-barmaid",
+  "title": "The Roaring Barmaid",
+  "description": "",
+  "sheetMusicFile": "/images/sheetmusic/roaring-barmaid.png",
+  "versions": [
+    "/images/sheetmusic/roaring-barmaid-2.png",
+    "/images/sheetmusic/roaring-barmaid-3.png"
+  ],
+  "versionDescriptions": [
+    "And a version with chords..",
+    "And a version with alternate chords..."
+  ],
+  "chords": "/images/chords/roaring-barmaid-chords.png",
+  "chordVersions": ["/images/chords/roaring-barmaid-chords-2.png"],
+  "chodsDescription": "",
+  "chordVersionDescriptions": ["And a version with alternate chords..."],
+  "spotifyTrackId": "4RqxwMHi2yzI3fJHdlgrgj",
+  "youtubeTrackId": ""
+}
