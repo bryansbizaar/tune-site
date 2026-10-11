@@ -128,8 +128,16 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/696",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
+  },
+  {
+    "id": "been-to-the-east",
+    "title": "Been to the East, Been to the West",
+    "description": "4/4, A",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
   },
   {
     "id": "bell-table",
@@ -1426,8 +1434,8 @@
     "title": "The Roaring Barmaid",
     "description": "Jig, G",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "rolling-waves",
@@ -1498,7 +1506,7 @@
     "title": "Salmon Tails Up The Water",
     "description": "Rant, G",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -1532,7 +1540,7 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/7987",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
