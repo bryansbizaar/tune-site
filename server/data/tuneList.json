@@ -136,8 +136,8 @@
     "title": "Been to the East, Been to the West",
     "description": "4/4, A",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "bell-table",
@@ -1380,6 +1380,14 @@
     "upNextTunes": false
   },
   {
+    "id": "rakers",
+    "title": "The Rakers",
+    "description": "Jig, Dm",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "rakish-paddy",
     "title": "Rakish Paddy",
     "description": "Reel, D mix",
@@ -1434,7 +1442,7 @@
     "title": "The Roaring Barmaid",
     "description": "Jig, G",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {

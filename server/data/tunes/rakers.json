@@ -1,0 +1,12 @@
+{
+  "id": "rakers",
+  "title": "The Rakers",
+  "description": "",
+  "sheetMusicFile": "/images/sheetmusic/rakers.png",
+  "versions": ["/images/sheetmusic/rakers-2.png"],
+  "versionDescriptions": ["And a version with chords..."],
+  "chords": "/images/chords/rakers-chords.png",
+  "chordsDescription": "",
+  "spotifyTrackId": "",
+  "youtubeTrackId": ""
+}
