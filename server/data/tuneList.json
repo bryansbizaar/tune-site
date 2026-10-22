@@ -136,7 +136,7 @@
     "title": "Been to the East, Been to the West",
     "description": "4/4, A",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -1352,6 +1352,14 @@
     "upNextTunes": false
   },
   {
+    "id": "poite-tzigane",
+    "title": "Poite Tzigane",
+    "description": "2/4, Gm",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "polonas-de-sexdrega",
     "title": "Polonäs de Sexdrega",
     "description": "Polonäs, G",
@@ -1384,8 +1392,8 @@
     "title": "The Rakers",
     "description": "Jig, Dm",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "rakish-paddy",
