@@ -1356,8 +1356,8 @@
     "title": "Poite Tzigane",
     "description": "2/4, Gm",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "polonas-de-sexdrega",
@@ -1392,7 +1392,7 @@
     "title": "The Rakers",
     "description": "Jig, Dm",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -1728,6 +1728,16 @@
     "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": false
+  },
+  {
+    "id": "tamlin",
+    "title": "Tam Lin",
+    "description": "Reel, Dm",
+    "hasExternalLink": true,
+    "externalLinkUrl": "https://thesession.org/tunes/248",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
   },
   {
     "id": "tarantella",
