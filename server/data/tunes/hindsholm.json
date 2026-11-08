@@ -1,0 +1,18 @@
+{
+  "id": "hindsholm",
+  "title": "Hindsholm",
+  "description": "",
+  "sheetMusicFile": "/images/sheetmusic/hindsholm.png",
+  "versions": [
+    "/images/sheetmusic/hindsholm-2.png",
+    "/images/sheetmusic/hindsholm-3.png"
+  ],
+  "versionDescriptions": [
+    "And a version with chords...",
+    "This version is closer to the melody in the third part, with ornamentation"
+  ],
+  "chords": "/images/chords/hindsholm-chords.png",
+  "chordsDescription": "",
+  "spotifyTrackId": "",
+  "youtubeTrackId": "eatVAc8gDfQ"
+}
