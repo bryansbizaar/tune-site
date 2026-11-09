@@ -1300,6 +1300,14 @@
     "upNextTunes": false
   },
   {
+    "id": "one-eyed-jill",
+    "title": "One-eyed Jill",
+    "description": "Reel, D mix",
+    "hasChords": true,
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
+  },
+  {
     "id": "orientale",
     "title": "l' Orientale",
     "description": "2/4",
