@@ -764,8 +764,8 @@
     "title": "Hindsholm",
     "description": "Polska, A",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "holly-bush",
@@ -1304,7 +1304,7 @@
     "title": "One-eyed Jill",
     "description": "Reel, D mix",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -1752,7 +1752,7 @@
     "hasExternalLink": true,
     "externalLinkUrl": "https://thesession.org/tunes/248",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -1786,6 +1786,14 @@
     "hasChords": true,
     "tunesOfTheWeek": false,
     "upNextTunes": false
+  },
+  {
+    "id": "tour-de-taille",
+    "title": "Tour de Taille",
+    "description": "3/4, G",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
   },
   {
     "id": "trip-to-herves",
