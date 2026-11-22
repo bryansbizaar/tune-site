@@ -238,6 +238,14 @@
     "upNextTunes": false
   },
   {
+    "id": "bubamara",
+    "title": "Bubamara",
+    "description": "2/4, Cm",
+    "hasChords": true,
+    "tunesOfTheWeek": false,
+    "upNextTunes": true
+  },
+  {
     "id": "butterfly",
     "title": "The Butterfly",
     "description": "Slip jig, Em",
@@ -764,7 +772,7 @@
     "title": "Hindsholm",
     "description": "Polska, A",
     "hasChords": true,
-    "tunesOfTheWeek": true,
+    "tunesOfTheWeek": false,
     "upNextTunes": false
   },
   {
@@ -1792,8 +1800,8 @@
     "title": "Tour de Taille",
     "description": "3/4, G",
     "hasChords": true,
-    "tunesOfTheWeek": false,
-    "upNextTunes": true
+    "tunesOfTheWeek": true,
+    "upNextTunes": false
   },
   {
     "id": "trip-to-herves",
